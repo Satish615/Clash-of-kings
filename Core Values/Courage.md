@@ -1,5 +1,7 @@
 `Courage :`
 
+Implemented by Shiva Padma
+
 We will tell the truth about progress and estimates. We don't document excuses for failure because we plan to succeed. We don't fear anything because no one ever works alone. We will adapt to changes when ever they happen.
 
 _Week #1:_
