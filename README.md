@@ -1,6 +1,6 @@
 # cmpe202-fivestars
 
-Taking players from Chess Game as basis i.e moves of Rook, Knight, Bishop, Queen, King and Pawns we are implementing a unique of its kind strategy game.
+Game:- Taking players from Chess Game as basis i.e moves of Rook, Knight, Bishop, Queen, King and Pawns we are implementing a unique of its kind strategy game.
 
 **Kanban Phase Deliverables :**
 
@@ -18,9 +18,54 @@ XP Core Values:
 * [Respect](https://github.com/nguyensjsu/cmpe202-fivestars/wiki/Respect-%7C-XP-Core-Value-%5B-Devi-%5D)
 * [Simplicity](https://github.com/nguyensjsu/cmpe202-fivestars/wiki/Simplicity-%7C-XP-Core-Value--%5BShweta%5D)
 
+Week #1 Tasks :
+
+Game Idea Brainstorming:
+https://github.com/nguyensjsu/cmpe202-fivestars/issues/1
+
+Game Engine Research:
+
+https://github.com/nguyensjsu/cmpe202-fivestars/issues/3
+https://github.com/nguyensjsu/cmpe202-fivestars/issues/6
+
+Design Methodologies :-
+
+https://github.com/nguyensjsu/cmpe202-fivestars/issues/4
+https://github.com/nguyensjsu/cmpe202-fivestars/issues/2
+https://github.com/nguyensjsu/cmpe202-fivestars/issues/5
+
+Week #2 Tasks:
+
 Project Deliverable:
 * UI Wireframes
 * Activity Diagram
 * Design Sequence Diagram
 * Use Case Specification
 * User Story
+
+Checker Board Designs:-
+
+https://github.com/nguyensjsu/cmpe202-fivestars/issues/7
+
+Rules for GameIdea Multiplayer version:-
+
+https://github.com/nguyensjsu/cmpe202-fivestars/issues/13
+
+
+Week #3 Tasks:
+
+JavaScript Library/JavaScript Game Engine for move generation:
+
+https://github.com/nguyensjsu/cmpe202-fivestars/issues/17
+
+Randomize Algorithm for Static Players:
+
+https://github.com/nguyensjsu/cmpe202-fivestars/issues/18
+
+Come up with Possible Actors in the game and each actors rules/movements possible:-
+
+https://github.com/nguyensjsu/cmpe202-fivestars/issues/8
+
+
+
+
