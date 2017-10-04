@@ -18,7 +18,8 @@ XP Core Values:
 * [Respect](https://github.com/nguyensjsu/cmpe202-fivestars/wiki/Respect-%7C-XP-Core-Value-%5B-Devi-%5D)
 * [Simplicity](https://github.com/nguyensjsu/cmpe202-fivestars/wiki/Simplicity-%7C-XP-Core-Value--%5BShweta%5D)
 
-Week #1 Tasks :
+Week #1 :
+-------
 
 Game Idea Brainstorming:
 https://github.com/nguyensjsu/cmpe202-fivestars/issues/1
@@ -34,7 +35,8 @@ https://github.com/nguyensjsu/cmpe202-fivestars/issues/4
 https://github.com/nguyensjsu/cmpe202-fivestars/issues/2
 https://github.com/nguyensjsu/cmpe202-fivestars/issues/5
 
-Week #2 Tasks:
+Week #2 :
+-------
 
 Project Deliverable:
 * UI Wireframes
@@ -52,7 +54,8 @@ Rules for GameIdea Multiplayer version:-
 https://github.com/nguyensjsu/cmpe202-fivestars/issues/13
 
 
-Week #3 Tasks:
+Week #3:
+-------
 
 JavaScript Library/JavaScript Game Engine for move generation:
 
