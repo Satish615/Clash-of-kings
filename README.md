@@ -53,6 +53,9 @@ Rules for GameIdea Multiplayer version:-
 
 https://github.com/nguyensjsu/cmpe202-fivestars/issues/13
 
+coming up with a name for the game
+
+https://github.com/nguyensjsu/cmpe202-fivestars/issues/14
 
 Week #3:
 -------
@@ -61,13 +64,15 @@ JavaScript Library/JavaScript Game Engine for move generation:
 
 https://github.com/nguyensjsu/cmpe202-fivestars/issues/17
 
+Come up with Possible Actors in the game and each actors rules/movements possible:-
+
+https://github.com/nguyensjsu/cmpe202-fivestars/issues/8
+
 Randomize Algorithm for Static Players:
 
 https://github.com/nguyensjsu/cmpe202-fivestars/issues/18
 
-Come up with Possible Actors in the game and each actors rules/movements possible:-
 
-https://github.com/nguyensjsu/cmpe202-fivestars/issues/8
 
 
 
