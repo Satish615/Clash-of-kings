@@ -26,13 +26,13 @@ https://github.com/nguyensjsu/cmpe202-fivestars/issues/1
 
 Game Engine Research:
 
-https://github.com/nguyensjsu/cmpe202-fivestars/issues/3
+https://github.com/nguyensjsu/cmpe202-fivestars/issues/3;
 https://github.com/nguyensjsu/cmpe202-fivestars/issues/6
 
 Design Methodologies :-
 
-https://github.com/nguyensjsu/cmpe202-fivestars/issues/4
-https://github.com/nguyensjsu/cmpe202-fivestars/issues/2
+https://github.com/nguyensjsu/cmpe202-fivestars/issues/4;
+https://github.com/nguyensjsu/cmpe202-fivestars/issues/2;
 https://github.com/nguyensjsu/cmpe202-fivestars/issues/5
 
 Week #2 :
