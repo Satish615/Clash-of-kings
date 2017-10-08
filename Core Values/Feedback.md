@@ -10,3 +10,8 @@ Idea brainstorming: Swetha has proposed an idea of running game based on questio
 Week 2: Tasks done in this week:
 Game idea improvement: Devi proposed an idea of strategic chess variant where goal is to reach other end of board in optimum steps. Shiva suggested to implement a Multiplayer chess variant in same board to declare last survivor as winner after other players are killed.
 Tasks to be done in this week: Creating a prototype where we implement a basic chess variant where one player moves and from one cell to another from given possible suggestions. Design a prototype to strategically place the powers in board such that each player has a fair chance to win.
+
+
+Week 3: Tasks done in this week: Devi has worked on the chess board design and created a rectangular chess board would be optimal to use the entire screen space. At present the team agreed to board of size 28x10. shiva is working on developing an algorithm to place static powers on the board feedback was to first decide on the what powers we are going to place on the board and their quantity and focus on the placement next.
+
+Tasks to be done in this week: satish was not able to complete a checker board prototype for calculating moves .. so the task was split into two parts one deciding the players start position and second finding the possible moves. To work on sample design where players can kill a power and get that power attribute to them.
