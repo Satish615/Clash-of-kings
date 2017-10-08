@@ -1,3 +1,49 @@
+
+Week #3:
+
+Meeting Started at 4:10 PM 10/7/2017
+
+Attendees - Shiva,Satish,Akansha,Devi,Shwetha
+
+What did team do last week?
+
+Worked on the chess board and updated the lastest code to code section
+Worked on all possible objects of the game,
+Worked on the design  of the game.
+
+What are challenges:
+
+Dimensions of the game
+Choosing the right position for the static players to make the game neutral to all players.
+Time complexity for each user to win the game.
+
+Discussion held:
+Discused individual team members work
+Discussed the checker board code and its dependency
+Discussed the next weeks task assigned to each team mate
+
+
+
+
+
+What are challenges:
+
+Multi user functionality of the game
+Choosing the right position for the static players to make the game neutral to all players.
+Time complexity for each user to win the game.
+Discussion held:
+
+Discussed the final idea of the project.
+Defined individual developer shortcoming goals for the weekend.
+Discussed possible shortcomings in the project.
+Discussed the actions of each actor in the game and created an issue to come up with final objects and actors in the game
+Discussed the possible actions of the user and defined the definition of done.
+Defined user stories for the week and definition of done for the end of the week.
+Meeting ended at: 5:30 PM 9/30/2017
+
+
+
+
 Week #2:
 
 Meeting Started at 4:10 PM 9/30/2017
