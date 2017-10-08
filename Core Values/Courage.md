@@ -13,3 +13,6 @@ _Week #2:_
 - We showed the courage by tweaking the game idea to large extent to make it more intresting. 
 - Also team has made honest atempts to make sure our task boards are accurate about the progress.
 
+_Week #3:_
+- We showed the courage by efficient communication and taking feedback in constructive sense. 
+- Also team has made honest atempts to make sure our task boards are accurate about the progress.
