@@ -8,6 +8,26 @@
  * Date: 10 Aug 2013
  */
 
+function fenToObj(fen) {
+  if (validFen(fen) !== true) {
+    return false;
+  }
+
+  // cut off any move, castling, etc info from the end
+  // we're only interested in position information
+  fen = fen.replace(/ .+$/, '');
+
+  var rows = fen.split('/');
+  var position = {};
+
+  var currentRow = 8;
+  for (var i = 0; i < 8; i++) {
+    var row = rows[i].split('');
+    var colIndex = 0;
+
+    // loop through each character in the FEN section
+
+
 // start anonymous scope
 ;(function() {
 'use strict';
