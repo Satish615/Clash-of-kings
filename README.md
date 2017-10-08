@@ -12,7 +12,7 @@ Game:- Taking players from Chess Game as basis i.e moves of Rook, Knight, Bishop
 
 XP Core Values: 
 
-* [Courage](https://github.com/nguyensjsu/cmpe202-fivestars/wiki/Courage-%7C-XP-Core-Value-%5B-Shiva-%5D)
+* [Courage](https://github.com/nguyensjsu/cmpe202-fivestars/blob/master/Core%20Values/Courage.md)
 * [Communication](https://github.com/nguyensjsu/cmpe202-fivestars/wiki/Communication-%7C-XP-Core-Value-%5BAkansha%5D)
 * [Feedback](https://github.com/nguyensjsu/cmpe202-fivestars/wiki/Feedback-%7C-XP-Core-Value-%5B-Satish-%5D)
 * [Respect](https://github.com/nguyensjsu/cmpe202-fivestars/wiki/Respect-%7C-XP-Core-Value-%5B-Devi-%5D)
