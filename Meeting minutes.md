@@ -18,27 +18,11 @@ Choosing the right position for the static players to make the game neutral to a
 Time complexity for each user to win the game.
 
 Discussion held:
+
 Discused individual team members work
 Discussed the checker board code and its dependency
 Discussed the next weeks task assigned to each team mate
 
-
-
-
-
-What are challenges:
-
-Multi user functionality of the game
-Choosing the right position for the static players to make the game neutral to all players.
-Time complexity for each user to win the game.
-Discussion held:
-
-Discussed the final idea of the project.
-Defined individual developer shortcoming goals for the weekend.
-Discussed possible shortcomings in the project.
-Discussed the actions of each actor in the game and created an issue to come up with final objects and actors in the game
-Discussed the possible actions of the user and defined the definition of done.
-Defined user stories for the week and definition of done for the end of the week.
 Meeting ended at: 5:30 PM 9/30/2017
 
 
