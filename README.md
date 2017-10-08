@@ -31,7 +31,6 @@ https://github.com/nguyensjsu/cmpe202-fivestars/issues/6
 
 Design Methodologies Creational Patterns:-
 
-https://github.com/nguyensjsu/cmpe202-fivestars/issues/4;
 https://github.com/nguyensjsu/cmpe202-fivestars/issues/2;
 https://github.com/nguyensjsu/cmpe202-fivestars/issues/5
 
