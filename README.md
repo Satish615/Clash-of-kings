@@ -29,7 +29,7 @@ Game Engine Research:
 https://github.com/nguyensjsu/cmpe202-fivestars/issues/3;
 https://github.com/nguyensjsu/cmpe202-fivestars/issues/6
 
-Design Methodologies :-
+Design Methodologies Creational Patterns:-
 
 https://github.com/nguyensjsu/cmpe202-fivestars/issues/4;
 https://github.com/nguyensjsu/cmpe202-fivestars/issues/2;
@@ -56,6 +56,9 @@ https://github.com/nguyensjsu/cmpe202-fivestars/issues/13
 coming up with a name for the game
 
 https://github.com/nguyensjsu/cmpe202-fivestars/issues/14
+
+Design Methodologies Structural Patterns:-
+https://github.com/nguyensjsu/cmpe202-fivestars/issues/4
 
 Week #3:
 -------
