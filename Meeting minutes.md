@@ -3,7 +3,7 @@ Week #3:
 
 Meeting Started at 4:10 PM 10/7/2017
 
-Attendees - Shiva,Satish,Akansha,Devi,Shwetha
+Attendees - Shiva,Satish,Akansha,Devi,Shweta
 
 What did team do last week?
 
