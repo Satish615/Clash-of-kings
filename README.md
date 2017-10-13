@@ -75,6 +75,19 @@ Randomize Algorithm for Static Players:
 https://github.com/nguyensjsu/cmpe202-fivestars/issues/18
 
 
+Week #4 :
+--------
+
+CRC:-
+
+https://github.com/nguyensjsu/cmpe202-fivestars/issues/20
+
+Create prototype:-
+
+https://github.com/nguyensjsu/cmpe202-fivestars/issues/21 
+
+
+
 
 
 
