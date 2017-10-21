@@ -1084,7 +1084,7 @@ Programming Language -> Javascript
                                                 break;
                                         }
                                     }
-                                    for (i = active_id[0]; i <= 8; i++) {
+                                    for (i = active_id[0]; i <= 25; i++) {
                                         if (i != active_id[0]) {
                                             if (($("#" + parseInt(i + active_id[1])).attr('class') ? $("#" + parseInt(i + active_id[1])).attr('class').substr(0, 4) : '') == 'bg b')
                                                 break;
@@ -1104,7 +1104,7 @@ Programming Language -> Javascript
                                                 break;
                                         }
                                     }
-                                    for (i = active_id[1]; i <= 8; i++) {
+                                    for (i = active_id[1]; i <= 25; i++) {
                                         if (i != active_id[1]) {
                                             if (($("#" + parseInt(active_id[0] + i)).attr('class') ? $("#" + parseInt(active_id[0] + i)).attr('class').substr(0, 4) : '') == 'bg b')
                                                 break;
@@ -1390,46 +1390,112 @@ Programming Language -> Javascript
 
 
                                 case "wrook":
-                                    for (i = active_id[0]; i >= 1; i--) {
-                                        if (i != active_id[0]) {
-                                            if (($("#" + parseInt(i + active_id[1])).attr('class') ? $("#" + parseInt(i + active_id[1])).attr('class').substr(0, 4) : '') == 'bg w')
-                                                break;
-                                            $("#" + (parseInt(i + active_id[1])).toString()).addClass("selected");
-                                            $("#" + (parseInt(i + active_id[1])).toString()).css('outline', '2px solid red');
-                                            if ($("#" + parseInt(i + active_id[1])).hasClass("bg"))
-                                                break;
+                                    alert(   parseInt(parseInt(active_id[0] + active_id[1]) + active_id[2]));
+                                    if(active_id.length==2) {
+                                        for (i = active_id[0]; i >= 1; i--) {
+                                            if (i != active_id[0]) {
+                                                if (($("#" + parseInt(i + active_id[1])).attr('class') ? $("#" + parseInt(i + active_id[1])).attr('class').substr(0, 4) : '') == 'bg w')
+                                                    break;
+                                                $("#" + (parseInt(i + active_id[1])).toString()).addClass("selected");
+                                                $("#" + (parseInt(i + active_id[1])).toString()).css('outline', '2px solid red');
+                                                if ($("#" + parseInt(i + active_id[1])).hasClass("bg"))
+                                                    break;
+                                            }
+                                        }
+
+
+
+                                        for (i = active_id[0]; i <= 25; i++) {
+
+                                            if (i != active_id[0]) {
+                                                if (($("#" + parseInt(i + active_id[active_id.length - 1])).attr('class') ? $("#" + parseInt(i + active_id[active_id.length - 1])).attr('class').substr(0, 4) : '') == 'bg w')
+                                                    break;
+                                                $("#" + (parseInt(i + active_id[1])).toString()).addClass("selected");
+                                                $("#" + (parseInt(i + active_id[1])).toString()).css('outline', '2px solid red');
+                                                if ($("#" + parseInt(i + active_id[1])).hasClass("bg"))
+                                                    break;
+                                            }
+                                        }
+
+
+                                        for (i = active_id[1]; i >= 1; i--) {
+                                            if (i != active_id[1]) {
+                                                if (($("#" + parseInt(active_id[0] + i)).attr('class') ? $("#" + parseInt(active_id[0] + i)).attr('class').substr(0, 4) : '') == 'bg w')
+                                                    break;
+                                                $("#" + (parseInt(active_id[0] + i)).toString()).addClass("selected");
+                                                $("#" + (parseInt(active_id[0] + i)).toString()).css('outline', '2px solid red');
+                                                if ($("#" + parseInt(active_id[0] + i)).hasClass("bg"))
+                                                    break;
+                                            }
+                                        }
+
+
+
+                                        for (i = active_id[1]; i <= 9; i++) {
+                                            if (i != active_id[1]) {
+                                                if (($("#" + parseInt(active_id[0] + i)).attr('class') ? $("#" + parseInt(active_id[0] + i)).attr('class').substr(0, 4) : '') == 'bg w')
+                                                    break;
+                                                $("#" + (parseInt(active_id[0] + i)).toString()).addClass("selected");
+                                                $("#" + (parseInt(active_id[0] + i)).toString()).css('outline', '2px solid red');
+                                                if ($("#" + parseInt(active_id[0] + i)).hasClass("bg"))
+                                                    break;
+                                            }
+                                        }
+
+
+
+                                    }
+                                    else
+                                    {
+
+                                        for (i = parseInt(active_id[0] + active_id[1]); i >= 1; i--) {
+                                            if (i != parseInt(active_id[0] + active_id[1])) {
+                                                //  alert(   parseInt(i + active_id[2]));
+                                                if (($("#" + parseInt(i + active_id[2])).attr('class') ? $("#" + parseInt(i + active_id[2])).attr('class').substr(0, 4) : '') == 'bg w')
+                                                    break;
+                                                $("#" + (parseInt(i +active_id[2])).toString()).addClass("selected");
+                                                $("#" + (parseInt(i + active_id[2])).toString()).css('outline', '2px solid red');
+                                                if ($("#" + parseInt(i + active_id[2])).hasClass("bg"))
+                                                    break;
+                                            }
+                                        }
+
+
+                                        for (i =  parseInt(active_id[0] + active_id[1]); i <= 25; i++) {
+
+                                            if (i != parseInt(active_id[0] + active_id[1])) {
+                                                if (($("#" + parseInt(i + active_id[active_id.length - 1])).attr('class') ? $("#" + parseInt(i + active_id[active_id.length - 1])).attr('class').substr(0, 4) : '') == 'bg w')
+                                                    break;
+                                                $("#" + (parseInt(i + active_id[2])).toString()).addClass("selected");
+                                                $("#" + (parseInt(i + active_id[2])).toString()).css('outline', '2px solid red');
+                                                if ($("#" + parseInt(i + active_id[1])).hasClass("bg"))
+                                                    break;
+                                            }
+                                        }
+
+                                        for (i =  active_id[2]; i >= 1; i--) {
+                                            if (i != parseInt(active_id[2])) {
+                                                if (($("#" + parseInt(active_id[0]+active_id[1]  + i)).attr('class') ? $("#" + parseInt(active_id[0]+active_id[1]  + i)).attr('class').substr(0, 4) : '') == 'bg w')
+                                                    break;
+                                                $("#" + (parseInt(active_id[0]+active_id[1]  + i)).toString()).addClass("selected");
+                                                $("#" + (parseInt(active_id[0]+active_id[1]  + i)).toString()).css('outline', '2px solid red');
+                                                if ($("#" + parseInt(active_id[0]+active_id[1]  + i)).hasClass("bg"))
+                                                    break;
+                                            }
+                                        }
+
+                                        for (i = active_id[2]; i <= 9; i++) {
+                                            if (i != active_id[2]) {
+                                                if (($("#" + parseInt(active_id[0]+active_id[1]  + i)).attr('class') ? $("#" + parseInt(active_id[0]+active_id[1]  + i)).attr('class').substr(0, 4) : '') == 'bg w')
+                                                    break;
+                                                $("#" + (parseInt(active_id[0]+active_id[1]  + i)).toString()).addClass("selected");
+                                                $("#" + (parseInt(active_id[0]+active_id[1]  + i)).toString()).css('outline', '2px solid red');
+                                                if ($("#" + parseInt(active_id[0]+active_id[1]  + i)).hasClass("bg"))
+                                                    break;
+                                            }
                                         }
                                     }
-                                    for (i = active_id[0]; i <= 8; i++) {
-                                        if (i != active_id[0]) {
-                                            if (($("#" + parseInt(i + active_id[1])).attr('class') ? $("#" + parseInt(i + active_id[1])).attr('class').substr(0, 4) : '') == 'bg w')
-                                                break;
-                                            $("#" + (parseInt(i + active_id[1])).toString()).addClass("selected");
-                                            $("#" + (parseInt(i + active_id[1])).toString()).css('outline', '2px solid red');
-                                            if ($("#" + parseInt(i + active_id[1])).hasClass("bg"))
-                                                break;
-                                        }
-                                    }
-                                    for (i = active_id[1]; i >= 1; i--) {
-                                        if (i != active_id[1]) {
-                                            if (($("#" + parseInt(active_id[0] + i)).attr('class') ? $("#" + parseInt(active_id[0] + i)).attr('class').substr(0, 4) : '') == 'bg w')
-                                                break;
-                                            $("#" + (parseInt(active_id[0] + i)).toString()).addClass("selected");
-                                            $("#" + (parseInt(active_id[0] + i)).toString()).css('outline', '2px solid red');
-                                            if ($("#" + parseInt(active_id[0] + i)).hasClass("bg"))
-                                                break;
-                                        }
-                                    }
-                                    for (i = active_id[1]; i <= 8; i++) {
-                                        if (i != active_id[1]) {
-                                            if (($("#" + parseInt(active_id[0] + i)).attr('class') ? $("#" + parseInt(active_id[0] + i)).attr('class').substr(0, 4) : '') == 'bg w')
-                                                break;
-                                            $("#" + (parseInt(active_id[0] + i)).toString()).addClass("selected");
-                                            $("#" + (parseInt(active_id[0] + i)).toString()).css('outline', '2px solid red');
-                                            if ($("#" + parseInt(active_id[0] + i)).hasClass("bg"))
-                                                break;
-                                        }
-                                    }
+
                                     break;
 
 
@@ -1471,59 +1537,66 @@ Programming Language -> Javascript
 
                                 case "wbishop":
 
-                                    for (i = parseInt(active_id); i <= 88; i += 9) {
-                                        if (i != active_id && i.toString()[1] <= 8) {
-                                            if (($("#" + parseInt(i)).attr('class') ? $("#" + parseInt(i)).attr('class').substr(0, 4) : '') == 'bg w')
-                                                break;
-                                            $("#" + (parseInt(i)).toString()).addClass("selected");
-                                            $("#" + (parseInt(i)).toString()).css('outline', '2px solid red');
-                                            if ($("#" + parseInt(i)).hasClass("bg"))
-                                                break;
-                                        }
-                                        if ($.inArray(i, border_right_up) != -1)
-                                            break;
-                                    }
-
-                                    for (i = parseInt(active_id); i >= 11; i -= 9) {
-                                        if (i != active_id && i.toString()[1] >= 1) {
-
-                                            if (($("#" + parseInt(i)).attr('class') ? $("#" + parseInt(i)).attr('class').substr(0, 4) : '') == 'bg w')
-                                                break;
-                                            $("#" + (parseInt(i)).toString()).addClass("selected");
-                                            $("#" + (parseInt(i)).toString()).css('outline', '2px solid red');
-                                            if ($("#" + parseInt(i)).hasClass("bg"))
+                                    if(active_id.length==2) {
+                                        for (i = parseInt(active_id); i <= 260; i += 9) {
+                                            if (i != active_id && i.toString()[1] <= 9) {
+                                                if (($("#" + parseInt(i)).attr('class') ? $("#" + parseInt(i)).attr('class').substr(0, 4) : '') == 'bg w')
+                                                    break;
+                                                $("#" + (parseInt(i)).toString()).addClass("selected");
+                                                $("#" + (parseInt(i)).toString()).css('outline', '2px solid red');
+                                                if ($("#" + parseInt(i)).hasClass("bg"))
+                                                    break;
+                                            }
+                                            if ($.inArray(i, border_right_up) != -1)
                                                 break;
                                         }
-                                        if ($.inArray(i, border_left_down) != -1)
-                                            break;
-                                    }
-                                    for (i = parseInt(active_id); i <= 88; i += 11) {
-                                        if (i != active_id && i.toString()[1] <= 8) {
 
-                                            if (($("#" + parseInt(i)).attr('class') ? $("#" + parseInt(i)).attr('class').substr(0, 4) : '') == 'bg w')
-                                                break;
-                                            $("#" + (parseInt(i)).toString()).addClass("selected");
-                                            $("#" + (parseInt(i)).toString()).css('outline', '2px solid red');
-                                            if ($("#" + parseInt(i)).hasClass("bg"))
+                                            for (i = parseInt(active_id); i >= 11; i -= 9) {
+                                                if (i != active_id && i.toString()[1] <= 1) {
+                                                    if (($("#" + parseInt(i)).attr('class') ? $("#" + parseInt(i)).attr('class').substr(0, 4) : '') == 'bg w')
+                                                        break;
+                                                    $("#" + (parseInt(i)).toString()).addClass("selected");
+                                                    $("#" + (parseInt(i)).toString()).css('outline', '2px solid red');
+                                                    if ($("#" + parseInt(i)).hasClass("bg"))
+                                                        break;
+                                                }
+                                                if ($.inArray(i, border_left_down) != -1)
+                                                    break;
+                                        }
+                                        for (i = parseInt(active_id); i <= 260; i += 11) {
+                                            if (i != active_id && i.toString()[1] <= 9) {
+
+                                                if (($("#" + parseInt(i)).attr('class') ? $("#" + parseInt(i)).attr('class').substr(0, 4) : '') == 'bg w')
+                                                    break;
+                                                $("#" + (parseInt(i)).toString()).addClass("selected");
+                                                $("#" + (parseInt(i)).toString()).css('outline', '2px solid red');
+                                                if ($("#" + parseInt(i)).hasClass("bg"))
+                                                    break;
+                                            }
+                                            if ($.inArray(i, border_right_down) != -1)
                                                 break;
                                         }
-                                        if ($.inArray(i, border_right_down) != -1)
-                                            break;
-                                    }
 
-                                    for (i = parseInt(active_id); i >= 11; i -= 11) {
-                                        if (i != active_id && i.toString()[1] >= 1) {
+                                        for (i = parseInt(active_id); i >= 11; i -= 11) {
 
-                                            if (($("#" + parseInt(i)).attr('class') ? $("#" + parseInt(i)).attr('class').substr(0, 4) : '') == 'bg w')
-                                                break;
-                                            $("#" + (parseInt(i)).toString()).addClass("selected");
-                                            $("#" + (parseInt(i)).toString()).css('outline', '2px solid red');
-                                            if ($("#" + parseInt(i)).hasClass("bg"))
+                                            if (i != active_id && i.toString()[1] >= 1) {
+                                                alert(i);
+                                                if (($("#" + parseInt(i)).attr('class') ? $("#" + parseInt(i)).attr('class').substr(0, 4) : '') == 'bg w')
+                                                    break;
+                                                $("#" + (parseInt(i)).toString()).addClass("selected");
+                                                $("#" + (parseInt(i)).toString()).css('outline', '2px solid red');
+                                                if ($("#" + parseInt(i)).hasClass("bg"))
+                                                    break;
+                                            }
+                                            if ($.inArray(i, border_left_up) != -1)
                                                 break;
                                         }
-                                        if ($.inArray(i, border_left_up) != -1)
-                                            break;
                                     }
+                                    else
+                                    {
+
+                                    }
+
                                     break;
 
 
