@@ -10,4 +10,4 @@ Index.html Description:
 4. if we clcik on any div block in the possible path then our player moves there, if we clcik on opposite player, which is present in the path we kill the player and occupy its position
 
 
-in the code CASES suggest the possible actions for each player
+in the code CASES suggest the possible actions for each player.
