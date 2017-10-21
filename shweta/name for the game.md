@@ -11,3 +11,7 @@ Salvos chess
 Battle chess
 clash of kings 
 chess wars
+
+
+
+"Clash of kings" - finalised name 
