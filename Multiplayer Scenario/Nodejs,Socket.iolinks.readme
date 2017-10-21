@@ -1,0 +1,15 @@
+Reference links to implement a simple multiplayer game 
+
+https://modernweb.com/building-multiplayer-games-with-node-js-and-socket-io/
+
+Conclusions made:
+
+1. use nodejs and socket.io for multiplayer application
+
+2. use Mongodb to store temp json data,
+
+3.Use express.js for routing
+
+4.Convert the data in form of JSON
+
+
