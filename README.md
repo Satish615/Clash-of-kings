@@ -1,6 +1,7 @@
 # cmpe202-fivestars
+Game : **Clash of Kings**
 
-Game:- Taking players from Chess Game as basis i.e moves of Rook, Knight, Bishop, Queen, King and Pawns we are implementing a unique of its kind strategy game.
+Taking players from Chess Game as basis i.e moves of Rook, Knight, Bishop, Queen, King and Pawns, we are implementing a unique of its kind strategy game.
 
 **Kanban Phase Deliverables :**
 
