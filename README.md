@@ -85,6 +85,33 @@ Chess Board & Chess Moves Implementation by the end of this week-
 
 ![](https://github.com/nguyensjsu/cmpe202-fivestars/blob/master/Chess_Screenshot.png)
 
+Week #5 :
+---------
+
+Clean the code
+
+https://github.com/nguyensjsu/cmpe202-fivestars/issues/23
+
+Remove logics for unnecessary players (black players)
+
+https://github.com/nguyensjsu/cmpe202-fivestars/issues/26
+
+Change the id for each block. make it start from 0
+
+https://github.com/nguyensjsu/cmpe202-fivestars/issues/24
+
+Refactor the code so that everything is in object-oriented format 
+
+https://github.com/nguyensjsu/cmpe202-fivestars/issues/25
+
+Hosting code on server 
+
+https://github.com/nguyensjsu/cmpe202-fivestars/issues/27
+
+socket.io and node js for server
+
+https://github.com/nguyensjsu/cmpe202-fivestars/issues/22
+
 
 
 
