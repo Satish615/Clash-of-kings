@@ -1,0 +1,791 @@
+<!--
+Developed By -> Shiva && Devi
+Programming Language -> Javascript
+-->
+
+<html>
+    <head>
+        <title>Chess</title>
+        <style type="text/css">
+            #chess div{
+                width:46px;height:50px;border:1px solid #868686;
+                float:left; 
+                background-size: 330px 130px;
+                margin: 1px;
+                font-size: 9px;
+                background-color: #D5C4A1;
+            }
+
+
+            #chess div:nth-child(	20n+	1	),
+            #chess div:nth-child(	20n+	3	),
+            #chess div:nth-child(	20n+	5	),
+            #chess div:nth-child(	20n+	7	),
+            #chess div:nth-child(	20n+	9	),
+            #chess div:nth-child(	20n+	11	),
+            #chess div:nth-child(	20n+	13	),
+            #chess div:nth-child(	20n+	15	),
+            #chess div:nth-child(	20n+	17	),
+            #chess div:nth-child(	20n+	19	),
+            #chess div:nth-child(	20n+	21	),
+            #chess div:nth-child(	20n+	23	),
+            #chess div:nth-child(	20n+	25	),
+            #chess div:nth-child(	20n+	27	)
+
+
+
+            {
+                background-color: #966F33;
+            }
+
+
+            #chess div:nth-of-type(25n+1){
+                clear:left;
+            }
+
+            .bg{background-image: url('images/Chess_Pieces.png');}
+
+            .wrook{background-position:112px -3px;}
+            .brook{background-position:112px -68px;}
+
+            .wknight{background-position:167px -3px;}
+            .bknight{background-position:167px -68px;}
+
+            .wbishop{background-position:222px -3px;}
+            .bbishop{background-position:222px -68px;}
+
+            .wqueen{background-position:278px -3px;}
+            .bqueen{background-position:278px -68px;}
+
+            .wking{background-position:4px -3px;}
+            .bking{background-position:4px -68px;}
+
+            .wpawn{background-position:57px -3px;}
+            .bpawn{background-position:57px -68px;}
+
+            #dead_board_white div,#dead_board_black div{
+                width:30px;height:30px;
+                float:left;
+                background-size: 165px 65px;
+                background-image: url('images/Chess_Pieces.png');
+            }
+
+            .dwrook{background-position:56px -1.5px;}
+            .dbrook{background-position:56px -34px;}
+
+            .dwknight{background-position:83.5px -1.5px;}
+            .dbknight{background-position:83.5px -34px;}
+
+            .dwbishop{background-position:111px -1.5px;}
+            .dbbishop{background-position:111px -34px;}
+
+            .dwqueen{background-position:139px -1.5px;}
+            .dbqueen{background-position:139px -34px;}
+
+            .dwking{background-position:2px -1.5px;}
+            .dbking{background-position:2px -34px;}
+
+            .dwpawn{background-position:28.5px -1.5px;}
+            .dbpawn{background-position:28.5px -34px;}
+
+            .button {
+                background-color: white;
+                color: black;
+                border: 2px solid #878787;
+                border-radius: 4px;
+                cursor: pointer;
+                padding: 5px 5px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 13px;
+                -webkit-transition-duration: 0.4s; /* Safari */
+                transition-duration: 0.4s;
+            }
+
+            .button:hover {
+                background-color: #878787; /* Green */
+                color: white;
+            }
+        </style>
+        <script src="jquery-1.12.0.min.js"></script>
+        <script src="jquery-migrate-1.2.1.min.js"></script>
+        <script type="text/javascript">
+
+
+
+
+
+
+            function load()
+            {
+            /*    $("#11,#81").addClass("bg brook");
+                $("#21,#71").addClass("bg bknight");
+                $("#31,#61").addClass("bg bbishop");
+                $("#41").addClass("bg bqueen");
+                $("#51").addClass("bg bking");
+                $("#12,#22,#32,#42,#52,#62,#72,#82").addClass("bg bpawn");
+*/
+                $("#10,#188,#144,#97").addClass("bg wrook");
+                $("#238,#192,#62,#36").addClass("bg wknight");
+                $("#31,#128,#216,#131").addClass("bg wbishop");
+                $("#91").addClass("bg wqueen");
+                $("#159").addClass("bg wking");
+                $("#222,#29,#171,#95").addClass("bg wpawn");
+
+            }
+
+            $(document).ready(function () {
+
+                var active_id = null;
+                var active_element = null;
+                var count_steps = 1;
+                var last_dead_element = null;
+                var queen_live = null;
+                var current_turn = 'w';
+                var steps = new Array();
+
+                var element_array = new Array();
+                element_array['wrook'] = 'White Rook';
+                element_array['wknight'] = 'White Knight';
+                element_array['wbishop'] = 'White Bishop';
+                element_array['wqueen'] = 'White Queen';
+                element_array['wking'] = 'White King';
+                element_array['wpawn'] = 'White Pawn';
+                /*element_array['brook'] = 'Black Rook';
+                element_array['bknight'] = 'Black Knight';
+                element_array['bbishop'] = 'Black Bishop';
+                element_array['bqueen'] = 'Black Queen';
+                element_array['bking'] = 'Black King';
+                element_array['bpawn'] = 'Black Pawn';
+                */
+            //    var border_up = [11, 21, 31, 41, 51, 61, 71, 81];
+              //  var border_down = [18, 28, 38, 48, 58, 68, 78, 88];
+
+                var num_alpha = ['', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
+                $("#chess div").click(function () {
+
+                    if ($(this).hasClass("bg") || $(this).hasClass("selected")) {
+                        //if selected
+                        if ($(this).hasClass("selected"))
+                        {
+                            //wins
+                            if ($(this).hasClass("bking"))
+                                alert("White wins...");
+                            if ($(this).hasClass("wking"))
+                                alert("Black wins...");
+
+                            //Dead elements
+                            var class_split = $(this).attr('class').split(" ");
+
+                            if (class_split[0] == 'bg' && class_split[2] == 'selected')
+                            {
+                                if (class_split[1].substring(0, 1) == 'b')
+                                    $("#dead_board_black").append("<div class='d" + class_split[1] + "'></div>");
+                                else
+                                    $("#dead_board_white").append("<div class='d" + class_split[1] + "'></div>");
+
+                                last_dead_element = class_split[1];
+                            }
+
+
+                            //remove outline and change position of element
+                            $(this).removeClass($(this).attr('class'));
+                            $("#" + active_id).removeClass("bg " + active_element);
+
+                       /*     //Queen live
+                            if (active_element == 'bpawn' && $.inArray(parseInt($(this).attr('id')), border_down) != -1) {
+                                active_element = 'bqueen';
+                                alert("Black Pawn change into black Queen.");
+                                queen_live = "Black Pawn => Black Queen";
+                            }
+                            ;
+                            if (active_element == 'wpawn' && $.inArray(parseInt($(this).attr('id')), border_up) != -1) {
+                                active_element = 'wqueen';
+                                alert("White Pawn change into white Queen.");
+                                queen_live = "White Pawn => White Queen";
+                            }
+                            ;
+                        */
+                            $(this).addClass("bg " + active_element);
+                            $("#chess div").removeClass("selected");
+                            $("#chess div").css('outline', '');
+
+                            if (active_element.substring(0, 1) == 'b')
+                                moves_bg = "background-color:rgb(236, 234, 234) ;color:black;font-weight: 100;";
+                            else
+                                moves_bg = "background-color:#white ;color:black;font-weight: 100;";
+                            if (last_dead_element)
+                                moves_bg += " color:red !important;font-weight: 200 !important; "
+
+                            $("#steps").append("<span style='" + moves_bg + "'>" + count_steps + ". " + element_array[active_element] + " : " + num_alpha[active_id[0]] + Math.abs(active_id[1] - 9) + ' -> ' + num_alpha[$(this).attr('id')[0]] + Math.abs($(this).attr('id')[1] - 9));
+                            if (last_dead_element)
+                                $("#steps").append(" <span style='color:red;'>(" + element_array[last_dead_element] + ")</span> ");
+                            if (queen_live)
+                                $("#steps").append(" <span style='color:green;'>(" + queen_live + ")</span> ");
+                            $("#steps").append(" </span><br/>");
+                            $('#steps').animate({scrollTop: $('#steps').height()});
+
+                            //add step
+                            if (last_dead_element)
+                                var step_last_dead = ' ' + last_dead_element;
+                            else
+                                var step_last_dead = '';
+                            if (queen_live)
+                                var step_queen_live = ' ' + 1;
+                            else
+                                var step_queen_live = '';
+                            //active_element active_id->destination_id dead_element queen_live
+                            steps[count_steps] = active_element + ' ' + active_id + '->' + $(this).attr('id') + step_last_dead + step_queen_live;
+
+                            if ($(this).attr('class').substring(3, 4) == current_turn)
+                            {
+                                if (current_turn == 'w')
+                                    current_turn = 'w';
+                                else
+                                    current_turn = 'w';
+                            }
+
+                            count_steps++;
+                            active_id = null;
+                            active_element = null;
+                            last_dead_element = null;
+                            queen_live = null;
+                        } else {
+
+                            //Turn
+                            if ($(this).attr('class').substring(3, 4) != current_turn)
+                            {
+                                if (current_turn == 'w')
+                                    alert("It's White Turn");
+                                if (current_turn == 'b')
+                                    alert("It's Black Turn");
+                                return;
+                            }
+
+                            $("#chess div").removeClass("selected");
+                            $("#chess div").css('outline', '');
+                            $(this).css('outline', '2px solid red');
+
+                            active_id = $(this).attr('id');
+                            active_element = $(this).attr('class').substring(3);
+
+                            switch (active_element) {
+
+
+                                case "wrook":
+                               // alert(   parseInt(paWrseInt(active_id[0] + active_id[1]) + active_id[2]));
+                                if(active_id.length==2) {
+                                    for (i = active_id[0]; i >= 1; i--) {
+                                        if (i != active_id[0]) {
+                                            if (($("#" + parseInt(i + active_id[1])).attr('class') ? $("#" + parseInt(i + active_id[1])).attr('class').substr(0, 4) : '') == 'bg w')
+                                                break;
+                                            $("#" + (parseInt(i + active_id[1])).toString()).addClass("selected");
+                                            $("#" + (parseInt(i + active_id[1])).toString()).css('outline', '2px solid red');
+                                            if ($("#" + parseInt(i + active_id[1])).hasClass("bg"))
+                                                break;
+                                        }
+                                    }
+
+
+
+                                    for (i = active_id[0]; i <= 25; i++) {
+
+                                        if (i != active_id[0]) {
+                                            if (($("#" + parseInt(i + active_id[active_id.length - 1])).attr('class') ? $("#" + parseInt(i + active_id[active_id.length - 1])).attr('class').substr(0, 4) : '') == 'bg w')
+                                                break;
+                                            $("#" + (parseInt(i + active_id[1])).toString()).addClass("selected");
+                                            $("#" + (parseInt(i + active_id[1])).toString()).css('outline', '2px solid red');
+                                            if ($("#" + parseInt(i + active_id[1])).hasClass("bg"))
+                                                break;
+                                        }
+                                    }
+
+
+                                    for (i = active_id[1]; i >= 0; i--) {
+                                        if (i != active_id[1]) {
+                                            if (($("#" + parseInt(active_id[0] + i)).attr('class') ? $("#" + parseInt(active_id[0] + i)).attr('class').substr(0, 4) : '') == 'bg w')
+                                                break;
+                                            $("#" + (parseInt(active_id[0] + i)).toString()).addClass("selected");
+                                            $("#" + (parseInt(active_id[0] + i)).toString()).css('outline', '2px solid red');
+                                            if ($("#" + parseInt(active_id[0] + i)).hasClass("bg"))
+                                                break;
+                                        }
+                                    }
+
+
+
+                                    for (i = active_id[1]; i <= 9; i++) {
+                                        if (i != active_id[1]) {
+                                            if (($("#" + parseInt(active_id[0] + i)).attr('class') ? $("#" + parseInt(active_id[0] + i)).attr('class').substr(0, 4) : '') == 'bg w')
+                                                break;
+                                            $("#" + (parseInt(active_id[0] + i)).toString()).addClass("selected");
+                                            $("#" + (parseInt(active_id[0] + i)).toString()).css('outline', '2px solid red');
+                                            if ($("#" + parseInt(active_id[0] + i)).hasClass("bg"))
+                                                break;
+                                        }
+                                    }
+
+
+
+                                }
+                                else
+                                {
+
+                                    for (i = parseInt(active_id[0] + active_id[1]); i >= 1; i--) {
+                                        if (i != parseInt(active_id[0] + active_id[1])) {
+                                            //  alert(   parseInt(i + active_id[2]));
+                                            if (($("#" + parseInt(i + active_id[2])).attr('class') ? $("#" + parseInt(i + active_id[2])).attr('class').substr(0, 4) : '') == 'bg w')
+                                                break;
+                                            $("#" + (parseInt(i +active_id[2])).toString()).addClass("selected");
+                                            $("#" + (parseInt(i + active_id[2])).toString()).css('outline', '2px solid red');
+                                            if ($("#" + parseInt(i + active_id[2])).hasClass("bg"))
+                                                break;
+                                        }
+                                    }
+
+
+                                    for (i =  parseInt(active_id[0] + active_id[1]); i <= 25; i++) {
+
+                                        if (i != parseInt(active_id[0] + active_id[1])) {
+                                            if (($("#" + parseInt(i + active_id[active_id.length - 1])).attr('class') ? $("#" + parseInt(i + active_id[active_id.length - 1])).attr('class').substr(0, 4) : '') == 'bg w')
+                                                break;
+                                            $("#" + (parseInt(i + active_id[2])).toString()).addClass("selected");
+                                            $("#" + (parseInt(i + active_id[2])).toString()).css('outline', '2px solid red');
+                                            if ($("#" + parseInt(i + active_id[2])).hasClass("bg"))
+                                                break;
+                                        }
+                                    }
+
+                                    for (i =  parseInt(active_id[2]); i >= 0; i--) {
+                                        if (i != parseInt(active_id[2])) {
+                                            if (($("#" + parseInt(active_id[0]+active_id[1]  + i)).attr('class') ? $("#" + parseInt(active_id[0]+active_id[1]  + i)).attr('class').substr(0, 4) : '') == 'bg w')
+                                                break;
+                                            $("#" + (parseInt(active_id[0]+active_id[1]  + i)).toString()).addClass("selected");
+                                            $("#" + (parseInt(active_id[0]+active_id[1]  + i)).toString()).css('outline', '2px solid red');
+                                            if ($("#" + parseInt(active_id[0]+active_id[1]  + i)).hasClass("bg"))
+                                                break;
+                                        }
+                                    }
+
+                                    for (i = parseInt(active_id[2]); i <= 9; i++) {
+                                        if (i != parseInt(active_id[2])) {
+                                            if (($("#" + parseInt(active_id[0]+active_id[1]  + i)).attr('class') ? $("#" + parseInt(active_id[0]+active_id[1]  + i)).attr('class').substr(0, 4) : '') == 'bg w')
+                                                break;
+                                            $("#" + (parseInt(active_id[0]+active_id[1]  + i)).toString()).addClass("selected");
+                                            $("#" + (parseInt(active_id[0]+active_id[1]  + i)).toString()).css('outline', '2px solid red');
+                                            if ($("#" + parseInt(active_id[0]+active_id[1]  + i)).hasClass("bg"))
+                                                break;
+                                        }
+                                    }
+                                }
+
+                                break;
+
+
+                                case "wknight":
+
+                                    if (active_id.substr(-1) === '0' || active_id.substr(-1) === '1') {
+
+
+                                        if (($("#" + (parseInt(active_id) + 12).toString()).attr('class') ? $("#" + (parseInt(active_id) + 12).toString()).attr('class').substr(0, 4) : '') != 'bg w') {
+                                            $("#" + (parseInt(active_id) + 12).toString()).addClass("selected");
+                                            $("#" + (parseInt(active_id) + 12).toString()).css('outline', '2px solid red');
+                                        }
+
+                                        if (($("#" + (parseInt(active_id) - 8).toString()).attr('class') ? $("#" + (parseInt(active_id) - 8).toString()).attr('class').substr(0, 4) : '') != 'bg w') {
+                                            $("#" + (parseInt(active_id) - 8).toString()).addClass("selected");
+                                            $("#" + (parseInt(active_id) - 8).toString()).css('outline', '2px solid red');
+                                        }
+                                        if (($("#" + (parseInt(active_id) + 21).toString()).attr('class') ? $("#" + (parseInt(active_id) + 21).toString()).attr('class').substr(0, 4) : '') != 'bg w') {
+                                            $("#" + (parseInt(active_id) + 21).toString()).addClass("selected");
+                                            $("#" + (parseInt(active_id) + 21).toString()).css('outline', '2px solid red');
+                                        }
+
+
+                                        if (($("#" + (parseInt(active_id) - 19).toString()).attr('class') ? $("#" + (parseInt(active_id) - 19).toString()).attr('class').substr(0, 4) : '') != 'bg w') {
+                                            $("#" + (parseInt(active_id) - 19).toString()).addClass("selected");
+                                            $("#" + (parseInt(active_id) - 19).toString()).css('outline', '2px solid red');
+                                        }
+                                        if(active_id.substr(-1) !== '0' ) {
+                                            if (($("#" + (parseInt(active_id) - 21).toString()).attr('class') ? $("#" + (parseInt(active_id) - 21).toString()).attr('class').substr(0, 4) : '') != 'bg w') {
+                                                $("#" + (parseInt(active_id) - 21).toString()).addClass("selected");
+                                                $("#" + (parseInt(active_id) - 21).toString()).css('outline', '2px solid red');
+                                            }
+                                            if (($("#" + (parseInt(active_id) + 19).toString()).attr('class') ? $("#" + (parseInt(active_id) + 19).toString()).attr('class').substr(0, 4) : '') != 'bg w') {
+                                                $("#" + (parseInt(active_id) + 19).toString()).addClass("selected");
+                                                $("#" + (parseInt(active_id) + 19).toString()).css('outline', '2px solid red');
+                                            }
+
+
+                                        }
+                                    }
+
+                                    else if (active_id.substr(-1) === '9' || active_id.substr(-1) === '8') {
+
+
+
+                                        if (($("#" + (parseInt(active_id) - 12).toString()).attr('class') ? $("#" + (parseInt(active_id) - 12).toString()).attr('class').substr(0, 4) : '') != 'bg w') {
+                                            $("#" + (parseInt(active_id) - 12).toString()).addClass("selected");
+                                            $("#" + (parseInt(active_id) - 12).toString()).css('outline', '2px solid red');
+                                        }
+                                        if (($("#" + (parseInt(active_id) + 8).toString()).attr('class') ? $("#" + (parseInt(active_id) + 8).toString()).attr('class').substr(0, 4) : '') != 'bg w') {
+                                            $("#" + (parseInt(active_id) + 8).toString()).addClass("selected");
+                                            $("#" + (parseInt(active_id) + 8).toString()).css('outline', '2px solid red');
+                                        }
+
+
+                                        if (($("#" + (parseInt(active_id) - 21).toString()).attr('class') ? $("#" + (parseInt(active_id) - 21).toString()).attr('class').substr(0, 4) : '') != 'bg w') {
+                                            $("#" + (parseInt(active_id) - 21).toString()).addClass("selected");
+                                            $("#" + (parseInt(active_id) - 21).toString()).css('outline', '2px solid red');
+                                        }
+                                        if (($("#" + (parseInt(active_id) + 19).toString()).attr('class') ? $("#" + (parseInt(active_id) + 19).toString()).attr('class').substr(0, 4) : '') != 'bg w') {
+                                            $("#" + (parseInt(active_id) + 19).toString()).addClass("selected");
+                                            $("#" + (parseInt(active_id) + 19).toString()).css('outline', '2px solid red');
+                                        }
+
+                                      if(active_id.substr(-1) !== '9' ) {
+                                          if (($("#" + (parseInt(active_id) - 19).toString()).attr('class') ? $("#" + (parseInt(active_id) - 19).toString()).attr('class').substr(0, 4) : '') != 'bg w') {
+                                              $("#" + (parseInt(active_id) - 19).toString()).addClass("selected");
+                                              $("#" + (parseInt(active_id) - 19).toString()).css('outline', '2px solid red');
+                                          }
+                                          if (($("#" + (parseInt(active_id) + 21).toString()).attr('class') ? $("#" + (parseInt(active_id) + 21).toString()).attr('class').substr(0, 4) : '') != 'bg w') {
+                                              $("#" + (parseInt(active_id) + 21).toString()).addClass("selected");
+                                              $("#" + (parseInt(active_id) + 21).toString()).css('outline', '2px solid red');
+                                          }
+                                      }
+                                    }
+                                    else {
+                                        if (($("#" + (parseInt(active_id) + 12).toString()).attr('class') ? $("#" + (parseInt(active_id) + 12).toString()).attr('class').substr(0, 4) : '') != 'bg w') {
+                                            $("#" + (parseInt(active_id) + 12).toString()).addClass("selected");
+                                            $("#" + (parseInt(active_id) + 12).toString()).css('outline', '2px solid red');
+                                        }
+                                        if (($("#" + (parseInt(active_id) - 12).toString()).attr('class') ? $("#" + (parseInt(active_id) - 12).toString()).attr('class').substr(0, 4) : '') != 'bg w') {
+                                            $("#" + (parseInt(active_id) - 12).toString()).addClass("selected");
+                                            $("#" + (parseInt(active_id) - 12).toString()).css('outline', '2px solid red');
+                                        }
+                                        if (($("#" + (parseInt(active_id) + 8).toString()).attr('class') ? $("#" + (parseInt(active_id) + 8).toString()).attr('class').substr(0, 4) : '') != 'bg w') {
+                                            $("#" + (parseInt(active_id) + 8).toString()).addClass("selected");
+                                            $("#" + (parseInt(active_id) + 8).toString()).css('outline', '2px solid red');
+                                        }
+                                        if (($("#" + (parseInt(active_id) - 8).toString()).attr('class') ? $("#" + (parseInt(active_id) - 8).toString()).attr('class').substr(0, 4) : '') != 'bg w') {
+                                            $("#" + (parseInt(active_id) - 8).toString()).addClass("selected");
+                                            $("#" + (parseInt(active_id) - 8).toString()).css('outline', '2px solid red');
+                                        }
+                                        if (($("#" + (parseInt(active_id) + 21).toString()).attr('class') ? $("#" + (parseInt(active_id) + 21).toString()).attr('class').substr(0, 4) : '') != 'bg w') {
+                                            $("#" + (parseInt(active_id) + 21).toString()).addClass("selected");
+                                            $("#" + (parseInt(active_id) + 21).toString()).css('outline', '2px solid red');
+                                        }
+                                        if (($("#" + (parseInt(active_id) - 21).toString()).attr('class') ? $("#" + (parseInt(active_id) - 21).toString()).attr('class').substr(0, 4) : '') != 'bg w') {
+                                            $("#" + (parseInt(active_id) - 21).toString()).addClass("selected");
+                                            $("#" + (parseInt(active_id) - 21).toString()).css('outline', '2px solid red');
+                                        }
+                                        if (($("#" + (parseInt(active_id) + 19).toString()).attr('class') ? $("#" + (parseInt(active_id) + 19).toString()).attr('class').substr(0, 4) : '') != 'bg w') {
+                                            $("#" + (parseInt(active_id) + 19).toString()).addClass("selected");
+                                            $("#" + (parseInt(active_id) + 19).toString()).css('outline', '2px solid red');
+                                        }
+                                        if (($("#" + (parseInt(active_id) - 19).toString()).attr('class') ? $("#" + (parseInt(active_id) - 19).toString()).attr('class').substr(0, 4) : '') != 'bg w') {
+                                            $("#" + (parseInt(active_id) - 19).toString()).addClass("selected");
+                                            $("#" + (parseInt(active_id) - 19).toString()).css('outline', '2px solid red');
+                                        }
+                                    }
+                                    break;
+
+
+                                case "wbishop":
+
+                                for (i = parseInt(active_id); i <= parseInt(active_id)+11*(9-parseInt(active_id.substr(-1))); i += 11) {
+                                        if (i != parseInt(active_id)) {
+
+                                            if (($("#" + parseInt(i)).attr('class') ? $("#" + parseInt(i)).attr('class').substr(0, 4) : '') != 'bg w'){
+                                            $("#" + (parseInt(i)).toString()).addClass("selected");
+                                            $("#" + (parseInt(i)).toString()).css('outline', '2px solid red');}
+                                            else break;
+
+                                        }
+                                    }
+                                for (i = parseInt(active_id); i <= parseInt(active_id)+9*(parseInt(active_id.substr(-1))); i += 9) {
+                                        if (i != parseInt(active_id)) {
+
+                                            if (($("#" + parseInt(i)).attr('class') ? $("#" + parseInt(i)).attr('class').substr(0, 4) : '') != 'bg w'){
+                                                $("#" + (parseInt(i)).toString()).addClass("selected");
+                                                $("#" + (parseInt(i)).toString()).css('outline', '2px solid red');}
+                                            else break;
+
+                                        }
+                                    }
+
+                                 for (i = parseInt(active_id); i >= parseInt(active_id)-11*(parseInt(active_id.substr(-1))); i -= 11) {
+                                        if (i != parseInt(active_id)) {
+
+                                            if (($("#" + parseInt(i)).attr('class') ? $("#" + parseInt(i)).attr('class').substr(0, 4) : '') != 'bg w'){
+                                                $("#" + (parseInt(i)).toString()).addClass("selected");
+                                                $("#" + (parseInt(i)).toString()).css('outline', '2px solid red');}
+                                            else break;
+
+                                        }
+                                    }
+
+                                    for (i = parseInt(active_id); i >= parseInt(active_id)-9*(9-parseInt(active_id.substr(-1))); i -= 9) {
+                                        if (i != parseInt(active_id)) {
+
+                                            if (($("#" + parseInt(i)).attr('class') ? $("#" + parseInt(i)).attr('class').substr(0, 4) : '') != 'bg w'){
+                                                $("#" + (parseInt(i)).toString()).addClass("selected");
+                                                $("#" + (parseInt(i)).toString()).css('outline', '2px solid red');}
+                                            else break;
+
+                                        }
+                                    }
+
+                                    break;
+
+
+                                case "wqueen":
+
+
+                                // Use Decorator to add functionality from all other players
+
+                               /*
+                                    for (i = active_id[0]; i >= 1; i--) {
+                                        if (i != active_id[0]) {
+                                            if (($("#" + parseInt(i + active_id[1])).attr('class') ? $("#" + parseInt(i + active_id[1])).attr('class').substr(0, 4) : '') == 'bg w')
+                                                break;
+                                            $("#" + (parseInt(i + active_id[1])).toString()).addClass("selected");
+                                            $("#" + (parseInt(i + active_id[1])).toString()).css('outline', '2px solid red');
+                                            if ($("#" + parseInt(i + active_id[1])).hasClass("bg"))
+                                                break;
+                                        }
+                                    }
+                                    for (i = active_id[0]; i <= 8; i++) {
+                                        if (i != active_id[0]) {
+                                            if (($("#" + parseInt(i + active_id[1])).attr('class') ? $("#" + parseInt(i + active_id[1])).attr('class').substr(0, 4) : '') == 'bg w')
+                                                break;
+                                            $("#" + (parseInt(i + active_id[1])).toString()).addClass("selected");
+                                            $("#" + (parseInt(i + active_id[1])).toString()).css('outline', '2px solid red');
+                                            if ($("#" + parseInt(i + active_id[1])).hasClass("bg"))
+                                                break;
+                                        }
+                                    }
+                                    for (i = active_id[1]; i >= 1; i--) {
+                                        if (i != active_id[1]) {
+                                            if (($("#" + parseInt(active_id[0] + i)).attr('class') ? $("#" + parseInt(active_id[0] + i)).attr('class').substr(0, 4) : '') == 'bg w')
+                                                break;
+                                            $("#" + (parseInt(active_id[0] + i)).toString()).addClass("selected");
+                                            $("#" + (parseInt(active_id[0] + i)).toString()).css('outline', '2px solid red');
+                                            if ($("#" + parseInt(active_id[0] + i)).hasClass("bg"))
+                                                break;
+                                        }
+                                    }
+                                    for (i = active_id[1]; i <= 8; i++) {
+                                        if (i != active_id[1]) {
+                                            if (($("#" + parseInt(active_id[0] + i)).attr('class') ? $("#" + parseInt(active_id[0] + i)).attr('class').substr(0, 4) : '') == 'bg w')
+                                                break;
+                                            $("#" + (parseInt(active_id[0] + i)).toString()).addClass("selected");
+                                            $("#" + (parseInt(active_id[0] + i)).toString()).css('outline', '2px solid red');
+                                            if ($("#" + parseInt(active_id[0] + i)).hasClass("bg"))
+                                                break;
+                                        }
+                                    }
+
+
+                                    for (i = parseInt(active_id); i <= 88; i += 9) {
+                                        if (i != active_id && i.toString()[1] <= 8) {
+                                            if (($("#" + parseInt(i)).attr('class') ? $("#" + parseInt(i)).attr('class').substr(0, 4) : '') == 'bg w')
+                                                break;
+                                            $("#" + (parseInt(i)).toString()).addClass("selected");
+                                            $("#" + (parseInt(i)).toString()).css('outline', '2px solid red');
+                                            if ($("#" + parseInt(i)).hasClass("bg"))
+                                                break;
+                                        }
+                                        if ($.inArray(i, border_right_up) != -1)
+                                            break;
+                                    }
+
+                                    for (i = parseInt(active_id); i >= 11; i -= 9) {
+                                        if (i != active_id && i.toString()[1] >= 1) {
+
+                                            if (($("#" + parseInt(i)).attr('class') ? $("#" + parseInt(i)).attr('class').substr(0, 4) : '') == 'bg w')
+                                                break;
+                                            $("#" + (parseInt(i)).toString()).addClass("selected");
+                                            $("#" + (parseInt(i)).toString()).css('outline', '2px solid red');
+                                            if ($("#" + parseInt(i)).hasClass("bg"))
+                                                break;
+                                        }
+                                        if ($.inArray(i, border_left_down) != -1)
+                                            break;
+                                    }
+                                    for (i = parseInt(active_id); i <= 88; i += 11) {
+                                        if (i != active_id && i.toString()[1] <= 8) {
+
+                                            if (($("#" + parseInt(i)).attr('class') ? $("#" + parseInt(i)).attr('class').substr(0, 4) : '') == 'bg w')
+                                                break;
+                                            $("#" + (parseInt(i)).toString()).addClass("selected");
+                                            $("#" + (parseInt(i)).toString()).css('outline', '2px solid red');
+                                            if ($("#" + parseInt(i)).hasClass("bg"))
+                                                break;
+                                        }
+                                        if ($.inArray(i, border_right_down) != -1)
+                                            break;
+                                    }
+
+                                    for (i = parseInt(active_id); i >= 11; i -= 11) {
+                                        if (i != active_id && i.toString()[1] >= 1) {
+
+                                            if (($("#" + parseInt(i)).attr('class') ? $("#" + parseInt(i)).attr('class').substr(0, 4) : '') == 'bg w')
+                                                break;
+                                            $("#" + (parseInt(i)).toString()).addClass("selected");
+                                            $("#" + (parseInt(i)).toString()).css('outline', '2px solid red');
+                                            if ($("#" + parseInt(i)).hasClass("bg"))
+                                                break;
+                                        }
+                                        if ($.inArray(i, border_left_up) != -1)
+                                            break;
+                                    }
+                             */
+                               break;
+
+
+                                case "wking":
+                                    //Top Row
+                                    if (active_id.substr(-1) === '0'){
+                                        if (($("#" + (parseInt(active_id) + 1).toString()).attr('class') ? $("#" + (parseInt(active_id) + 1).toString()).attr('class').substr(0, 4) : '') != 'bg w') {
+                                            $("#" + (parseInt(active_id) + 1).toString()).addClass("selected");
+                                            $("#" + (parseInt(active_id) + 1).toString()).css('outline', '2px solid red');
+                                        }
+
+                                        if (($("#" + (parseInt(active_id) + 10).toString()).attr('class') ? $("#" + (parseInt(active_id) + 10).toString()).attr('class').substr(0, 4) : '') != 'bg w') {
+                                            $("#" + (parseInt(active_id) + 10).toString()).addClass("selected");
+                                            $("#" + (parseInt(active_id) + 10).toString()).css('outline', '2px solid red');
+                                        }
+                                        if (($("#" + (parseInt(active_id) - 10).toString()).attr('class') ? $("#" + (parseInt(active_id) - 10).toString()).attr('class').substr(0, 4) : '') != 'bg w') {
+                                            $("#" + (parseInt(active_id) - 10).toString()).addClass("selected");
+                                            $("#" + (parseInt(active_id) - 10).toString()).css('outline', '2px solid red');
+                                        }
+                                        if (($("#" + (parseInt(active_id) - 9).toString()).attr('class') ? $("#" + (parseInt(active_id) - 9).toString()).attr('class').substr(0, 4) : '') != 'bg w') {
+                                            $("#" + (parseInt(active_id) - 9).toString()).addClass("selected");
+                                            $("#" + (parseInt(active_id) - 9).toString()).css('outline', '2px solid red');
+                                        }
+                                        if (($("#" + (parseInt(active_id) + 11).toString()).attr('class') ? $("#" + (parseInt(active_id) + 11).toString()).attr('class').substr(0, 4) : '') != 'bg w') {
+                                            $("#" + (parseInt(active_id) + 11).toString()).addClass("selected");
+                                            $("#" + (parseInt(active_id) + 11).toString()).css('outline', '2px solid red');
+                                        }
+
+                                    }
+                                    //Last Row
+                                    else if(active_id.substr(-1) === '9') {
+
+                                        if (($("#" + (parseInt(active_id) - 1).toString()).attr('class') ? $("#" + (parseInt(active_id) - 1).toString()).attr('class').substr(0, 4) : '') != 'bg w') {
+                                            $("#" + (parseInt(active_id) - 1).toString()).addClass("selected");
+                                            $("#" + (parseInt(active_id) - 1).toString()).css('outline', '2px solid red');
+                                        }
+                                        if (($("#" + (parseInt(active_id) + 10).toString()).attr('class') ? $("#" + (parseInt(active_id) + 10).toString()).attr('class').substr(0, 4) : '') != 'bg w') {
+                                            $("#" + (parseInt(active_id) + 10).toString()).addClass("selected");
+                                            $("#" + (parseInt(active_id) + 10).toString()).css('outline', '2px solid red');
+                                        }
+                                        if (($("#" + (parseInt(active_id) - 10).toString()).attr('class') ? $("#" + (parseInt(active_id) - 10).toString()).attr('class').substr(0, 4) : '') != 'bg w') {
+                                            $("#" + (parseInt(active_id) - 10).toString()).addClass("selected");
+                                            $("#" + (parseInt(active_id) - 10).toString()).css('outline', '2px solid red');
+                                        }
+                                        if (($("#" + (parseInt(active_id) + 9).toString()).attr('class') ? $("#" + (parseInt(active_id) + 9).toString()).attr('class').substr(0, 4) : '') != 'bg w') {
+                                            $("#" + (parseInt(active_id) + 9).toString()).addClass("selected");
+                                            $("#" + (parseInt(active_id) + 9).toString()).css('outline', '2px solid red');
+                                        }
+
+                                        if (($("#" + (parseInt(active_id) - 11).toString()).attr('class') ? $("#" + (parseInt(active_id) - 11).toString()).attr('class').substr(0, 4) : '') != 'bg w') {
+                                            $("#" + (parseInt(active_id) - 11).toString()).addClass("selected");
+                                            $("#" + (parseInt(active_id) - 11).toString()).css('outline', '2px solid red');
+                                        }
+
+                                    }
+                                    else {
+                                        if (($("#" + (parseInt(active_id) + 1).toString()).attr('class') ? $("#" + (parseInt(active_id) + 1).toString()).attr('class').substr(0, 4) : '') != 'bg w') {
+                                            $("#" + (parseInt(active_id) + 1).toString()).addClass("selected");
+                                            $("#" + (parseInt(active_id) + 1).toString()).css('outline', '2px solid red');
+                                        }
+                                        if (($("#" + (parseInt(active_id) - 1).toString()).attr('class') ? $("#" + (parseInt(active_id) - 1).toString()).attr('class').substr(0, 4) : '') != 'bg w') {
+                                            $("#" + (parseInt(active_id) - 1).toString()).addClass("selected");
+                                            $("#" + (parseInt(active_id) - 1).toString()).css('outline', '2px solid red');
+                                        }
+                                        if (($("#" + (parseInt(active_id) + 10).toString()).attr('class') ? $("#" + (parseInt(active_id) + 10).toString()).attr('class').substr(0, 4) : '') != 'bg w') {
+                                            $("#" + (parseInt(active_id) + 10).toString()).addClass("selected");
+                                            $("#" + (parseInt(active_id) + 10).toString()).css('outline', '2px solid red');
+                                        }
+                                        if (($("#" + (parseInt(active_id) - 10).toString()).attr('class') ? $("#" + (parseInt(active_id) - 10).toString()).attr('class').substr(0, 4) : '') != 'bg w') {
+                                            $("#" + (parseInt(active_id) - 10).toString()).addClass("selected");
+                                            $("#" + (parseInt(active_id) - 10).toString()).css('outline', '2px solid red');
+                                        }
+                                        if (($("#" + (parseInt(active_id) + 9).toString()).attr('class') ? $("#" + (parseInt(active_id) + 9).toString()).attr('class').substr(0, 4) : '') != 'bg w') {
+                                            $("#" + (parseInt(active_id) + 9).toString()).addClass("selected");
+                                            $("#" + (parseInt(active_id) + 9).toString()).css('outline', '2px solid red');
+                                        }
+                                        if (($("#" + (parseInt(active_id) - 9).toString()).attr('class') ? $("#" + (parseInt(active_id) - 9).toString()).attr('class').substr(0, 4) : '') != 'bg w') {
+                                            $("#" + (parseInt(active_id) - 9).toString()).addClass("selected");
+                                            $("#" + (parseInt(active_id) - 9).toString()).css('outline', '2px solid red');
+                                        }
+                                        if (($("#" + (parseInt(active_id) + 11).toString()).attr('class') ? $("#" + (parseInt(active_id) + 11).toString()).attr('class').substr(0, 4) : '') != 'bg w') {
+                                            $("#" + (parseInt(active_id) + 11).toString()).addClass("selected");
+                                            $("#" + (parseInt(active_id) + 11).toString()).css('outline', '2px solid red');
+                                        }
+                                        if (($("#" + (parseInt(active_id) - 11).toString()).attr('class') ? $("#" + (parseInt(active_id) - 11).toString()).attr('class').substr(0, 4) : '') != 'bg w') {
+                                            $("#" + (parseInt(active_id) - 11).toString()).addClass("selected");
+                                            $("#" + (parseInt(active_id) - 11).toString()).css('outline', '2px solid red');
+                                        }
+
+                                    }
+                                    break;
+
+                                case "wpawn":
+
+                                    if (($("#" + (parseInt(active_id) - 1).toString()).attr('class') ? $("#" + (parseInt(active_id) - 1).toString()).attr('class').substr(0, 2) : '') != 'bg') {
+                                        $("#" + (parseInt(active_id) - 1).toString()).addClass("selected");
+                                        $("#" + (parseInt(active_id) - 1).toString()).css('outline', '2px solid red');
+                                    }
+
+                                    if (($("#" + (parseInt(active_id) + 1).toString()).attr('class') ? $("#" + (parseInt(active_id) + 1).toString()).attr('class').substr(0, 2) : '') != 'bg') {
+                                        $("#" + (parseInt(active_id) + 1).toString()).addClass("selected");
+                                        $("#" + (parseInt(active_id) + 1).toString()).css('outline', '2px solid red');
+                            
+                                    if ($("#" + (parseInt(active_id) - 11).toString()).hasClass("bg")) {
+                                        if (($("#" + (parseInt(active_id) - 11).toString()).attr('class') ? $("#" + (parseInt(active_id) - 11).toString()).attr('class').substr(0, 4) : '') != 'bg w') {
+                                            $("#" + (parseInt(active_id) - 11).toString()).addClass("selected");
+                                            $("#" + (parseInt(active_id) - 11).toString()).css('outline', '2px solid red');
+                                        }
+                                    }
+                                    if ($("#" + (parseInt(active_id) + 9).toString()).hasClass("bg")) {
+                                        if (($("#" + (parseInt(active_id) + 9).toString()).attr('class') ? $("#" + (parseInt(active_id) + 9).toString()).attr('class').substr(0, 4) : '') != 'bg w') {
+                                            $("#" + (parseInt(active_id) + 9).toString()).addClass("selected");
+                                            $("#" + (parseInt(active_id) + 9).toString()).css('outline', '2px solid red');
+                                        }
+                                    }
+
+                                    break;
+
+                                default:
+
+                            }
+                        }
+                    }
+
+                });
+
+            });
+        </script>
+    </head>
+    <body onload="load()">
+        <br>
+        <div id="chess" >
+        </div>
+    <script>
+        var toAdd = document.createDocumentFragment();
+        for(var j=0;j<10;j++)
+        for(var i=1; i <= 25; i++){
+        var newDiv = document.createElement('div');
+        newDiv.id = (10*i)+j;
+            newDiv.innerHTML=newDiv.id
+            toAdd.appendChild(newDiv);
+        }
+        if(document.getElementById("chess")!=null)
+        document.getElementById("chess").appendChild(toAdd);
+    </script>
+    </body>
+</html>
