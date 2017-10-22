@@ -494,6 +494,29 @@ Programming Language -> Javascript
 
                                 case "wbishop":
 
+                                /*    for (i = parseInt(active_id); i <= 259; i += 9) {
+                                        if (i != active_id && i.toString()[1] <= 8) {
+                                            if (($("#" + parseInt(i)).attr('class') ? $("#" + parseInt(i)).attr('class').substr(0, 4) : '') == 'bg w')
+                                                break;
+                                            $("#" + (parseInt(i)).toString()).addClass("selected");
+                                            $("#" + (parseInt(i)).toString()).css('outline', '2px solid red');
+                                            if ($("#" + parseInt(i)).hasClass("bg"))
+                                                break;
+                                        }
+                                    }
+
+                                    for (i = parseInt(active_id); i >= 10; i -= 9) {
+                                        if (i != active_id && i.toString()[1] >= 1) {
+
+                                            if (($("#" + parseInt(i)).attr('class') ? $("#" + parseInt(i)).attr('class').substr(0, 4) : '') == 'bg w')
+                                                break;
+                                            $("#" + (parseInt(i)).toString()).addClass("selected");
+                                            $("#" + (parseInt(i)).toString()).css('outline', '2px solid red');
+                                            if ($("#" + parseInt(i)).hasClass("bg"))
+                                                break;
+                                        }
+                                    }
+                                  */
                                 for (i = parseInt(active_id); i <= parseInt(active_id)+11*(9-parseInt(active_id.substr(-1))); i += 11) {
                                         if (i != parseInt(active_id)) {
 
@@ -537,6 +560,33 @@ Programming Language -> Javascript
                                         }
                                     }
 
+
+/*
+                                    for (i = parseInt(active_id); i >= 10; i -= 11) {
+                                        if (i !==  parseInt(active_id)) {
+
+                                            if (($("#" + parseInt(i)).attr('class') ? $("#" + parseInt(i + parseInt(active_id))).attr('class').substr(0, 4) : '') != 'bg w')
+                                                $("#" + (parseInt(i)).toString()).addClass("selected");
+                                                $("#" + (parseInt(i)).toString()).css('outline', '2px solid red');
+                                            if ($("#" + parseInt(i)).hasClass("bg"))
+                                                break;
+                                        }
+                                    }
+/*
+                                    for (i = parseInt(active_id); i >= 10; i -= 11) {
+                                        if (i !==  parseInt(active_id) && i.toString()[1] >= 1) {
+
+                                            if (($("#" + parseInt(i)).attr('class') ? $("#" + parseInt(i)).attr('class').substr(0, 4) : '') == 'bg w')
+                                                break;
+                                            $("#" + (parseInt(i)).toString()).addClass("selected");
+                                            $("#" + (parseInt(i)).toString()).css('outline', '2px solid red');
+                                            if ($("#" + parseInt(i)).hasClass("bg"))
+                                                break;
+                                        }
+                                        if ($.inArray(i, border_left_up) != -1)
+                                            break;
+                                    }
+*/
                                     break;
 
 
@@ -744,7 +794,18 @@ Programming Language -> Javascript
                                     if (($("#" + (parseInt(active_id) + 1).toString()).attr('class') ? $("#" + (parseInt(active_id) + 1).toString()).attr('class').substr(0, 2) : '') != 'bg') {
                                         $("#" + (parseInt(active_id) + 1).toString()).addClass("selected");
                                         $("#" + (parseInt(active_id) + 1).toString()).css('outline', '2px solid red');
-                            
+                                    }
+                                   // if (($("#" + (parseInt(active_id) - 1).toString()).attr('class') ? $("#" + (parseInt(active_id) - 1).toString()).attr('class').substr(0, 4) : '') == 'bg b')
+                                    //        break;
+                                   /* if (($("#" + (parseInt(active_id) - 1).toString()).attr('class') ? $("#" + (parseInt(active_id) - 2).toString()).attr('class').substr(0, 4) : '') != 'bg w') {
+                                            $("#" + (parseInt(active_id) - 1).toString()).addClass("selected");
+                                            $("#" + (parseInt(active_id) - 1).toString()).css('outline', '2px solid red');
+                                        }
+                                    if (($("#" + (parseInt(active_id) + 1).toString()).attr('class') ? $("#" + (parseInt(active_id) - 2).toString()).attr('class').substr(0, 4) : '') != 'bg w'){
+                                        $("#" + (parseInt(active_id) + 1).toString()).addClass("selected");
+                                        $("#" + (parseInt(active_id) + 1).toString()).css('outline', '2px solid red');
+                                    }
+                                */
                                     if ($("#" + (parseInt(active_id) - 11).toString()).hasClass("bg")) {
                                         if (($("#" + (parseInt(active_id) - 11).toString()).attr('class') ? $("#" + (parseInt(active_id) - 11).toString()).attr('class').substr(0, 4) : '') != 'bg w') {
                                             $("#" + (parseInt(active_id) - 11).toString()).addClass("selected");
@@ -773,7 +834,7 @@ Programming Language -> Javascript
     </head>
     <body onload="load()">
         <br>
-        <div id="chess" >
+        <div id="chess" style="overflow-x: scroll;">
         </div>
     <script>
         var toAdd = document.createDocumentFragment();
