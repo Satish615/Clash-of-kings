@@ -81,14 +81,10 @@ https://github.com/nguyensjsu/cmpe202-fivestars/issues/18
 
 Week #4 :
 --------
+Chess Board & Chess Moves Implementation by the end of this week-
 
-Create prototype:-
+![](https://github.com/nguyensjsu/cmpe202-fivestars/blob/master/Chess_Screenshot.png)
 
-https://github.com/nguyensjsu/cmpe202-fivestars/issues/21 
-
-CRC:-
-
-https://github.com/nguyensjsu/cmpe202-fivestars/issues/20
 
 
 
