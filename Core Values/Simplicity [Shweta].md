@@ -15,6 +15,14 @@ Following are the steps I took to make sure simplicity in our project:
    * instead of very complicated chess game idea with multiplayers and many rules, starting with a very simple board with less rules.
    * Making sure that the game is not too complex for new platers to understand.
    * Decided to simulate the game once on a real board then impliment it online. So that, the whole team will be able to analye about different factors before jumping into the coding.
+4. 4th week 
+   * Decided to use a simple libarry socket.io for real-time gaming experience.
+5. 5th week 
+   * Decided to apply one team game consisting 4 players. 
+   * Finalized a simple design for the game which makes it easy for players to understand the game and play it.
+6. 6th week
+
+  
    
     
     
