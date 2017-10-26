@@ -1,0 +1,44 @@
+var express = require("express");
+var socket = require("socket.io");
+var app = express();
+
+var server = app.listen(3000,function(){
+  console.log("app is listening on 3000 port");
+});
+
+app.use(express.static('public'));
+
+var io = socket(server);
+
+io.on('connection',function(socket){
+  console.log('Socket connection is succesfully established',socket.id);
+  socket.on('chat',function(data){
+    io.sockets.emit('chat',data);
+  });
+
+});
+
+message.js
+var socket = io.connect("http://localhost:3000");
+
+var messsage = document.getElementById('messsage');
+    btn = document.getElementById('send');
+    handle=document.getElementById('handle');
+    output = document.getElementById('output');
+
+btn.addEventListener(click,function(){
+  socket.emit('chat',{
+    message : message.value,
+    handle: handle.value
+  })
+})
+
+//listen to output
+socket.on('chat',function(data){
+  output.innerHTML = '<p><strong>'+data.handle+':</strong>'+data.message+'</p>';
+});
+
+
+
+
+
