@@ -20,7 +20,22 @@ var Client = (function(window) {
   var pawnPromotionPrompt = null;
   var forfeitPrompt       = null;
 
+   /**
+   * Initialize the UI
+   */
+  var init = function(config) {
+    gameID      = config.gameID;
+    playerColor = config.playerColor;
+    playerName  = config.playerName;
 
+    container   = $('#game');
+    messages    = $('#messages');
+    board       = $('#board');
+    squares     = board.find('.square');
+
+    gameOverMessage     = $('#game-over');
+    pawnPromotionPrompt = $('#pawn-promotion');
+    forfeitPrompt       = $('#forfeit-game');
  
 
     gameClasses = "white black red orange pawn rook knight bishop queen king not-moved empty selected " +
