@@ -30,3 +30,4 @@
     // Set square IDs
     squares.each(function(i) { $(this).attr('id', squareIDs[i]); });
   };
+
