@@ -51,7 +51,7 @@ var Client = (function(window) {
     attachDOMEventHandlers();
     attachSocketEventHandlers();
 
-    // Initialize modal popup windows
+    // Initialize modal popup window
    // gameOverMessage.modal({show: false, keyboard: false, backdrop: 'static'});
    // pawnPromotionPrompt.modal({show: false, keyboard: false, backdrop: 'static'});
    // forfeitPrompt.modal({show: false, keyboard: false, backdrop: 'static'});
