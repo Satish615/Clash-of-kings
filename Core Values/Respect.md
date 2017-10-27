@@ -1,4 +1,18 @@
 Implemented by Venkata Deviprasad Sura
+Respect week  5:
+All team members dependency is understood and tasks are planned in order of dependencies.
+Make sure dependencies of each one are met and are taken care
+Make sure the code validations are doen by each individual properly as per procedure implemented
+To be done:
+
+Implementing Javascript patterns on our completed code.
+
+
+Respect week 4:
+All team members dependency is understood and tasks are planned in order of dependencies.
+Each team member is given stipulated time period to complete his task and forward it to other.
+Each team member has been given equal importance and make sure their individual requirements are satisfied
+
 Repect week 3:
 All team members dependency is understood and tasks are planned in order of dependencies.
 Each team member is given stipulated time period to complete his task and forward it to other.
