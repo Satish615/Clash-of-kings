@@ -1,4 +1,4 @@
-Defining Board Positions :
+Defining Board Positions everytime each of the four players joins the game :
 
 Player 1(White) : Z9 
 Player 2(Black) : A0
