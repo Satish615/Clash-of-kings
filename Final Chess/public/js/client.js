@@ -64,9 +64,9 @@ var Client = (function(window) {
    * Assign square IDs and labels based on player's perspective
    */
   var assignSquares = function() {
-    var fileLabels = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H','I','J','k','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
-    var rankLabels = [9,8, 7, 6, 5, 4, 3, 2, 1,0];
-    var squareIDs  = [
+    var fileLabels = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
+    var rankLabels = [9, 8, 7, 6, 5, 4, 3, 2, 1, 0];
+   /* var squareIDs  = [
         'a9','b9','c9','d9','e9','f9','g9','h9','i9','j9','k9','l9','m9','n9','o9','p9','q9','r9','s9','t9','u9','v9','w9','x9','y9','z9',
         'a8','b8','c8','d8','e8','f8','g8','h8','i8','j8','k8','l8','m8','n8','o8','p8','q8','r8','s8','t8','u8','v8','w8','x8','y8','z8',
         'a7','b7','c7','d7','e7','f7','g7','h7','i7','j7','k7','l7','m7','n7','o7','p7','q7','r7','s7','t7','u7','v7','w7','x7','y7','z7',
@@ -78,6 +78,61 @@ var Client = (function(window) {
         'a1','b1','c1','d1','e1','f1','g1','h1','i1','j1','k1','l1','m1','n1','o1','p1','q1','r1','s1','t1','u1','v1','w1','x1','y1','z1',
         'a0','b0','c0','d0','e0','f0','g0','h0','i0','j0','k0','l0','m0','n0','o0','p0','q0','r0','s0','t0','u0','v0','w0','x0','y0','z0'
 
-    ];
+    ];*/
+    
+    var squareIDs =[];
+    //Defining Board position for Player 1
+    if (playerColor === 'white') {
+      for(i=9;i>=0;i--){
+           for(j=0;j<26;j++){
+              squareIDs.push(filelabels2[j]+rankLabels[i]);
+           }
+      }
+    
+  }
+//Defining Board position for Player 2
+    if (playerColor === 'black') {
+      fileLabels.reverse();
+      filelabels2.reverse();
+      rankLabels.reverse();
+    for(i=0;i<10;i++){
+           for(j=25;j>=0;j--){
+              squareIDs.push(filelabels2[j]+rankLabels[i]);
+           }
+      }
+    
+    }
+//Defining Board position for Player 3
+    if (playerColor === 'red') {
+          filelabels2.reverse();
+          fileLabels.reverse();
+          for(i=9;i>=0;i--){
+             for(j=25;j>=0;j--){
+                squareIDs.push(filelabels2[j]+rankLabels[i]);
+             }
+          }
+       
+    }
+//Defining Board position for Player 4
+      if (playerColor === 'yellow') {
+          rankLabels.reverse();
+          for(i=0;i<10;i++){
+             for(j=0;j<26;j++){
+                squareIDs.push(filelabels2[j]+rankLabels[i]);
+             }
+          }
+         
+
+      }
+
+    // Set file and rank labels
+    $('.top-edge').each(function(i) { $(this).text(fileLabels[i]); });
+    $('.right-edge').each(function(i) { $(this).text(rankLabels[i]); });
+    $('.bottom-edge').each(function(i) { $(this).text(fileLabels[i]); });
+    $('.left-edge').each(function(i) { $(this).text(rankLabels[i]); });
+
+    // Set square IDs
+    squares.each(function(i) { $(this).attr('id', squareIDs[i]); });
+  };
     
     
