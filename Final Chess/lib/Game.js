@@ -91,6 +91,14 @@ this.lastMove = null;
       this.players[2].color = 'red';
       this.players[3].color = 'yellow';
   }
+ else if (params.playerColor === 'black') {
+      this.players[0].color = 'white';
+      this.players[1].color = 'black';
+      this.players[2].color = 'red';
+      this.players[3].color = 'yellow';
+  }
+}
+
 
 
 // Export the game object
