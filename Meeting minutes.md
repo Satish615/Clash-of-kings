@@ -1,3 +1,51 @@
+Week #5:
+
+Attendees - Shiva,Satish,Akansha,Devi,Shweta
+
+What did team do last week?
+- Used socket.io to make the game realtime interactive
+- made the UI chnages to make the game easy to understad
+- Came up with some ideas to radomly put some static players on the board
+- Used node js for backend server for the game 
+
+What are challenges:
+- Coming up with radimzation algorithms.
+- making sure that all the players get equal opportunity to play.
+
+
+Discussion held:
+
+- Discused individual team members work completed
+- Discussed the follow up tasks and came up with individual code assignments
+- Run through on algorithm 
+- Code review for realtime multiplayer experience .
+
+***
+
+Week #4:
+
+Attendees - Shiva,Satish,Akansha,Devi,Shweta
+
+What did team do last week?
+- Worked on configuring moves for each actor of the game
+- Started commiting code for the same.
+- Few of them came up  with game prototype
+- Initial brainstorming on network games
+
+What are challenges:
+- Coming up with efficient design to represent the chess board squares so that move generation for various actors would be quick.
+- Libraries to make use of for online network games.
+
+
+Discussion held:
+
+- Changes in workflow for transiton to agile 
+- Discused individual team members work completed
+- Discussed the follow up tasks and came up with individual code assignments
+- Run through on algorithm 
+- Code review for move generation.
+
+***
 
 Week #3:
 
