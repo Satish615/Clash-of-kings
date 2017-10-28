@@ -21,6 +21,9 @@ Following are the steps I took to make sure simplicity in our project:
    * Decided to apply one team game consisting 4 players. 
    * Finalized a simple design for the game which makes it easy for players to understand the game and play it.
 6. 6th week
+  * Used socket.io library and node js to make the game realtime interactive. 
+  * Using the ready made library made the project very simple to implement.
+  
 
   
    
