@@ -79,5 +79,21 @@ function Game(params) {
     { type: 'move', pieceCode: 'wN', startSquare: 'g1', endSquare: 'h3' }
   ];
 }
+this.lastMove = null;
+
+  this.modifiedOn = Date.now();
+
+  // Set player colors
+  // params.playerColor is the color of the player who created the game
+  if (params.playerColor === 'white') {
+    this.players[0].color = 'white';
+    this.players[1].color = 'black';
+      this.players[2].color = 'red';
+      this.players[3].color = 'yellow';
+  }
+
+
 // Export the game object
 module.exports = Game;
+
+
