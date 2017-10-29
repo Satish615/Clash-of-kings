@@ -22,3 +22,23 @@ var validateGame = function(req) {
   };
 };
 
+/**
+ * Validate "Start Game" form input
+ * Returns valid data on success or null on failure
+ */
+var validateStartGame = function(req) {
+
+  // These must exist
+  if (!req.body['player-color']) { return null; }
+
+  // Player Color must be 'white' or 'black'
+  if (req.body['player-color'] !== 'white' && req.body['player-color'] !== 'black' && req.body['player-color'] !== 'yellow'&& req.body['player-color'] !== 'red') { return null; }
+
+  // If Player Name consists only of whitespace, set as 'Player 1'
+  if (/^\s*$/.test(req.body['player-name'])) { req.body['player-name'] = 'Player 1'; }
+
+  return {
+    playerColor : req.body['player-color'],
+    playerName  : req.body['player-name']
+  };
+};
