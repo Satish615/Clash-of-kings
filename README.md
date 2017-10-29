@@ -12,7 +12,7 @@ Taking players from Chess Game as basis i.e moves of Rook, Knight, Bishop, Queen
 
 [Agile Task Board](https://github.com/nguyensjsu/cmpe202-fivestars/projects/1)
 
-[Meeting Minutes](https://github.com/nguyensjsu/cmpe202-fivestars/wiki/Meeting-Minutes)
+[Meeting Minutes](https://github.com/nguyensjsu/cmpe202-fivestars/blob/master/Meeting%20minutes.md)
 
 XP Core Values: 
 
