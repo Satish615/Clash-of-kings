@@ -222,6 +222,100 @@ var getMovesForPawn = function(piece, square, board, lastMove, includeUnsafe) {
 };
 
 
+var getMovesForKing = function(piece, square, board, includeUnsafe) {
+  var moves = [];
+
+  var transforms = [
+    {x:+0, y:+1},
+    {x:+1, y:+1},
+    {x:+1, y:+0},
+    {x:+1, y:-1},
+    {x:+0, y:-1},
+    {x:-1, y:-1},
+    {x:-1, y:+0},
+    {x:-1, y:+1}
+  ];
+
+  var destination, move = null;
+
+  // Loop all moves
+  for (var i=0; i<transforms.length; i++) {
+
+    // Get destination square for move
+      if(square!==null)
+    destination = transformSquare(square, transforms[i]);
+    if (!destination) { continue; }
+
+    // If destination square is empty
+    if (board[destination] === null) {
+      move = {
+        type        : 'move',
+        pieceCode   : piece.substring(0,2),
+        startSquare : square,
+        endSquare   : destination
+      };
+      if (includeUnsafe || isMoveSafe(move, board)) { moves.push(move); }
+    }
+    // If destination square is occupied by foe
+    else if (board[destination][0] !== piece[0]) {
+      move = {
+        type          : 'capture',
+        pieceCode     : piece.substring(0,2),
+        startSquare   : square,
+        endSquare     : destination,
+        captureSquare : destination
+      };
+      if (includeUnsafe || isMoveSafe(move, board)) { moves.push(move); }
+    }
+    // If destination square is occupied by friend
+    else {
+      // Do nothing
+    }
+  }
+
+  // Check for castling moves
+
+  if (piece[0] === 'w') {
+    if (board.e1 === 'wK_' && board.h1 === 'wR_' && board.f1 === null && board.g1 === null) {
+      move = {
+        type: 'castle',
+        pieceCode: 'wK',
+        boardSide: 'king'
+      };
+      if (includeUnsafe || isMoveSafe(move, board)) { moves.push(move); }
+    }
+    if (board.e1 === 'wK_' && board.a1 === 'wR_' && board.b1 === null && board.c1 === null && board.d1 === null) {
+      move = {
+        type: 'castle',
+        pieceCode: 'wK',
+        boardSide: 'queen'
+      };
+      if (includeUnsafe || isMoveSafe(move, board)) { moves.push(move); }
+    }
+  }
+
+  if (piece[0] === 'b') {
+    if (board.e8 === 'bK_' && board.h8 === 'bR_' && board.f8 === null && board.g8 === null) {
+      move = {
+        type: 'castle',
+        pieceCode: 'bK',
+        boardSide: 'king'
+      };
+      if (includeUnsafe || isMoveSafe(move, board)) { moves.push(move); }
+    }
+    if (board.e8 === 'bK_' && board.a8 === 'bR_' && board.b8 === null && board.c8 === null && board.d8 === null) {
+      move = {
+        type: 'castle',
+        pieceCode: 'bK',
+        boardSide: 'queen'
+      };
+      if (includeUnsafe || isMoveSafe(move, board)) { moves.push(move); }
+    }
+  }
+
+  return moves;
+};
+
 // Export the game object
 module.exports = Game;
 
