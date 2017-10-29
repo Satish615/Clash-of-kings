@@ -3,7 +3,10 @@ Game : **Clash of Kings**
 
 Taking players from Chess Game as basis i.e moves of Rook, Knight, Bishop, Queen, King and Pawns, we are implementing a unique of its kind strategy game.
 
-**Kanban Phase Deliverables :**
+**Agile Methodologies Used**
+
+
+Week 1-Week 4 :  [**Kanban Phase Deliverables**]
 
 [Cumulative Flow Diagram](https://docs.google.com/a/sjsu.edu/spreadsheets/d/150TyqCxRxhK7aqt2JpKUFNBQsHHqq0wVjuAcBEJsWQM/edit?usp=sharing)
 
@@ -85,6 +88,9 @@ Week #4 :
 Chess Board & Chess Moves Implementation by the end of this week-
 
 ![](https://github.com/nguyensjsu/cmpe202-fivestars/blob/master/Chess_Screenshot.png)
+
+------------------------------------------------------------------------------------------------------------------------
+Week 5-Week 8 :  [**Scrum Phase Deliverables**]
 
 Week #5 :
 ---------
