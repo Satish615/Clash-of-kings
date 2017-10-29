@@ -3,11 +3,6 @@ Game : **Clash of Kings**
 
 Taking players from Chess Game as basis i.e moves of Rook, Knight, Bishop, Queen, King and Pawns, we are implementing a unique of its kind strategy game.
 
-**Agile Methodologies Used:**
-
-
-**Week 1-Week 4 :**  **[Kanban Phase Deliverables/XP Core Values]**
-
 [Cumulative Flow Diagram](https://docs.google.com/a/sjsu.edu/spreadsheets/d/150TyqCxRxhK7aqt2JpKUFNBQsHHqq0wVjuAcBEJsWQM/edit?usp=sharing)
 
 [BurnDown Chart](https://drive.google.com/a/sjsu.edu/file/d/0B0my03hiLrdRQjAtQ0JvdTB0QVE/view?usp=sharing)
@@ -15,6 +10,8 @@ Taking players from Chess Game as basis i.e moves of Rook, Knight, Bishop, Queen
 [Agile Task Board](https://github.com/nguyensjsu/cmpe202-fivestars/projects/1)
 
 [Meeting Minutes](https://github.com/nguyensjsu/cmpe202-fivestars/blob/master/Meeting%20minutes.md)
+
+**Week 1-Week 4 :**  **[Kanban Phase Deliverables/XP Core Values]**
 
 XP Core Values: 
 
