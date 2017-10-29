@@ -100,6 +100,127 @@ this.lastMove = null;
 }
 
 
+var getMovesForPawn = function(piece, square, board, lastMove, includeUnsafe) {
+  var moves = [];
+
+  var moveTransforms, captureTransforms = [];
+
+  if (piece[0] === 'w') {
+    moveTransforms    = (piece[2] === '_') ? [{x:+0, y:+1}, {x:+0, y:+2}] : [{x:+0, y:+1}];
+    captureTransforms = [{x:+1, y:+1}, {x:-1, y:+1}];
+  }
+
+  if (piece[0] === 'b') {
+      moveTransforms = (piece[2] === '_') ? [{x: +0, y: -1}, {x: +0, y: -2}] : [{x: +0, y: -1}];
+      captureTransforms = [{x: +1, y: -1}, {x: -1, y: -1}];
+  }
+  if (piece[0] === 'r') {
+          moveTransforms    = (piece[2] === '_') ? [{x:+0, y:+1}, {x:+0, y:+2}] : [{x:+0, y:+1}];
+          captureTransforms = [{x:+1, y:+1}, {x:-1, y:+1}];
+      }
+
+  if (piece[0] === 'y') {
+      moveTransforms = (piece[2] === '_') ? [{x: +0, y: -1}, {x: +0, y: -2}] : [{x: +0, y: -1}];
+      captureTransforms = [{x: +1, y: -1}, {x: -1, y: -1}];
+  }
+
+  var destination, move, capture = null;
+
+  // Loop moves
+  for (var i=0; i<moveTransforms.length; i++) {
+
+    // Get destination square for move
+    destination = transformSquare(square, moveTransforms[i]);
+    if (!destination) { break; }
+
+    // If destination square is empty
+    if (board[destination] === null) {
+      move = {type: 'move', pieceCode: piece.substring(0,2), startSquare: square, endSquare: destination};
+      if (includeUnsafe || isMoveSafe(move, board)) { moves.push(move); }
+    }
+    // If destination square is occupied
+    else {
+      break;
+    }
+  }
+
+  // Loop captures
+  for (var i=0; i<captureTransforms.length; i++) {
+
+    // Get destination square for capture
+    destination = transformSquare(square, captureTransforms[i]);
+    if (!destination) { //continue;
+        break; }
+
+    // If destination square is empty
+    if (board[destination] === null) {
+
+      // Get prerequisite move for a valid en passant capture
+      if (piece[0] === 'w') {
+        epPreReq = {
+          type        : 'move',
+          pieceCode   : 'bP',
+          startSquare : destination[0] + '7',
+          endSquare   : destination[0] + square[1]
+        };
+      }
+      if (piece[0] === 'b') {
+        epPreReq = {
+          type        : 'move',
+          pieceCode   : 'wP',
+          startSquare : destination[0]+'2',
+          endSquare   : destination[0] + square[1]
+        };
+      }
+        if (piece[0] === 'r') {
+            epPreReq = {
+                type        : 'move',
+                pieceCode   : 'bP',
+                startSquare : destination[0] + '7',
+                endSquare   : destination[0] + square[1]
+            };
+        }
+        if (piece[0] === 'y') {
+            epPreReq = {
+                type        : 'move',
+                pieceCode   : 'rP',
+                startSquare : destination[0] + '7',
+                endSquare   : destination[0] + square[1]
+            };
+        }
+
+      // If last move matches the prerequisite, then we have a valid en passant capture
+      if (_.isEqual(lastMove, epPreReq)) {
+        capture = {
+          type          : 'capture',
+          pieceCode     : piece.substring(0,2),
+          startSquare   : square,
+          endSquare     : destination,
+          captureSquare : destination[0]+square[1]
+        };
+        if (includeUnsafe || isMoveSafe(capture, board)) { moves.push(capture); }
+      }
+    }
+    // If destination square is occupied by foe
+    else if (board[destination][0] !== piece[0]) {
+      capture = {
+        type          : 'capture',
+        pieceCode     : piece.substring(0,2),
+        startSquare   : square,
+        endSquare     : destination,
+        captureSquare : destination
+      };
+      if (includeUnsafe || isMoveSafe(capture, board)) { moves.push(capture); }
+    }
+    // If destination square is occupied by friend
+    else {
+      // Do nothing
+    }
+  }
+
+  return moves;
+};
+
 
 // Export the game object
 module.exports = Game;
