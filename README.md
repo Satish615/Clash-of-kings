@@ -5,7 +5,7 @@ Taking players from Chess Game as basis i.e moves of Rook, Knight, Bishop, Queen
 
 [Cumulative Flow Diagram](https://docs.google.com/a/sjsu.edu/spreadsheets/d/150TyqCxRxhK7aqt2JpKUFNBQsHHqq0wVjuAcBEJsWQM/edit?usp=sharing)
 
-[BurnDown Chart](https://drive.google.com/a/sjsu.edu/file/d/0B0my03hiLrdRQjAtQ0JvdTB0QVE/view?usp=sharing)
+[Burndown Chart](https://drive.google.com/a/sjsu.edu/file/d/0B0my03hiLrdRQjAtQ0JvdTB0QVE/view?usp=sharing)
 
 [Agile Task Board](https://github.com/nguyensjsu/cmpe202-fivestars/projects/1)
 
@@ -117,6 +117,39 @@ https://github.com/nguyensjsu/cmpe202-fivestars/issues/27
 socket.io and node js for server
 
 https://github.com/nguyensjsu/cmpe202-fivestars/issues/22
+
+Week #6 :
+---------
+
+Fix the position of player when it joins the game:
+
+https://github.com/nguyensjsu/cmpe202-fivestars/issues/25
+
+Set Timer for each player:
+
+https://github.com/nguyensjsu/cmpe202-fivestars/issues/28
+
+Complete Randomization Algorithm for Static Players:
+
+https://github.com/nguyensjsu/cmpe202-fivestars/issues/18
+
+Following Design Patterns to be implemented in upcoming weeks:
+
+Factory: https://github.com/nguyensjsu/cmpe202-fivestars/issues/30
+
+Strategy: https://github.com/nguyensjsu/cmpe202-fivestars/issues/31
+
+Prototype: https://github.com/nguyensjsu/cmpe202-fivestars/issues/32
+
+Decorator: https://github.com/nguyensjsu/cmpe202-fivestars/issues/33
+
+State: https://github.com/nguyensjsu/cmpe202-fivestars/issues/34
+
+
+
+
+
+
 
 
 
