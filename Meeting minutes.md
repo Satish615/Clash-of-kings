@@ -1,3 +1,26 @@
+Week #6:
+
+Attendees - Shiva,Satish,Akansha,Devi,Shweta
+
+What did team do last week?
+- brainsrtomed on timer functionality 
+- Undestanding the code in detail 
+- Using deisng patterns into the code 
+
+What are challenges:
+- Understanding design patterns and using them in the code 
+- The code is so vast with use of sesssions and socket.io for realtime, it becomes difficult to easily understand it.
+
+
+Discussion held:
+
+- Discussed everyones code implementation 
+- Discussed the follow up tasks and came up with individual code assignments
+- Run through on algorithm 
+- Code review timer and randomization implementation .
+
+***
+
 Week #5:
 
 Attendees - Shiva,Satish,Akansha,Devi,Shweta
