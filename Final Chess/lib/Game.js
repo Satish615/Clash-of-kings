@@ -285,6 +285,59 @@ var getMovesForRook = function(piece, square, board, includeUnsafe) {
   return moves;
 };
 
+var getMovesForBishop = function(piece, square, board, includeUnsafe) {
+  var moves = [];
+
+  var transforms = {
+    ne: [{x:+1, y:+1}, {x:+2, y:+2}, {x:+3, y:+3}, {x:+4, y:+4}, {x:+5, y:+5}, {x:+6, y:+6}, {x:+7, y:+7},{x:+8, y:+8},{x:+9, y:+9}],
+    se: [{x:+1, y:-1}, {x:+2, y:-2}, {x:+3, y:-3}, {x:+4, y:-4}, {x:+5, y:-5}, {x:+6, y:-6}, {x:+7, y:-7},{x:+8, y:-8},{x:+9, y:-9}],
+    sw: [{x:-1, y:-1}, {x:-2, y:-2}, {x:-3, y:-3}, {x:-4, y:-4}, {x:-5, y:-5}, {x:-6, y:-6}, {x:-7, y:-7},{x:-8, y:-8},{x:-9, y:-9}],
+    nw: [{x:-1, y:+1}, {x:-2, y:+2}, {x:-3, y:+3}, {x:-4, y:+4}, {x:-5, y:+5}, {x:-6, y:+6}, {x:-7, y:+7},{x:-8, y:+8},{x:-9, y:+9}]
+  };
+
+  var destination, move = null;
+
+  // Loop all moves
+  for (var group in transforms) {
+    for (var i=0; i<transforms[group].length; i++) {
+
+      // Get destination square for move
+      destination = transformSquare(square, transforms[group][i]);
+      if (!destination) { break; }
+
+      // If destination square is empty
+      if (board[destination] === null) {
+        move = {
+          type        : 'move',
+          pieceCode   : piece.substring(0,2),
+          startSquare : square,
+          endSquare   : destination
+        };
+        if (includeUnsafe || isMoveSafe(move, board)) { moves.push(move); }
+      }
+      // If destination square is occupied by foe
+      else if (board[destination][0] !== piece[0]) {
+        move = {
+          type          : 'capture',
+          pieceCode     : piece.substring(0,2),
+          startSquare   : square,
+          endSquare     : destination,
+          captureSquare : destination
+        };
+        // if (includeUnsafe || isMoveSafe(move, board)) {
+          moves.push(move); //}
+        break;
+      }
+      // If destination square is occupied by friend
+      else {
+        break;
+      }
+    }
+  }
+
+  return moves;
+};
+
 var getMovesForKing = function(piece, square, board, includeUnsafe) {
   var moves = [];
 
