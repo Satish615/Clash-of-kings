@@ -72,3 +72,16 @@ var home = function(req, res) {
   // Welcome
   res.render('home');
 };
+
+/**
+ * Render "Game" Page (or redirect to home page if session is invalid)
+ */
+var game = function(req, res) {
+
+  // Validate session data
+  var validData = validateGame(req);
+  if (!validData) { res.redirect('/'); return; }
+
+  // Render the game page
+  res.render('game', validData);
+};
