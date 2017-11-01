@@ -42,3 +42,33 @@ var validateStartGame = function(req) {
     playerName  : req.body['player-name']
   };
 };
+
+/**
+ * Validate "Join Game" form input
+ * Returns valid data on success or null on failure
+ */
+var validateJoinGame = function(req) {
+
+  // These must exist
+  if (!req.body['game-id']) { return null; }
+
+  // If Game ID consists of only whitespace, return null
+  if (/^\s*$/.test(req.body['game-id'])) { return null; }
+
+  // If Player Name consists only of whitespace, set as 'Player 2'
+  if (/^\s*$/.test(req.body['player-name'])) { req.body['player-name'] = 'Player 2'; }
+
+  return {
+    gameID      : req.body['game-id'],
+    playerName  : req.body['player-name']
+  };
+};
+
+/**
+ * Render "Home" Page
+ */
+var home = function(req, res) {
+
+  // Welcome
+  res.render('home');
+};
