@@ -85,3 +85,30 @@ var game = function(req, res) {
   // Render the game page
   res.render('game', validData);
 };
+
+/**
+ * Process "Start Game" form submission
+ * Redirects to game page on success or home page on failure
+ */
+var startGame = function(req, res) {
+
+  // Create a new session
+  req.session.regenerate(function(err) {
+    if (err) { res.redirect('/'); return; }
+
+    // Validate form input
+    var validData = validateStartGame(req);
+    if (!validData) { res.redirect('/'); return; }
+
+    // Create new game
+    var gameID = DB.add(validData);
+
+    // Save data to session
+    req.session.gameID      = gameID;
+    req.session.playerColor = validData.playerColor;
+    req.session.playerName  = validData.playerName;
+
+    // Redirect to game page
+    res.redirect('/game/'+gameID);
+  });
+};
