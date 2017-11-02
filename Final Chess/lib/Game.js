@@ -241,6 +241,75 @@ var getMovesForRook = function(piece, square, board, includeUnsafe) {
         {x:-22, y:0}, {x:-23, y:0}, {x:-24, y:0}, {x:-25, y:0}]
   };
 
+  var getMovesForQueen = function(piece, square, board, includeUnsafe) {
+  //  return (getMovesForRook(piece, square, board, includeUnsafe)+getMovesForBishop(piece, square, board, includeUnsafe));
+  var moves = [];
+
+    var transforms = {
+        n: [{x:0, y:+1}, {x:0, y:+2}, {x:0, y:+3}, {x:0, y:+4}, {x:0, y:+5}, {x:0, y:+6}, {x:0, y:+7},
+            {x:0, y:+8}, {x:0, y:+8}, {x:0, y:+9}],
+
+        e: [{x:+1, y:0}, {x:+2, y:0}, {x:+3, y:0}, {x:+4, y:0}, {x:+5, y:0}, {x:+6, y:0}, {x:+7, y:0},
+            {x:+8, y:0}, {x:+9, y:0}, {x:+10, y:0}, {x:+11, y:0}, {x:+12, y:0}, {x:+13, y:0}, {x:+14, y:0},
+            {x:+15, y:0}, {x:+16, y:0}, {x:+17, y:0}, {x:+18, y:0}, {x:+19, y:0}, {x:+20, y:0}, {x:+21, y:0},
+            {x:+22, y:0}, {x:+23, y:0}, {x:+24, y:0}, {x:+25, y:0}],
+
+
+        s: [{x:0, y:-1}, {x:0, y:-2}, {x:0, y:-3}, {x:0, y:-4}, {x:0, y:-5}, {x:0, y:-6}, {x:0, y:-7} ,{x:0, y:-8}, {x:0, y:-9}],
+        w: [{x:-1, y:0}, {x:-2, y:0}, {x:-3, y:0}, {x:-4, y:0}, {x:-5, y:0}, {x:-6, y:0}, {x:-7, y:0},
+            {x:-8, y:0}, {x:-9, y:0}, {x:-10, y:0}, {x:-11, y:0}, {x:-12, y:0}, {x:-13, y:0}, {x:-14, y:0},
+            {x:-15, y:0}, {x:-16, y:0}, {x:-17, y:0}, {x:-18, y:0}, {x:-19, y:0}, {x:-20, y:0}, {x:-21, y:0},
+            {x:-22, y:0}, {x:-23, y:0}, {x:-24, y:0}, {x:-25, y:0}],
+        ne: [{x:+1, y:+1}, {x:+2, y:+2}, {x:+3, y:+3}, {x:+4, y:+4}, {x:+5, y:+5}, {x:+6, y:+6}, {x:+7, y:+7},{x:+8, y:+8},{x:+9, y:+9}],
+        se: [{x:+1, y:-1}, {x:+2, y:-2}, {x:+3, y:-3}, {x:+4, y:-4}, {x:+5, y:-5}, {x:+6, y:-6}, {x:+7, y:-7},{x:+8, y:-8},{x:+9, y:-9}],
+        sw: [{x:-1, y:-1}, {x:-2, y:-2}, {x:-3, y:-3}, {x:-4, y:-4}, {x:-5, y:-5}, {x:-6, y:-6}, {x:-7, y:-7},{x:-8, y:-8},{x:-9, y:-9}],
+        nw: [{x:-1, y:+1}, {x:-2, y:+2}, {x:-3, y:+3}, {x:-4, y:+4}, {x:-5, y:+5}, {x:-6, y:+6}, {x:-7, y:+7},{x:-8, y:+8},{x:-9, y:+9}]
+    };
+
+
+    var destination, move = null;
+
+  // Loop all moves
+  for (var group in transforms) {
+    for (var i=0; i<transforms[group].length; i++) {
+
+      // Get destination square for move
+      destination = transformSquare(square, transforms[group][i]);
+      if (!destination) { break; }
+
+      // If destination square is empty
+      if (board[destination] === null) {
+        move = {
+          type        : 'move',
+          pieceCode   : piece.substring(0,2),
+          startSquare : square,
+          endSquare   : destination
+        };
+        if (includeUnsafe || isMoveSafe(move, board)) { moves.push(move); }
+      }
+      // If destination square is occupied by foe
+      else if (board[destination][0] !== piece[0]) {
+        move = {
+          type          : 'capture',
+          pieceCode     : piece.substring(0,2),
+          startSquare   : square,
+          endSquare     : destination,
+          captureSquare : destination
+        };
+        if (includeUnsafe || isMoveSafe(move, board)) { moves.push(move); }
+        break;
+      }
+      // If destination square is occupied by friend
+      else {
+        break;
+      }
+    }
+  }
+
+  return moves;
+};
+  
+  
   var destination, move = null;
 
   // Loop all moves
