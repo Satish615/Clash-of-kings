@@ -123,9 +123,6 @@ var joinGame = function(req, res) {
   req.session.regenerate(function(err) {
     if (err) { res.redirect('/'); return; }
 
-    // Validate form input
-    var validData = validateJoinGame(req);
-    if (!validData) { res.redirect('/'); return; }
 
     // Find specified game
     var game = DB.find(validData.gameID);
