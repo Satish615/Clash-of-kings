@@ -1,4 +1,6 @@
 Implemented by Venkata Deviprasad Sura
+
+
 Respect week  6:
 All team memebers planned events are completed and taken care, every ones review is considered.
 Make sure the code validations are doen by each individual properly as per procedure implemented.
