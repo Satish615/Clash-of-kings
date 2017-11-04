@@ -1,0 +1,23 @@
+{
+  "name": "socket.io-chess",
+  "version": "0.2.0",
+  "private": true,
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^3.3.8",
+    "jade": "^0.33.0",
+    "karma-phantomjs-launcher": "^1.0.4",
+    "pug": "^2.0.0-rc.4",
+    "socket.io": "^0.9.19",
+    "underscore": "^1.5.2"
+  },
+  "description": "A real-time multi-player chess app using [node](https://github.com/joyent/node), [express](https://github.com/visionmedia/express), and of course [socket.io](https://github.com/LearnBoost/socket.io).",
+  "main": "server.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "author": "",
+  "license": "ISC"
+}
