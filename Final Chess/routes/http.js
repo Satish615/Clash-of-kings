@@ -131,4 +131,24 @@ var joinGame = function(req, res) {
     // Find specified game
     var game = DB.find(validData.gameID);
     if (!game) { res.redirect('/'); return;}
+      // Determine which player (color) to join as
+    var joinColor ;
+      if(game.players[0].joined)
+      joinColor= game.players[1].color;
+       if(game.players[1].joined)
+           joinColor= game.players[2].color;
+      if(game.players[2].joined)
+          joinColor= game.players[3].color;
+if(!game.players[0].joined)
+    joinColor= game.players[0].color;
+      // Save data to session
+    req.session.gameID      = validData.gameID;
+    req.session.playerColor = joinColor;
+    req.session.playerName  = validData.playerName;
+
+    // Redirect to game page
+    res.redirect('/game/'+validData.gameID);
+  });
+};
+
 
