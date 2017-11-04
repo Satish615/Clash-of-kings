@@ -99,6 +99,54 @@ this.lastMove = null;
   }
 }
 
+var getMovesForPlayer = function(playerColor, board, lastMove) {
+  var moves = [];
+  var piece, square = null;
+
+  // Loop board
+  for (square in board) {
+      piece = board[square];
+
+      // Skip empty squares and opponent's pieces
+      if (piece === null) {
+          continue;
+      }
+      if (piece[0] !== playerColor[0]) {
+          continue;
+      }
+      if (square !== null) {
+          // Collect all moves for all of player's pieces
+          switch (piece[1]) {
+              case 'P':
+                  if(square!==null)
+                  moves.push.apply(moves, getMovesForPawn(piece, square, board, lastMove));
+                  break;
+              case 'R':
+                  if(square!==null)
+                  moves.push.apply(moves, getMovesForRook(piece, square, board));
+                  break;
+              case 'N':
+                  if(square!==null)
+                  moves.push.apply(moves, getMovesForKnight(piece, square, board));
+                  break;
+              case 'B':
+                  if(square!==null)
+                  moves.push.apply(moves, getMovesForBishop(piece, square, board));
+                  break;
+              case 'Q':
+                  if(square!==null)
+                  moves.push.apply(moves, getMovesForQueen(piece, square, board));
+                  break;
+              case 'K':
+                  if(square!==null)
+                  moves.push.apply(moves, getMovesForKing(piece, square, board));
+                  break;
+          }
+      }
+  }
+
+  return moves;
+};
 
 var getMovesForPawn = function(piece, square, board, lastMove, includeUnsafe) {
   var moves = [];
