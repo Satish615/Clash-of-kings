@@ -1,5 +1,12 @@
 Implemented by Venkata Deviprasad Sura
+Respect week  6:
+All team memebers planned events are completed and taken care, every ones review is considered.
+Make sure the code validations are doen by each individual properly as per procedure implemented.
+All people are equally distributed tasks
 
+To be done:
+
+Implementing Javascript patterns on our completed code.
 
 Respect week  5:
 All team members dependency is understood and tasks are planned in order of dependencies.
