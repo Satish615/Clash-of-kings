@@ -5,7 +5,8 @@ Taking players from Chess Game as basis i.e moves of Rook, Knight, Bishop, Queen
 
 [Cumulative Flow Diagram](https://docs.google.com/a/sjsu.edu/spreadsheets/d/150TyqCxRxhK7aqt2JpKUFNBQsHHqq0wVjuAcBEJsWQM/edit?usp=sharing)
 
-[Burndown Chart](https://drive.google.com/a/sjsu.edu/file/d/0B0my03hiLrdRQjAtQ0JvdTB0QVE/view?usp=sharing)
+<!---[Burndown Chart](https://drive.google.com/a/sjsu.edu/file/d/0B0my03hiLrdRQjAtQ0JvdTB0QVE/view?usp=sharing)--->
+[Burndown Chart](https://docs.google.com/spreadsheets/d/1JCwrrKYYLpR_GcMBCLl4FsvvsWJpbuLkF6Eb9Omjt1k/edit#gid=879809152)
 
 [Agile Task Board](https://github.com/nguyensjsu/cmpe202-fivestars/projects/1)
 
