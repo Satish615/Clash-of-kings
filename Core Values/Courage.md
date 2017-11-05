@@ -24,3 +24,7 @@ _Week #4:_
 _Week #5:_
 - Team has addressed the courage value to transit from kanban to agile and has made honest attemts to make sure our task boards are accurate about the progress.
 - Team has showed the courage in adopting socket.io to client side version of the code successfully.
+
+_Week #6:_
+- Team has made an effort to make sure our task boards are accurate about the progress.
+- Team members have implemented very crucial features of the game succesfully this week.
