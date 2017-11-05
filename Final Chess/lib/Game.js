@@ -1,31 +1,42 @@
 function Game(params) {
 
+  // pending/ongoing/checkmate/stalemate/forfeit
   this.status = 'pending';
 
-  this.activePlayer = null;
+  this.activePlayer = null; //Not needed now
 
+/*
+  this.active = null;
+  var outerScope = this;
+  var activetimer =  setInterval(function(){
+      if(outerScope.active){
+          outerScope.active = false;
+      }
+      else outerScope.active = true;
+      console.log("set timer -" + outerScope.active);
+  }, 10000);
+   */
   this.players = [
     {color: 'white', name: null, joined: false, inCheck: false, forfeited: false},
     {color: 'black', name: null, joined: false, inCheck: false, forfeited: false},
-      {color: 'red', name: null, joined: false, inCheck: false, forfeited: false},
-      {color: 'yellow', name: null, joined: false, inCheck: false, forfeited: false}
+    {color: 'red', name: null, joined: false, inCheck: false, forfeited: false},
+    {color: 'yellow', name: null, joined: false, inCheck: false, forfeited: false}
   ];
 
-  this.board = {};
-  /*  this.board = {
+    this.board = {
 
-        a9: 'bR_', b9: 'bN_', c9: 'bB_', d9: 'bQ_', e9: 'bK_', f9: 'bB_', g9: 'bN_', h9: 'bR_',
+        a9: null, b9: null, c9: null, d9: null, e9: null, f9: null, g9: null, h9: null,
         i9: null, j9: null, k9: null, l9: null, m9: null, n9: null, o9: null, p9: null,
         q9: null, r9: null, s9:null, t9: null, u9: null, v9: null, w9: null, x9: null,
         y9: null, z9: null,
-        a8: 'bP_', b8: 'bP_', c8: 'bP_', d8: 'bP_', e8: 'bP_', f8: 'bP_', g8: 'bP_', h8: 'bP_',
+        a8: null, b8: null, c8: null, d8: null, e8: null, f8:null, g8: null, h8: null,
         i8: null, j8: null, k8: null, l8: null, m8: null, n8: null, o8: null, p8: null,
         q8: null, r8: null, s8: null, t8: null, u8: null, v8: null, w8: null, x8: null,
         y8: null, z8: null,
         a7: null, b7: null, c7: null, d7: null, e7: null, f7: null, g7: null, h7: null,
         i7: null, j7: null, k7: null, l7: null, m7: null, n7: null, o7: null, p7: null,
-        q7: null, r7: null, s7: null, t7: null, u7: 'yR', v7: 'yQ', w7: 'yK',x7: 'yN',
-        y7: 'yB', z7: 'yP',
+        q7: null, r7: null, s7: null, t7: null, u7: null, v7: null, w7: null,x7: null,
+        y7: null, z7: null,
         a6: null,  b6: null,  c6: null,  d6: null,  e6: null,  f6: null,  g6: null,  h6: null,
         i6: null, j6: null, k6: null, l6: null, m6: null, n6: null, o6: null, p6: null,
         q6: null, r6: null, s6: null, t6: null, u6: null, v6: null, w6: null, x6: null,
@@ -43,44 +54,36 @@ function Game(params) {
         q3: null, r3: null, s3: null, t3: null, u3: null, v3: null, w3: null, x3: null,
         y3: null, z3: null,
         a2: null, b2: null, c2: null, d2: null, e2: null, f2: null, g2: null, h2: null,
-        i2: null, j2: null, k2: null, l2: null, m2: null, n2: null, o2: 'rQ', p2: 'rB',
-        q2: 'rN', r2: 'rR', s2: 'rK', t2: 'rP', u2: null, v2: null, w2: null, x2: null,
+        i2: null, j2: null, k2: null, l2: null, m2: null, n2: null, o2: null, p2: null,
+        q2: null, r2: null, s2: null, t2: null, u2: null, v2: null, w2: null, x2: null,
         y2: null, z2: null,
-        a1: 'wP', b1: 'wP', c1: 'wP_', d1: 'wP_', e1: 'wP_', f1: 'wP_', g1: 'wP_', h1: 'wP_',
+        a1: null, b1: null, c1: null, d1: null, e1: null, f1: null, g1: null, h1:null,
         i1: null, j1: null, k1: null, l1: null, m1: null, n1: null, o1:null, p1: null,
         q1: null, r1: null, s1: null, t1: null, u1: null, v1: null, w1:null, x1:null,
         y1: null, z1: null,
-        a0: 'wR_', b0: 'wN_', c0: 'wB_', d0: 'wQ_', e0: 'wK_', f0: 'wB_', g0: 'wN_', h0: 'wR_',
+        a0: null, b0: null, c0:null, d0: null, e0: null, f0:null, g0: null, h0: null,
         i0: null, j0: null, k0:null, l0: null, m0: null, n0: null, o0: null, p0: null,
         q0: null, r0: null, s0: null, t0: null, u0: null, v0: null, w0: null, x0: null,
-        y0: null, z0: null  }; */
+        y0: null, z0: null  };
 
   this.capturedPieces = [];
 
   this.validMoves = [
-    { type: 'move', pieceCode: 'wP', startSquare: 'a1', endSquare: 'a3' },
-    { type: 'move', pieceCode: 'wP ', startSquare: 'b1', endSquare: 'b3' },
-    { type: 'move', pieceCode: 'wP_', startSquare: 'c1', endSquare: 'b3' },
-    { type: 'move', pieceCode: 'wP_', startSquare: 'b2', endSquare: 'b4' },
-    { type: 'move', pieceCode: 'wP', startSquare: 'c2', endSquare: 'c3' },
-    { type: 'move', pieceCode: 'wP', startSquare: 'c2', endSquare: 'c4' },
-    { type: 'move', pieceCode: 'wP', startSquare: 'd2', endSquare: 'd3' },
-    { type: 'move', pieceCode: 'wP', startSquare: 'd2', endSquare: 'd4' },
-    { type: 'move', pieceCode: 'wP', startSquare: 'e2', endSquare: 'e3' },
-    { type: 'move', pieceCode: 'wP', startSquare: 'e2', endSquare: 'e4' },
-    { type: 'move', pieceCode: 'wP', startSquare: 'f2', endSquare: 'f3' },
-    { type: 'move', pieceCode: 'wP', startSquare: 'f2', endSquare: 'f4' },
-    { type: 'move', pieceCode: 'wP', startSquare: 'g2', endSquare: 'g3' },
-    { type: 'move', pieceCode: 'wP', startSquare: 'g2', endSquare: 'g4' },
-    { type: 'move', pieceCode: 'wP', startSquare: 'h2', endSquare: 'h3' },
-    { type: 'move', pieceCode: 'wP', startSquare: 'h2', endSquare: 'h4' },
-    { type: 'move', pieceCode: 'wN', startSquare: 'b1', endSquare: 'a3' },
-    { type: 'move', pieceCode: 'wN', startSquare: 'b1', endSquare: 'c3' },
-    { type: 'move', pieceCode: 'wN', startSquare: 'g1', endSquare: 'f3' },
-    { type: 'move', pieceCode: 'wN', startSquare: 'g1', endSquare: 'h3' }
+    { type: 'move', pieceCode: 'wK', startSquare: 'a0', endSquare: 'a1' },
+    { type: 'move', pieceCode: 'wK ', startSquare: 'a0', endSquare: 'b0' },
+    { type: 'move', pieceCode: 'wK', startSquare: 'a0', endSquare: 'b1' },
+    { type: 'move', pieceCode: 'rK', startSquare: 'z0', endSquare: 'z1' },
+    { type: 'move', pieceCode: 'rK', startSquare: 'z0', endSquare: 'y1' },
+    { type: 'move', pieceCode: 'rK', startSquare: 'z0', endSquare: 'y0' },
+    { type: 'move', pieceCode: 'yK', startSquare: 'a9', endSquare: 'b8' },
+    { type: 'move', pieceCode: 'yK', startSquare: 'a9', endSquare: 'b9' },
+    { type: 'move', pieceCode: 'yK', startSquare: 'a9', endSquare: 'a8' },
+    { type: 'move', pieceCode: 'bK', startSquare: 'z9', endSquare: 'y8' },
+    { type: 'move', pieceCode: 'bK', startSquare: 'z9', endSquare: 'y9' },
+    { type: 'move', pieceCode: 'bK', startSquare: 'z9', endSquare: 'z8' }
   ];
-}
-this.lastMove = null;
+
+  this.lastMove = null;
 
   this.modifiedOn = Date.now();
 
@@ -92,7 +95,7 @@ this.lastMove = null;
       this.players[2].color = 'red';
       this.players[3].color = 'yellow';
   }
- else if (params.playerColor === 'black') {
+  else if (params.playerColor === 'black') {
       this.players[0].color = 'white';
       this.players[1].color = 'black';
       this.players[2].color = 'red';
@@ -108,48 +111,41 @@ Game.prototype.addPlayer = function(playerData) {
     var p;
     p = _.findWhere(this.players, { joined: false});
 
-  if (!p) { return false; }
-  
+    if (!p) { return false; }
 
-  // Set player info
-  p.name = playerData.playerName;
-  p.joined = true;
-  console.log(p);
 
-  if(this.players[0].joined){
-  this.board['z9'] = 'wK_';
-  }
+    // Set player info
+    p.name = playerData.playerName;
+    p.joined = true;
+    //console.log(p);
 
-  if(this.players[1].joined){
-   this.board['a0'] = 'bK_';
-   this.board['z9'] = 'wK_';
-   
-  }
+    if(this.players[0].joined){
+        this.board['a0'] = 'wK';
+    }
 
-  if(this.players[2].joined){
-    this.board['a9'] = 'rK_';
-    this.board['a0'] = 'bK_';
-    this.board['z9'] = 'wK_';
+    if(this.players[1].joined){
+        this.board['z9'] = 'bK';
+    }
 
-   }
+    if(this.players[2].joined){
+        this.board['z0'] = 'rK';
+    }
 
-  if(this.players[3].joined){
-    this.board['z0'] = 'yK_';
-    this.board['a9'] = 'rK_';
-    this.board['a0'] = 'bK_';
-    this.board['z9'] = 'wK_';
+    if(this.players[3].joined){
+        this.board['a9'] = 'yK';
+    }
 
-   }
+    // If both players have joined, start the game
+    if (this.players[0].joined && this.players[1].joined
+        //&& this.players[2].joined && this.players[3].joined && this.status == 'pending'
+    ) {
+       // this.activePlayer = _.findWhere(this.players, {color: 'white'});
+        this.status = 'ongoing';
+    }
 
-   // If both players have joined, start the game
-   if (this.players[0].joined && this.players[1].joined && this.players[2].joined && this.players[3].joined && this.status == 'pending') {
-    this.activePlayer = _.findWhere(this.players, {color: 'white'});
-    this.status = 'ongoing';
-   }
+    this.modifiedOn = Date.now();
 
-   this.modifiedOn = Date.now();
-
-   return true;
+    return true;
 };
 
   var getMovesForPlayer = function(playerColor, board, lastMove) {
