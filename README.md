@@ -134,6 +134,10 @@ Complete Randomization Algorithm for Static Players:
 
 https://github.com/nguyensjsu/cmpe202-fivestars/issues/18
 
+UML Diagrams:
+
+https://github.com/nguyensjsu/cmpe202-fivestars/tree/master/UML%20Diagrams
+
 Following Design Patterns to be implemented in upcoming weeks:
 
 Factory: https://github.com/nguyensjsu/cmpe202-fivestars/issues/30
