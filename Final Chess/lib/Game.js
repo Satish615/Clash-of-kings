@@ -11,7 +11,8 @@ function Game(params) {
       {color: 'yellow', name: null, joined: false, inCheck: false, forfeited: false}
   ];
 
-    this.board = {
+  this.board = {};
+  /*  this.board = {
 
         a9: 'bR_', b9: 'bN_', c9: 'bB_', d9: 'bQ_', e9: 'bK_', f9: 'bB_', g9: 'bN_', h9: 'bR_',
         i9: null, j9: null, k9: null, l9: null, m9: null, n9: null, o9: null, p9: null,
@@ -52,7 +53,7 @@ function Game(params) {
         a0: 'wR_', b0: 'wN_', c0: 'wB_', d0: 'wQ_', e0: 'wK_', f0: 'wB_', g0: 'wN_', h0: 'wR_',
         i0: null, j0: null, k0:null, l0: null, m0: null, n0: null, o0: null, p0: null,
         q0: null, r0: null, s0: null, t0: null, u0: null, v0: null, w0: null, x0: null,
-        y0: null, z0: null  };
+        y0: null, z0: null  }; */
 
   this.capturedPieces = [];
 
@@ -99,7 +100,59 @@ this.lastMove = null;
   }
 }
 
-var getMovesForPlayer = function(playerColor, board, lastMove) {
+/**
+ * Add player to game, and after both players have joined activate the game.
+ * Returns true on success and false on failure.
+ */
+Game.prototype.addPlayer = function(playerData) {
+    var p;
+    p = _.findWhere(this.players, { joined: false});
+
+  if (!p) { return false; }
+  
+
+  // Set player info
+  p.name = playerData.playerName;
+  p.joined = true;
+  console.log(p);
+
+  if(this.players[0].joined){
+  this.board['z9'] = 'wK_';
+  }
+
+  if(this.players[1].joined){
+   this.board['a0'] = 'bK_';
+   this.board['z9'] = 'wK_';
+   
+  }
+
+  if(this.players[2].joined){
+    this.board['a9'] = 'rK_';
+    this.board['a0'] = 'bK_';
+    this.board['z9'] = 'wK_';
+
+   }
+
+  if(this.players[3].joined){
+    this.board['z0'] = 'yK_';
+    this.board['a9'] = 'rK_';
+    this.board['a0'] = 'bK_';
+    this.board['z9'] = 'wK_';
+
+   }
+
+   // If both players have joined, start the game
+   if (this.players[0].joined && this.players[1].joined && this.players[2].joined && this.players[3].joined && this.status == 'pending') {
+    this.activePlayer = _.findWhere(this.players, {color: 'white'});
+    this.status = 'ongoing';
+   }
+
+   this.modifiedOn = Date.now();
+
+   return true;
+};
+
+  var getMovesForPlayer = function(playerColor, board, lastMove) {
   var moves = [];
   var piece, square = null;
 
