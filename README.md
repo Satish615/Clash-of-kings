@@ -16,11 +16,21 @@ Taking players from Chess Game as basis i.e moves of Rook, Knight, Bishop, Queen
 
 XP Core Values: 
 
+Core Values on Wiki :
+
 * [Courage](https://github.com/nguyensjsu/cmpe202-fivestars/blob/master/Core%20Values/Courage.md)
 * [Communication](https://github.com/nguyensjsu/cmpe202-fivestars/wiki/Communication-%7C-XP-Core-Value-%5BAkansha%5D)
 * [Feedback](https://github.com/nguyensjsu/cmpe202-fivestars/edit/master/Feedback-%7C-XP-Core-Value-%5B-Satish-%5D)
 * [Respect](https://github.com/nguyensjsu/cmpe202-fivestars/wiki/Respect-%7C-XP-Core-Value-%5B-Devi-%5D)
 * [Simplicity](https://github.com/nguyensjsu/cmpe202-fivestars/wiki/Simplicity-%7C-XP-Core-Value--%5BShweta%5D)
+
+Core Values on README.md:
+
+* [Courage](https://github.com/nguyensjsu/cmpe202-fivestars/blob/master/Core%20Values/Courage.md)
+* [Communication](https://github.com/nguyensjsu/cmpe202-fivestars/blob/master/Core%20Values/Communication.md)
+* [Feedback](https://github.com/nguyensjsu/cmpe202-fivestars/blob/master/Core%20Values/Feedback.md)
+* [Respect](https://github.com/nguyensjsu/cmpe202-fivestars/blob/master/Core%20Values/Respect.md)
+* [Simplicity](https://github.com/nguyensjsu/cmpe202-fivestars/blob/master/Core%20Values/Simplicity%20%5BShweta%5D.md)
 
 Week #1 :
 -------
