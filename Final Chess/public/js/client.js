@@ -72,7 +72,7 @@ var Client = (function(window) {
      //Defining Board position for Player 1
     if (playerColor === 'white') {
 
-      for(i=9;i>=0;i--){
+      for(i=0;i<10;i++){
            for(j=0;j<26;j++){
              squareIDs.push(filelabels2[j]+rankLabels[i]);
               
