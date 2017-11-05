@@ -152,3 +152,24 @@ if(!game.players[0].joined)
 };
 
 
+/**
+ * Redirect non-existent routes to the home page
+ */
+var invalid = function(req, res) {
+
+  // Go home HTTP request, you're drunk
+  res.redirect('/');
+};
+
+/**
+ * Attach route handlers to the app
+ */
+exports.attach = function(app, db) {
+  DB = db;
+
+  app.get('/',         home);
+  app.get('/game/:id', game);
+  app.post('/start',   startGame);
+  app.post('/join',    joinGame);
+  app.all('*',         invalid);
+};
