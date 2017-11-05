@@ -20,3 +20,9 @@ Week 4:
 Tasks done in this week: Shiva and Devi have worked on the chessboard design using Html , css. So the feed back provided was to refactor the code and include the functionaltites on Server side and also to implement design patterns to the code.
 
 Tasks to be done in this week: To implement socket.io for creating Mutliplayer game as use it along with node Js in server side. To create an alogorithm for randomization of static players arranged in the board.
+
+Week 5:
+Task done in this week:
+Akansha has worked on creating the board view for each players but feedback was to update the code such that square id would be unique for each player.
+For creating the timers feedback to is to split the work into more backlogs so that progress can be effectively tracked.
+For randomizing static players feedback is to start working on the code and try to build a default config with static players and then build alogrithm to generate new patterns.
