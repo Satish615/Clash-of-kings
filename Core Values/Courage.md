@@ -27,4 +27,4 @@ _Week #5:_
 
 _Week #6:_
 - Team has made an effort to make sure our task boards are accurate about the progress.
-- Team members have implemented very crucial features of the game succesfully this week.
+- Team members have implemented very crucial features of the game succesfully this week given few constraints and feedback from previous weeks. 
