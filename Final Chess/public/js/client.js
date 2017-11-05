@@ -64,77 +64,65 @@ var Client = (function(window) {
   /**
    * Assign square IDs and labels based on player's perspective
    */
-  var assignSquares = function() {
-    var fileLabels = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
-    var filelabels2 = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
-    var rankLabels = [9, 8, 7, 6, 5, 4, 3, 2, 1, 0];
-    
-     //Defining Board position for Player 1
-    if (playerColor === 'white') {
+    var assignSquares = function() {
+      var fileLables = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
+      var rankLabels = [9, 8, 7, 6, 5, 4, 3, 2, 1, 0];
 
-      for(i=0;i<10;i++){
-           for(j=0;j<26;j++){
-             squareIDs.push(filelabels2[j]+rankLabels[i]);
-              
-           }
-      }
-      // Set square IDs
-      squares.each(function(i) { $(this).attr('id', squareIDs[i]); });
-      
-    }
-   
-  
-   //Defining Board position for Player 2
-    if (playerColor === 'black') {
-      fileLabels.reverse();
-      filelabels2.reverse();
-      rankLabels.reverse();
-     
-    for(i=0;i<10;i++){
-           for(j=0;j<26;j++){
-              squareIDs.push(filelabels2[j]+rankLabels[i]);
-              
-           }
-      }
-      // Set square IDs
-      squares.each(function(i) { $(this).attr('id', squareIDs[i]); });
-
-    }
-    
-//Defining Board position for Player 3
-    if (playerColor === 'red') {
-          filelabels2.reverse();
-          fileLabels.reverse();
+      //Defining Square IDs for Player 1
+      if (playerColor === 'white') {
           for(i=0;i<10;i++){
-             for(j=0;j<26;j++){
-                squareIDs.push(filelabels2[j]+rankLabels[i]);
-                
-             }
+              for(j=0;j<26;j++){
+                  squareIDs.push(fileLables[j]+rankLabels[i]);
+
+              }
           }
-      // Set square IDs
-        squares.each(function(i) { $(this).attr('id', squareIDs[i]); });
-    }
-    
-//Defining Board position for Player 4
+      }
+
+
+      //Defining Square IDs for Player 2
+      if (playerColor === 'black') {
+          fileLables.reverse();
+          rankLabels.reverse();
+
+          for(i=0;i<10;i++){
+              for(j=0;j<26;j++){
+                  squareIDs.push(fileLables[j]+rankLabels[i]);
+
+              }
+          }
+      }
+
+      //Defining Square IDs for Player 3
+      if (playerColor === 'red') {
+          fileLables.reverse();
+          for(i=0;i<10;i++){
+              for(j=0;j<26;j++){
+                  squareIDs.push(fileLables[j]+rankLabels[i]);
+
+              }
+          }
+     }
+
+      //Defining Square IDs for Player 4
       if (playerColor === 'yellow') {
           rankLabels.reverse();
           for(i=0;i<10;i++){
-             for(j=0;j<26;j++){
-                squareIDs.push(filelabels2[j]+rankLabels[i]);
-                
-             }
-          }
-         // Set square IDs
-         squares.each(function(i) { $(this).attr('id', squareIDs[i]); });
+              for(j=0;j<26;j++){
+                  squareIDs.push(fileLables[j]+rankLabels[i]);
 
+              }
+          }
       }
 
-    // Set file and rank labels
-    $('.top-edge').each(function(i) { $(this).text(fileLabels[i]); });
-    $('.right-edge').each(function(i) { $(this).text(rankLabels[i]); });
-    $('.bottom-edge').each(function(i) { $(this).text(fileLabels[i]); });
-    $('.left-edge').each(function(i) { $(this).text(rankLabels[i]); });
-   
+      // Set square IDs
+      squares.each(function(i) { $(this).attr('id', squareIDs[i]); });
+
+      // Set file and rank labels
+      $('.top-edge').each(function(i) { $(this).text(fileLables[i]); });
+      $('.right-edge').each(function(i) { $(this).text(rankLabels[i]); });
+      $('.bottom-edge').each(function(i) { $(this).text(fileLables[i]); });
+      $('.left-edge').each(function(i) { $(this).text(rankLabels[i]); });
+
   };
     
     
