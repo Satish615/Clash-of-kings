@@ -26,3 +26,12 @@ Task done in this week:
 Akansha has worked on creating the board view for each players but feedback was to update the code such that square id would be unique for each player.
 For creating the timers feedback to is to split the work into more backlogs so that progress can be effectively tracked.
 For randomizing static players feedback is to start working on the code and try to build a default config with static players and then build alogrithm to generate new patterns.
+
+week 6:
+Tasks done in this week:
+Feed back is to use prototype  and factory design patterns for implementing the static players for board.
+To create timers after each player move so that player can be static.
+
+week 7:
+Tasks done in this week:
+Feedback is to create functions to display the timer on the front end for players to see.
