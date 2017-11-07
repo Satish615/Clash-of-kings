@@ -148,6 +148,24 @@ Game.prototype.addPlayer = function(playerData) {
     return true;
 };
 
+Game.prototype.forfeit = function(playerData) {
+
+  // Find player in question
+  var p = _.findWhere(this.players, {color: playerData.playerColor});
+  if (!p) { return false; }
+
+  // Set player info
+  p.forfeited = true;
+
+  // Set game status
+  this.status = 'forfeit';
+
+  this.modifiedOn = Date.now();
+
+  return true;
+};
+
+
   var getMovesForPlayer = function( board) {
   var moves = [];
   var piece, square = null;
