@@ -1,3 +1,22 @@
+Week #7:
+
+Attendees - Shiva,Satish,Akansha,Devi,Shweta
+
+What did team do last week?
+- Completed the business logic of timer part and discussed how to display.
+- Figured out how to do coloring for static players and implemented few
+- Studied design patterns to use.
+
+What are challenges:
+- How to make timer visible to all the players. 
+- The main challenge is to keep the game as easily understandable and simple for players.
+
+Discussion held:
+
+- Discussed business logic for timer 
+- Discussed design patterns
+- discussed display of static players.
+
 Week #6:
 
 Attendees - Shiva,Satish,Akansha,Devi,Shweta
