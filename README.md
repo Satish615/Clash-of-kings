@@ -176,6 +176,10 @@ killing static players and other user players
 
 https://github.com/nguyensjsu/cmpe202-fivestars/issues/37
 
+Sequence Diagram :
+
+https://github.com/nguyensjsu/cmpe202-fivestars/issues/29
+
 Players should be able to chat:
 
 https://github.com/nguyensjsu/cmpe202-fivestars/issues/38
