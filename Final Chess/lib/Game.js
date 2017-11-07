@@ -148,6 +148,20 @@ Game.prototype.addPlayer = function(playerData) {
     return true;
 };
 
+Game.prototype.removePlayer = function(playerData) {
+
+  // Find player in question
+  var p = _.findWhere(this.players, {color: playerData.playerColor});
+  if (!p) { return false; }
+
+  // Set player info
+  p.joined = false;
+
+  this.modifiedOn = Date.now();
+
+  return true;
+};
+
 Game.prototype.forfeit = function(playerData) {
 
   // Find player in question
