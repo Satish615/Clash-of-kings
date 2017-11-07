@@ -24,6 +24,10 @@ Following are the steps I took to make sure simplicity in our project:
   * Used socket.io library and node js to make the game realtime interactive. 
   * Using the ready made library made the project very simple to implement.
   
+7. 7th week
+  * Using multi-color players as static players so that it is simple for players to distinguish. 
+  * Displaying timer on game screen for all the players, so that it is easy for all the players to understand when they can       make a move.
+  
 
   
    
