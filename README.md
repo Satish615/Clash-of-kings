@@ -160,7 +160,25 @@ Decorator: https://github.com/nguyensjsu/cmpe202-fivestars/issues/33
 
 State: https://github.com/nguyensjsu/cmpe202-fivestars/issues/34
 
+Week #7:
+--------
+Timer for each player to be shown on his window:
 
+https://github.com/nguyensjsu/cmpe202-fivestars/issues/28
+
+Design Patterns implementation :
+
+Strategy Pattern in progress:
+
+https://github.com/nguyensjsu/cmpe202-fivestars/issues/31
+
+killing static players and other user players
+
+https://github.com/nguyensjsu/cmpe202-fivestars/issues/37
+
+Players should be able to chat:
+
+https://github.com/nguyensjsu/cmpe202-fivestars/issues/38
 
 
 
