@@ -7,9 +7,9 @@
   },
   "dependencies": {
     "express": "^3.3.8",
+    "http": "0.0.0",
     "jade": "^0.33.0",
-    "karma-phantomjs-launcher": "^1.0.4",
-    "pug": "^2.0.0-rc.4",
+    "path": "^0.12.7",
     "socket.io": "^0.9.19",
     "underscore": "^1.5.2"
   },
