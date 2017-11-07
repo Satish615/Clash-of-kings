@@ -148,10 +148,11 @@ Game.prototype.addPlayer = function(playerData) {
     return true;
 };
 
-  var getMovesForPlayer = function(playerColor, board, lastMove) {
+  var getMovesForPlayer = function( board) {
   var moves = [];
   var piece, square = null;
 
+  console.log("inside move generation");
   // Loop board
   for (square in board) {
       piece = board[square];
@@ -160,15 +161,17 @@ Game.prototype.addPlayer = function(playerData) {
       if (piece === null) {
           continue;
       }
-      if (piece[0] !== playerColor[0]) {
+      if (piece[0] === 's') {
+          // don't evaluate moves for static players
           continue;
       }
+ 
       if (square !== null) {
           // Collect all moves for all of player's pieces
           switch (piece[1]) {
               case 'P':
                   if(square!==null)
-                  moves.push.apply(moves, getMovesForPawn(piece, square, board, lastMove));
+                  moves.push.apply(moves, getMovesForPawn(piece, square, board));
                   break;
               case 'R':
                   if(square!==null)
