@@ -180,7 +180,6 @@ var Client = (function(window) {
     });
   }
   
-   // Highlight valid moves for black pieces
     if (playerColor === 'black') {
       container.on('click', '.black.pawn',   function(ev) {
         if (bActive) {
