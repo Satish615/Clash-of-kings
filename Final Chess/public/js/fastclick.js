@@ -97,3 +97,25 @@ this.onTouchEnd = function() { return FastClick.prototype.onTouchEnd.apply(self,
 		layer.addEventListener('mousedown', this.onMouse, true);
 		layer.addEventListener('mouseup', this.onMouse, true);
 	}
+	
+	/** @type function() */
+	this.onTouchEnd = function() { return FastClick.prototype.onTouchEnd.apply(self, arguments); };
+
+	/** @type function() */
+	this.onTouchCancel = function() { return FastClick.prototype.onTouchCancel.apply(self, arguments); };
+
+	if (FastClick.notNeeded(layer)) {
+		return;
+	}
+
+	// Set up event handlers as required
+	if (this.deviceIsAndroid) {
+		layer.addEventListener('mouseover', this.onMouse, true);
+		layer.addEventListener('mousedown', this.onMouse, true);
+		layer.addEventListener('mouseup', this.onMouse, true);
+	}
+
+	layer.addEventListener('click', this.onClick, true);
+	layer.addEventListener('touchstart', this.onTouchStart, false);
+	layer.addEventListener('touchend', this.onTouchEnd, false);
+	layer.addEventListener('touchcancel', this.onTouchCancel, false);
