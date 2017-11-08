@@ -126,3 +126,19 @@ var Client = (function(window) {
   };
     
     
+  var attachSocketEventHandlers = function() {
+
+    // Update UI with new game state
+    socket.on('update', function(data) {
+      console.log(data);
+      gameState = data;
+      update();
+    });
+
+    // Display an error
+    socket.on('error', function(data) {
+      console.log(data);
+      showErrorMessage(data);
+    });
+  };
+  
