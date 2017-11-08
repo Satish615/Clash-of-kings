@@ -1,0 +1,25 @@
+extends layout
+
+block content
+
+  nav.navbar.navbar-inverse.navbar-static-top(role="navigation")
+    .navbar-header
+      a.navbar-brand(href="/") Socket.IO Chess
+
+  div.container
+
+    #messages
+
+    #game
+
+      #title-bar
+        button#forfeit.btn.btn-sm.btn-default.pull-right Forfeit
+        span Game:&nbsp;
+        strong #{gameID}
+
+      #opponent.player-info
+        strong ...
+        span.status.pull-right
+        ul.captured-pieces.list-inline
+
+      h3 timer(black) : #t1
