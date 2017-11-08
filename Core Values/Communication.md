@@ -9,4 +9,4 @@ Week                    |        Channel           |          Type              
 10/15/2017-10/21/2017 | Project Refactor | Face-to-Face Meetings & Zoom Web Conferencing | tasks in progress: code cleaning, code refactoring as per OOP model, socket.io protocol to be used for client server communication and Node.js for server side programming | 
 10/22/2017-10/28/2017 | Project Build | Face-to-Face Meetings | refactored code, socket.io used for building client server communication, board positions defined for everytime each of the four clients join the game, Randomization of fixed chess pieces in progress, next week task focus will be on applying design patterns | 
 10/29/2017-11/04/2017 | Project Build | Face-to-Face Meetings | use case diagram, game development , design patterns to be studied and applied | 
-
+11/05/2017-11/11/2017 | Project Build | Face-to-Face Meetings, Zoom Web Conferencing | Killing static pieces and players, Highlight valid moves for all players, Display Timer on each player's window, Work on Design Patterns |
