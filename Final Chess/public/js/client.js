@@ -20,7 +20,11 @@ var Client = (function(window) {
   var pawnPromotionPrompt = null;
   var forfeitPrompt       = null;
   var squareIDs=[];
-
+  var wActive = true;
+  var bActive = true;
+  var yActive = true;
+  var rActive = true;
+  
    /**
    * Initialize the UI
    */
@@ -126,6 +130,40 @@ var Client = (function(window) {
   };
     
     
+  var attachDOMEventHandlers = function() {
+      if (playerColor === 'white') {
+      container.on('click', '.white.pawn', function(ev) {
+        if (wActive) {
+          highlightValidMoves('wP', ev.target);
+        }
+      });
+      container.on('click', '.white.rook', function(ev) {
+          if (wActive) {
+              highlightValidMoves('wR', ev.target);
+          }
+      });
+      container.on('click', '.white.knight', function(ev) {
+        if (wActive) {
+          highlightValidMoves('wN', ev.target);
+        }
+      });
+      container.on('click', '.white.bishop', function(ev) {
+        if (wActive) {
+          highlightValidMoves('wB', ev.target);
+        }
+      });
+      container.on('click', '.white.queen', function(ev) {
+        if (wActive) {
+          highlightValidMoves('wQ', ev.target);
+        }
+      });
+      container.on('click', '.white.king', function(ev) {
+        if (wActive) {
+          highlightValidMoves('wK', ev.target);
+        }
+      });
+    }
+     };
   var attachSocketEventHandlers = function() {
 
     // Update UI with new game state
