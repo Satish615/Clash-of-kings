@@ -176,9 +176,9 @@ killing static players and other user players
 
 https://github.com/nguyensjsu/cmpe202-fivestars/issues/37
 
-Sequence Diagram :
+Add functions to highlight valid moves for all colour players :
 
-https://github.com/nguyensjsu/cmpe202-fivestars/issues/29
+https://github.com/nguyensjsu/cmpe202-fivestars/issues/35
 
 Players should be able to chat:
 
