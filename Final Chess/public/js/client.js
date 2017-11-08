@@ -178,5 +178,39 @@ var Client = (function(window) {
       console.log(data);
       showErrorMessage(data);
     });
-  };
+  }
+  
+   // Highlight valid moves for black pieces
+    if (playerColor === 'black') {
+      container.on('click', '.black.pawn',   function(ev) {
+        if (bActive) {
+          highlightValidMoves('bP', ev.target);
+        }
+      });
+      container.on('click', '.black.rook',   function(ev) {
+          if (bActive) {
+            highlightValidMoves('bR', ev.target);
+          }
+      });
+      container.on('click', '.black.knight', function(ev) {
+        if (bActive) {
+              highlightValidMoves('bN', ev.target);
+          }
+      });
+      container.on('click', '.black.bishop', function(ev) {
+        if (bActive) {
+          highlightValidMoves('bB', ev.target);
+        }
+      });
+      container.on('click', '.black.queen',  function(ev) {
+       if (bActive) {
+          highlightValidMoves('bQ', ev.target);
+        }
+      });
+      container.on('click', '.black.king',   function(ev) {
+        if (bActive) {
+          highlightValidMoves('bK', ev.target);
+        }
+      });
+    };
   
