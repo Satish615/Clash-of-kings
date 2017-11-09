@@ -247,6 +247,59 @@ var Client = (function(window) {
     });
   }
   
-   
+    var move = function(destinationSquare) {
+    var piece = selection.color+selection.piece;
+    var src   = $('#'+selection.file+selection.rank);
+    var dest  = $(destinationSquare);
+
+    clearHighlights();
+
+    // Move piece on board
+    src.removeClass(getPieceClasses(piece)).addClass('empty');
+    dest.removeClass('empty').addClass(getPieceClasses(piece));
+
+
+    //disable and call timer
+      switch (selection.color) {
+          case 'w':
+              console.log(selection.color);
+              wActive = false;
+              console.log(wActive);
+              setTimeout(function () {
+                  wActive = true;
+              }, 4000);
+              break;
+          case 'b':
+              console.log(selection.color);
+              bActive = false;
+              console.log(wActive);
+              setTimeout(function () {
+                  bActive = true;
+              }, 4000);
+              break;
+          case 'y':
+              console.log(selection.color);
+              yActive = false;
+              console.log(wActive);
+              setTimeout(function () {
+                  yActive = true;
+              }, 4000);
+              break;
+          case 'r':
+              console.log(selection.color);
+              rActive = false;
+              console.log(wActive);
+              setTimeout(function () {
+                  rActive = true;
+              }, 4000);
+              break;
+          default:
+              break;
+      }
+
+
+    // Return move string
+    return piece+selection.file+selection.rank+'-'+dest.attr('id');
+  };
  
   
