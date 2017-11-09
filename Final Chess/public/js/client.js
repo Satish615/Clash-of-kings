@@ -163,24 +163,8 @@ var Client = (function(window) {
         }
       });
     }
-     };
-  var attachSocketEventHandlers = function() {
-
-    // Update UI with new game state
-    socket.on('update', function(data) {
-      console.log(data);
-      gameState = data;
-      update();
-    });
-
-    // Display an error
-    socket.on('error', function(data) {
-      console.log(data);
-      showErrorMessage(data);
-    });
-  }
-  
-    if (playerColor === 'black') {
+    
+     if (playerColor === 'black') {
       container.on('click', '.black.pawn',   function(ev) {
         if (bActive) {
           highlightValidMoves('bP', ev.target);
@@ -211,5 +195,58 @@ var Client = (function(window) {
           highlightValidMoves('bK', ev.target);
         }
       });
-    };
+     }
+    
+          if (playerColor === 'yellow') {
+          container.on('click', '.yellow.pawn',   function(ev) {
+              if (yActive) {
+                  highlightValidMoves('yP', ev.target);
+              }
+          });
+          container.on('click', '.yellow.rook',   function(ev) {
+              if (yActive) {
+                  highlightValidMoves('yR', ev.target);
+              }
+          });
+          container.on('click', '.yellow.knight', function(ev) {
+              if (yActive) {
+                  highlightValidMoves('yN', ev.target);
+              }
+          });
+          container.on('click', '.yellow.bishop', function(ev) {
+              if (yActive) {
+                  highlightValidMoves('yB', ev.target);
+              }
+          });
+          container.on('click', '.yellow.queen',  function(ev) {
+              if (yActive) {
+                  highlightValidMoves('yQ', ev.target);
+              }
+          });
+          container.on('click', '.yellow.king',   function(ev) {
+              if (yActive) {
+                  highlightValidMoves('yK', ev.target);
+              }
+          });
+      }
+    
+     };
+  var attachSocketEventHandlers = function() {
+
+    // Update UI with new game state
+    socket.on('update', function(data) {
+      console.log(data);
+      gameState = data;
+      update();
+    });
+
+    // Display an error
+    socket.on('error', function(data) {
+      console.log(data);
+      showErrorMessage(data);
+    });
+  }
+  
+   
+ 
   
