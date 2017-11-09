@@ -166,7 +166,7 @@ Timer for each player to be shown on his window:
 
 https://github.com/nguyensjsu/cmpe202-fivestars/issues/28
 
-Design Patterns implemented :
+Design Patterns to be implemented :
 
 Prototype Pattern :
 
