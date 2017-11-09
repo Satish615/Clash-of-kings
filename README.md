@@ -166,11 +166,15 @@ Timer for each player to be shown on his window:
 
 https://github.com/nguyensjsu/cmpe202-fivestars/issues/28
 
-Design Patterns implementation :
+Design Patterns implemented :
 
-Strategy Pattern in progress:
+Prototype Pattern :
 
-https://github.com/nguyensjsu/cmpe202-fivestars/issues/31
+https://github.com/nguyensjsu/cmpe202-fivestars/issues/32
+
+Factory Pattern :
+
+https://github.com/nguyensjsu/cmpe202-fivestars/issues/30
 
 killing static players and other user players
 
