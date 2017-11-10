@@ -228,3 +228,33 @@ FastClick.prototype.needsClick = function(target) {
 	return (/\bneedsclick\b/).test(target.className);
 };
 
+/**
+ * Determine whether a given element requires a call to focus to simulate click into element.
+ *
+ * @param {EventTarget|Element} target Target DOM element
+ * @returns {boolean} Returns true if the element requires a call to focus to simulate native click.
+ */
+FastClick.prototype.needsFocus = function(target) {
+	'use strict';
+	switch (target.nodeName.toLowerCase()) {
+	case 'textarea':
+	case 'select':
+		return true;
+	case 'input':
+		switch (target.type) {
+		case 'button':
+		case 'checkbox':
+		case 'file':
+		case 'image':
+		case 'radio':
+		case 'submit':
+			return false;
+		}
+
+		// No point in attempting to focus disabled inputs
+		return !target.disabled && !target.readOnly;
+	default:
+		return (/\bneedsfocus\b/).test(target.className);
+	}
+};
+
