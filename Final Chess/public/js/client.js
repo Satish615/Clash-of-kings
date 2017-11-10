@@ -230,6 +230,40 @@ var Client = (function(window) {
           });
       }
     
+      if (playerColor === 'red') {
+          container.on('click', '.red.pawn',   function(ev) {
+              if (rActive)
+              {
+                  highlightValidMoves('rP', ev.target);
+              }
+          });
+          container.on('click', '.red.rook',   function(ev) {
+              if (rActive) {
+                  highlightValidMoves('rR', ev.target);
+             }
+          });
+          container.on('click', '.red.knight', function(ev) {
+             if (rActive) {
+                  highlightValidMoves('rN', ev.target);
+              }
+          });
+          container.on('click', '.red.bishop', function(ev) {
+              if (rActive) {
+                  highlightValidMoves('rB', ev.target);
+              }
+          });
+          container.on('click', '.red.queen',  function(ev) {
+              if (rActive) {
+                  highlightValidMoves('rQ', ev.target);
+              }
+          });
+          container.on('click', '.red.king',   function(ev) {
+              if (rActive) {
+                  highlightValidMoves('rK', ev.target);
+              }
+          });
+      }
+    
      };
   var attachSocketEventHandlers = function() {
 
@@ -245,7 +279,7 @@ var Client = (function(window) {
       console.log(data);
       showErrorMessage(data);
     });
-  }
+  };
   
     var move = function(destinationSquare) {
     var piece = selection.color+selection.piece;
