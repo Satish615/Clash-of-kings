@@ -184,9 +184,6 @@ Add functions to highlight valid moves for all colour players :
 
 https://github.com/nguyensjsu/cmpe202-fivestars/issues/35
 
-Players should be able to chat:
-
-https://github.com/nguyensjsu/cmpe202-fivestars/issues/38
 
 
 
