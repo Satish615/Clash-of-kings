@@ -321,6 +321,7 @@ var Pawn = function(piece, square, board, lastMove, includeUnsafe){
     }
 };
 
+//defining moves for Rook
 var Rook = function(piece, square, board, includeUnsafe){
     this.getMoves = function(piece, square, board){
         var moves = [];
@@ -385,6 +386,7 @@ var Rook = function(piece, square, board, includeUnsafe){
     }
 };
 
+//defining moves for Knight
 var Knight = function(piece, square, board, lastMove, includeUnsafe){
     this.getMoves = function(piece, square, board){
         var moves = [];
@@ -441,6 +443,7 @@ var Knight = function(piece, square, board, lastMove, includeUnsafe){
     }
 };
 
+//defining moves for Bishop
 var Bishop = function(piece, square, board, lastMove, includeUnsafe){
     this.getMoves = function(piece, square, board){
         var moves = [];
@@ -496,6 +499,7 @@ var Bishop = function(piece, square, board, lastMove, includeUnsafe){
     }
 };
 
+//defining moves for Queen
 var Queen = function(piece, square, board, lastMove, includeUnsafe){
     this.getMoves = function(piece, square, board){
         var moves = [];
@@ -565,6 +569,7 @@ var Queen = function(piece, square, board, lastMove, includeUnsafe){
     }
 };
 
+//defining moves for King
 var King = function(piece, square, board, includeUnsafe){
     this.getMoves = function(piece, square, board){
         var moves = [];
