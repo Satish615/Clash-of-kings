@@ -179,12 +179,11 @@ Game.prototype.forfeit = function(playerData) {
   return true;
 };
 
-
-  var PlayerMoves = function(){
+//using Strategy Pattern for defining player moves
+var PlayerMoves = function(){
     this.chessPiece = "";
 }
   
-//using Strategy Pattern for defining player moves
 PlayerMoves.prototype = {
     setStrategy: function(chessPiece){
         this.chessPiece = chessPiece;
