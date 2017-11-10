@@ -50,3 +50,10 @@ in client js in move function lino 400 and something
           }, 3000);
              
               break;
+              
+              
+   in game . jade
+   
+   
+   h3#clock
+      h3#timer1
