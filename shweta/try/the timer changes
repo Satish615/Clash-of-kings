@@ -31,3 +31,22 @@ var checkTime = function(i) {
     return i;
 }
 
+in client js in move function lino 400 and something 
+
+ switch (selection.color) {
+          case 'w':
+          console.log(selection.color);
+          wActive = false;
+          $('#timer1').text("wait for 4 seconds before making a move!");
+          console.log(wActive);
+          ctoday = new Date();
+          ch = ctoday.getHours();
+          cm = ctoday.getMinutes();
+          cs = ctoday.getSeconds();
+          cms = ctoday.getMilliseconds();
+          setTimeout(function () {
+              wActive = true;
+              $('#timer1').text("you can move now");
+          }, 3000);
+             
+              break;
