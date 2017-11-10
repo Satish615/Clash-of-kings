@@ -412,3 +412,18 @@ block content
           .modal-footer
             button#cancel-forfeit.btn.btn-default Cancel
             button#confirm-forfeit.btn.btn-primary Forfeit
+
+  script(src="/js/jquery.min.js")
+  script(src="/js/bootstrap.min.js")
+  script(src="/socket.io/socket.io.js")
+  script(src="/js/client.js")
+  script(src="/js/fastclick.js")
+  script.
+    $(document).ready(function() {
+      FastClick.attach(document.body);
+      window.Client({
+        gameID      : "#{gameID}",
+        playerColor : "#{playerColor}",
+        playerName  : "#{playerName}"
+      });
+    });
