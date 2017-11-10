@@ -176,6 +176,10 @@ Factory Pattern :
 
 https://github.com/nguyensjsu/cmpe202-fivestars/issues/30
 
+Strategy Pattern :
+
+https://github.com/nguyensjsu/cmpe202-fivestars/issues/31
+
 killing static players and other user players
 
 https://github.com/nguyensjsu/cmpe202-fivestars/issues/37
