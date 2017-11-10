@@ -1,0 +1,33 @@
+in client.js 
+
+var startTime = function() {
+    var today = new Date();
+    var h = today.getHours();
+    var m = today.getMinutes();
+    var s = today.getSeconds();
+    var ms = today.getMilliseconds();
+    // add a zero in front of numbers<10
+    m = checkTime(m);
+    s = checkTime(s);
+    ms = checkTime(ms);
+    
+    var dm, ds, dms, dhs;
+    if (!wActive)
+    {
+      dh = (h - ch + 24)%24;
+      dm = (m - cm + 60)%60;
+      ds = (s - cs + 60)%60;
+      dms = (ms - cms + 1000)%1000;
+      $('#clock').text(dh + ":" + dm + ":" + ds+ ":" + dms);
+    }
+    
+    var t = setTimeout(function(){ startTime() }, 50);
+};
+
+var checkTime = function(i) {
+    if (i < 10) {
+        i = "0" + i;
+    }
+    return i;
+}
+
