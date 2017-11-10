@@ -180,59 +180,25 @@ Game.prototype.forfeit = function(playerData) {
 };
 
 
-  var getMovesForPlayer = function( board) {
-  var moves = [];
-  var piece, square = null;
+  var PlayerMoves = function(){
+    this.chessPiece = "";
+}
+  
+//using Strategy Pattern for defining player moves
+PlayerMoves.prototype = {
+    setStrategy: function(chessPiece){
+        this.chessPiece = chessPiece;
+    },
 
-  console.log("inside move generation");
-  // Loop board
-  for (square in board) {
-      piece = board[square];
-
-      // Skip empty squares and opponent's pieces
-      if (piece === null) {
-          continue;
-      }
-      if (piece[0] === 's') {
-          // don't evaluate moves for static players
-          continue;
-      }
- 
-      if (square !== null) {
-          // Collect all moves for all of player's pieces
-          switch (piece[1]) {
-              case 'P':
-                  if(square!==null)
-                  moves.push.apply(moves, getMovesForPawn(piece, square, board));
-                  break;
-              case 'R':
-                  if(square!==null)
-                  moves.push.apply(moves, getMovesForRook(piece, square, board));
-                  break;
-              case 'N':
-                  if(square!==null)
-                  moves.push.apply(moves, getMovesForKnight(piece, square, board));
-                  break;
-              case 'B':
-                  if(square!==null)
-                  moves.push.apply(moves, getMovesForBishop(piece, square, board));
-                  break;
-              case 'Q':
-                  if(square!==null)
-                  moves.push.apply(moves, getMovesForQueen(piece, square, board));
-                  break;
-              case 'K':
-                  if(square!==null)
-                  moves.push.apply(moves, getMovesForKing(piece, square, board));
-                  break;
-          }
-      }
-  }
-
-  return moves;
+    getMoves: function(piece, square, board){
+        return this.piece.getMoves(piece, square, board);
+    }
 };
 
-var getMovesForPawn = function(piece, square, board, lastMove, includeUnsafe) {
+//defining moves for Pawn
+var Pawn = function(piece, square, board, lastMove, includeUnsafe){
+    this.getMoves = function(piece, square, board){
+  
   var moves = [];
 
   var moveTransforms, captureTransforms = [];
@@ -268,7 +234,7 @@ var getMovesForPawn = function(piece, square, board, lastMove, includeUnsafe) {
     // If destination square is empty
     if (board[destination] === null) {
       move = {type: 'move', pieceCode: piece.substring(0,2), startSquare: square, endSquare: destination};
-      if (includeUnsafe || isMoveSafe(move, board)) { moves.push(move); }
+      moves.push(move);
     }
     // If destination square is occupied
     else {
@@ -330,9 +296,11 @@ var getMovesForPawn = function(piece, square, board, lastMove, includeUnsafe) {
           endSquare     : destination,
           captureSquare : destination[0]+square[1]
         };
-        if (includeUnsafe || isMoveSafe(capture, board)) { moves.push(capture); }
+
+        moves.push(capture);
       }
     }
+
     // If destination square is occupied by foe
     else if (board[destination][0] !== piece[0]) {
       capture = {
@@ -342,19 +310,20 @@ var getMovesForPawn = function(piece, square, board, lastMove, includeUnsafe) {
         endSquare     : destination,
         captureSquare : destination
       };
-      if (includeUnsafe || isMoveSafe(capture, board)) { moves.push(capture); }
+      moves.push(capture);
     }
     // If destination square is occupied by friend
     else {
       // Do nothing
     }
   }
-
   return moves;
+    }
 };
 
-var getMovesForRook = function(piece, square, board, includeUnsafe) {
-  var moves = [];
+var Rook = function(piece, square, board, includeUnsafe){
+    this.getMoves = function(piece, square, board){
+        var moves = [];
 
   var transforms = {
     n: [{x:0, y:+1}, {x:0, y:+2}, {x:0, y:+3}, {x:0, y:+4}, {x:0, y:+5}, {x:0, y:+6}, {x:0, y:+7},
@@ -373,9 +342,163 @@ var getMovesForRook = function(piece, square, board, includeUnsafe) {
         {x:-22, y:0}, {x:-23, y:0}, {x:-24, y:0}, {x:-25, y:0}]
   };
 
-  var getMovesForQueen = function(piece, square, board, includeUnsafe) {
-  //  return (getMovesForRook(piece, square, board, includeUnsafe)+getMovesForBishop(piece, square, board, includeUnsafe));
-  var moves = [];
+  var destination, move = null;
+
+  // Loop all moves
+  for (var group in transforms) {
+    for (var i=0; i<transforms[group].length; i++) {
+
+      // Get destination square for move
+      destination = transformSquare(square, transforms[group][i]);
+      if (!destination) { break; }
+
+      // If destination square is empty
+      if (board[destination] === null) {
+        move = {
+          type        : 'move',
+          pieceCode   : piece.substring(0,2),
+          startSquare : square,
+          endSquare   : destination
+        };
+      moves.push(move);
+      }
+      // If destination square is occupied by foe
+      else if (board[destination][0] !== piece[0]) {
+        move = {
+          type          : 'capture',
+          pieceCode     : piece.substring(0,2),
+          startSquare   : square,
+          endSquare     : destination,
+          captureSquare : destination
+        };
+          moves.push(move);
+        break;
+      }
+      // If destination square is occupied by friend
+      else {
+        break;
+      }
+    }
+  }
+
+  return moves;
+    }
+};
+
+var Knight = function(piece, square, board, lastMove, includeUnsafe){
+    this.getMoves = function(piece, square, board){
+        var moves = [];
+
+  var transforms = [
+    {x:+1, y:+2},
+    {x:+2, y:+1},
+    {x:+2, y:-1},
+    {x:+1, y:-2},
+    {x:-1, y:-2},
+    {x:-2, y:-1},
+    {x:-2, y:+1},
+    {x:-1, y:+2}
+  ];
+
+  var destination, move = null;
+
+  // Loop all moves
+  for (var i=0; i<transforms.length; i++) {
+
+    // Get destination square for move
+    destination = transformSquare(square, transforms[i]);
+    if (!destination) { continue; }
+
+    // If destination square is empty
+    if (board[destination] === null) {
+      move = {
+        type        : 'move',
+        pieceCode   : piece.substring(0,2),
+        startSquare : square,
+        endSquare   : destination
+      };
+        moves.push(move);
+    }
+    // If destination square is occupied by foe
+    else if (board[destination][0] !== piece[0]) {
+      move = {
+        type          : 'capture',
+        pieceCode     : piece.substring(0,2),
+        startSquare   : square,
+        endSquare     : destination,
+        captureSquare : destination
+      };
+     // if (includeUnsafe || isMoveSafe(move, board)) {
+         moves.push(move); //}
+    }
+    // If destination square is occupied by friend
+    else {
+      // Do nothing
+    }
+  }
+
+  return moves;
+    }
+};
+
+var Bishop = function(piece, square, board, lastMove, includeUnsafe){
+    this.getMoves = function(piece, square, board){
+        var moves = [];
+
+  var transforms = {
+    ne: [{x:+1, y:+1}, {x:+2, y:+2}, {x:+3, y:+3}, {x:+4, y:+4}, {x:+5, y:+5}, {x:+6, y:+6}, {x:+7, y:+7},{x:+8, y:+8},{x:+9, y:+9}],
+    se: [{x:+1, y:-1}, {x:+2, y:-2}, {x:+3, y:-3}, {x:+4, y:-4}, {x:+5, y:-5}, {x:+6, y:-6}, {x:+7, y:-7},{x:+8, y:-8},{x:+9, y:-9}],
+    sw: [{x:-1, y:-1}, {x:-2, y:-2}, {x:-3, y:-3}, {x:-4, y:-4}, {x:-5, y:-5}, {x:-6, y:-6}, {x:-7, y:-7},{x:-8, y:-8},{x:-9, y:-9}],
+    nw: [{x:-1, y:+1}, {x:-2, y:+2}, {x:-3, y:+3}, {x:-4, y:+4}, {x:-5, y:+5}, {x:-6, y:+6}, {x:-7, y:+7},{x:-8, y:+8},{x:-9, y:+9}]
+  };
+
+  var destination, move = null;
+
+  // Loop all moves
+  for (var group in transforms) {
+    for (var i=0; i<transforms[group].length; i++) {
+
+      // Get destination square for move
+      destination = transformSquare(square, transforms[group][i]);
+      if (!destination) { break; }
+
+      // If destination square is empty
+      if (board[destination] === null) {
+        move = {
+          type        : 'move',
+          pieceCode   : piece.substring(0,2),
+          startSquare : square,
+          endSquare   : destination
+        };
+       moves.push(move);
+      }
+      // If destination square is occupied by foe
+      else if (board[destination][0] !== piece[0]) {
+        move = {
+          type          : 'capture',
+          pieceCode     : piece.substring(0,2),
+          startSquare   : square,
+          endSquare     : destination,
+          captureSquare : destination
+        };
+        // if (includeUnsafe || isMoveSafe(move, board)) {
+          moves.push(move); //}
+        break;
+      }
+      // If destination square is occupied by friend
+      else {
+        break;
+      }
+    }
+  }
+
+  return moves;
+    }
+};
+
+var Queen = function(piece, square, board, lastMove, includeUnsafe){
+    this.getMoves = function(piece, square, board){
+        var moves = [];
 
     var transforms = {
         n: [{x:0, y:+1}, {x:0, y:+2}, {x:0, y:+3}, {x:0, y:+4}, {x:0, y:+5}, {x:0, y:+6}, {x:0, y:+7},
@@ -417,7 +540,7 @@ var getMovesForRook = function(piece, square, board, includeUnsafe) {
           startSquare : square,
           endSquare   : destination
         };
-        if (includeUnsafe || isMoveSafe(move, board)) { moves.push(move); }
+        moves.push(move);
       }
       // If destination square is occupied by foe
       else if (board[destination][0] !== piece[0]) {
@@ -428,7 +551,7 @@ var getMovesForRook = function(piece, square, board, includeUnsafe) {
           endSquare     : destination,
           captureSquare : destination
         };
-        if (includeUnsafe || isMoveSafe(move, board)) { moves.push(move); }
+        moves.push(move);
         break;
       }
       // If destination square is occupied by friend
@@ -439,108 +562,12 @@ var getMovesForRook = function(piece, square, board, includeUnsafe) {
   }
 
   return moves;
-};
-  
-  
-  var destination, move = null;
-
-  // Loop all moves
-  for (var group in transforms) {
-    for (var i=0; i<transforms[group].length; i++) {
-
-      // Get destination square for move
-      destination = transformSquare(square, transforms[group][i]);
-      if (!destination) { break; }
-
-      // If destination square is empty
-      if (board[destination] === null) {
-        move = {
-          type        : 'move',
-          pieceCode   : piece.substring(0,2),
-          startSquare : square,
-          endSquare   : destination
-        };
-        if (includeUnsafe || isMoveSafe(move, board)) { moves.push(move); }
-      }
-      // If destination square is occupied by foe
-      else if (board[destination][0] !== piece[0]) {
-        move = {
-          type          : 'capture',
-          pieceCode     : piece.substring(0,2),
-          startSquare   : square,
-          endSquare     : destination,
-          captureSquare : destination
-        };
-//        if (includeUnsafe || isMoveSafe(move, board)) {
-          moves.push(move);
-      //}
-        break;
-      }
-      // If destination square is occupied by friend
-      else {
-        break;
-      }
     }
-  }
-
-  return moves;
 };
 
-var getMovesForBishop = function(piece, square, board, includeUnsafe) {
-  var moves = [];
-
-  var transforms = {
-    ne: [{x:+1, y:+1}, {x:+2, y:+2}, {x:+3, y:+3}, {x:+4, y:+4}, {x:+5, y:+5}, {x:+6, y:+6}, {x:+7, y:+7},{x:+8, y:+8},{x:+9, y:+9}],
-    se: [{x:+1, y:-1}, {x:+2, y:-2}, {x:+3, y:-3}, {x:+4, y:-4}, {x:+5, y:-5}, {x:+6, y:-6}, {x:+7, y:-7},{x:+8, y:-8},{x:+9, y:-9}],
-    sw: [{x:-1, y:-1}, {x:-2, y:-2}, {x:-3, y:-3}, {x:-4, y:-4}, {x:-5, y:-5}, {x:-6, y:-6}, {x:-7, y:-7},{x:-8, y:-8},{x:-9, y:-9}],
-    nw: [{x:-1, y:+1}, {x:-2, y:+2}, {x:-3, y:+3}, {x:-4, y:+4}, {x:-5, y:+5}, {x:-6, y:+6}, {x:-7, y:+7},{x:-8, y:+8},{x:-9, y:+9}]
-  };
-
-  var destination, move = null;
-
-  // Loop all moves
-  for (var group in transforms) {
-    for (var i=0; i<transforms[group].length; i++) {
-
-      // Get destination square for move
-      destination = transformSquare(square, transforms[group][i]);
-      if (!destination) { break; }
-
-      // If destination square is empty
-      if (board[destination] === null) {
-        move = {
-          type        : 'move',
-          pieceCode   : piece.substring(0,2),
-          startSquare : square,
-          endSquare   : destination
-        };
-        if (includeUnsafe || isMoveSafe(move, board)) { moves.push(move); }
-      }
-      // If destination square is occupied by foe
-      else if (board[destination][0] !== piece[0]) {
-        move = {
-          type          : 'capture',
-          pieceCode     : piece.substring(0,2),
-          startSquare   : square,
-          endSquare     : destination,
-          captureSquare : destination
-        };
-        // if (includeUnsafe || isMoveSafe(move, board)) {
-          moves.push(move); //}
-        break;
-      }
-      // If destination square is occupied by friend
-      else {
-        break;
-      }
-    }
-  }
-
-  return moves;
-};
-
-var getMovesForKing = function(piece, square, board, includeUnsafe) {
-  var moves = [];
+var King = function(piece, square, board, includeUnsafe){
+    this.getMoves = function(piece, square, board){
+        var moves = [];
 
   var transforms = [
     {x:+0, y:+1},
@@ -571,7 +598,7 @@ var getMovesForKing = function(piece, square, board, includeUnsafe) {
         startSquare : square,
         endSquare   : destination
       };
-      if (includeUnsafe || isMoveSafe(move, board)) { moves.push(move); }
+     moves.push(move);
     }
     // If destination square is occupied by foe
     else if (board[destination][0] !== piece[0]) {
@@ -582,7 +609,7 @@ var getMovesForKing = function(piece, square, board, includeUnsafe) {
         endSquare     : destination,
         captureSquare : destination
       };
-      if (includeUnsafe || isMoveSafe(move, board)) { moves.push(move); }
+     moves.push(move);
     }
     // If destination square is occupied by friend
     else {
@@ -599,7 +626,7 @@ var getMovesForKing = function(piece, square, board, includeUnsafe) {
         pieceCode: 'wK',
         boardSide: 'king'
       };
-      if (includeUnsafe || isMoveSafe(move, board)) { moves.push(move); }
+      moves.push(move);
     }
     if (board.e1 === 'wK_' && board.a1 === 'wR_' && board.b1 === null && board.c1 === null && board.d1 === null) {
       move = {
@@ -607,7 +634,7 @@ var getMovesForKing = function(piece, square, board, includeUnsafe) {
         pieceCode: 'wK',
         boardSide: 'queen'
       };
-      if (includeUnsafe || isMoveSafe(move, board)) { moves.push(move); }
+      moves.push(move);
     }
   }
 
@@ -618,7 +645,7 @@ var getMovesForKing = function(piece, square, board, includeUnsafe) {
         pieceCode: 'bK',
         boardSide: 'king'
       };
-      if (includeUnsafe || isMoveSafe(move, board)) { moves.push(move); }
+     moves.push(move);
     }
     if (board.e8 === 'bK_' && board.a8 === 'bR_' && board.b8 === null && board.c8 === null && board.d8 === null) {
       move = {
@@ -626,11 +653,85 @@ var getMovesForKing = function(piece, square, board, includeUnsafe) {
         pieceCode: 'bK',
         boardSide: 'queen'
       };
-      if (includeUnsafe || isMoveSafe(move, board)) { moves.push(move); }
+    moves.push(move);
     }
   }
 
   return moves;
+    }
+};
+
+function getMovesForPlayer(){
+    var moves = [];
+    var piece, square = null;
+    var pawn = new Pawn();
+    var rook = new Rook();
+    var knight = new Knight();
+    var bishop = new Bishop();
+    var queen = new Queen();
+    var king = new King();
+
+    var playerMoves = new PlayerMoves();
+
+    console.log("inside move generation");
+    // Loop board
+     for (square in board) {
+       piece = board[square];
+
+       // Skip empty squares and opponent's pieces
+       if (piece === null) {
+          continue;
+      }
+/*      if (piece[0] !== 's') {
+          // don't eveluate moves dor static players
+          continue;
+      }
+ */
+       if (square !== null) {
+          // Collect all moves for all of player's pieces
+          switch (piece[1]) {
+              case 'P':
+                  if(square!==null){
+                      playerMoves.setStrategy(pawn);
+                      moves.push.apply(moves, playerMoves.getMoves(piece, square, board));
+                  }
+                  break;
+              case 'R':
+                  if(square!==null){
+                      playerMoves.setStrategy(rook);
+                      moves.push.apply(moves, playerMoves.getMoves(piece, square, board));
+                  }
+                  break;
+              case 'N':
+                  if(square!==null){
+                      playerMoves.setStrategy(knight);
+                      moves.push.apply(moves, playerMoves.getMoves(piece, square, board));
+                  }
+                  break;
+              case 'B':
+                  if(square!==null){
+                      playerMoves.setStrategy(bishop);
+                      moves.push.apply(moves, playerMoves.getMoves(piece, square, board));
+                  }
+                  break;
+              case 'Q':
+                  if(square!==null){
+                      playerMoves.setStrategy(queen);
+                      moves.push.apply(moves, playerMoves.getMoves(piece, square, board));
+                  }
+                  break;
+              case 'K':
+                  if(square!==null){
+                      playerMoves.setStrategy(king);
+                      moves.push.apply(moves, playerMoves.getMoves(piece, square, board));
+                  }
+                  break;
+          }
+      }
+  }
+
+  return moves;
+    
 };
 
 var transformSquare = function(square, transform) {
