@@ -14,9 +14,13 @@ block content
       #opponent.player-info
         strong ...
         span.status.pull-right
-        ul.captured-pieces.list-inline
-        h3#clock 
-        h3#timer1 timer(black) 
+       ul.captured-pieces.list-inline
+
+      h3(style='display:inline')#clock 
+      h4(style='display:inline') &nbsp;&nbsp;&nbsp;
+      h4(style='display:inline')#timer1 
+      
+    .col-md-9    
       table#board
         tr
           td.top-left-corner
