@@ -883,5 +883,3 @@ var transformSquare = function(square, transform) {
 
 // Export the game object
 module.exports = Game;
-
-
