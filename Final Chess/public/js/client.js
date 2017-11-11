@@ -281,7 +281,7 @@ var Client = (function(window) {
     });
   };
   
-    var move = function(destinationSquare) {
+var move = function(destinationSquare) {
     var piece = selection.color+selection.piece;
     var src   = $('#'+selection.file+selection.rank);
     var dest  = $(destinationSquare);
@@ -330,6 +330,9 @@ var Client = (function(window) {
           default:
               break;
       }
+      // Return move string
+    return piece+selection.file+selection.rank+'-'+dest.attr('id');
+  };
 
  var capture = function(destinationSquare) {
     var piece = selection.color+selection.piece;
@@ -385,14 +388,104 @@ var Client = (function(window) {
               break;
       }
 
-
-
     // Return move string
     return piece+selection.file+selection.rank+'x'+dest.attr('id');
   };
-
-    // Return move string
-    return piece+selection.file+selection.rank+'-'+dest.attr('id');
-  };
  
+var update = function() {
+    var you, opponent = null;
+
+    var container, name, status, captures = null;
+
+    // Update player info
+    for (var i=0; i<gameState.players.length; i++) {
+
+      // Determine if player is you or opponent
+      if (gameState.players[i].color === playerColor) {
+        you = gameState.players[i];
+        container = $('#you');
+      }
+      else if (gameState.players[i].color !== playerColor) {
+        opponent = gameState.players[i];
+        container = $('#opponent');
+      }
+
+      name     = container.find('strong');
+      status   = container.find('.status');
+      captures = container.find('ul');
+
+      // Name
+      if (gameState.players[i].color) {
+        name.text(gameState.players[i].color);
+      }
+
+      // Active Status
+      container.removeClass('active-player');
+      if (gameState.activePlayer && gameState.activePlayer.color === gameState.players[i].color) {
+        container.addClass('active-player');
+      }
+
+      // Check Status
+      status.removeClass('label label-danger').text('');
+      if (gameState.players[i].inCheck) {
+        status.addClass('label label-danger').text('Check');
+      }
+
+      // Captured Pieces
+      captures.empty();
+      for (var j=0; j<gameState.capturedPieces.length; j++) {
+        if (gameState.capturedPieces[j][0] !== gameState.players[i].color[0]) {
+          captures.append('<li class="'+getPieceClasses(gameState.capturedPieces[j])+'"></li>');
+        }
+      }
+    }
+
+    // Update board
+    for (var sq in gameState.board) {
+      $('#'+sq).removeClass(gameClasses).addClass(getPieceClasses(gameState.board[sq]));
+    }
+
+    // Highlight last move
+    if (gameState.lastMove) {
+      if (gameState.lastMove.type === 'move' || gameState.lastMove.type === 'capture') {
+        $('#'+gameState.lastMove.startSquare).addClass('last-move');
+        $('#'+gameState.lastMove.endSquare).addClass('last-move');
+      }
+      else if (gameState.lastMove.type === 'castle') {
+        if (gameState.lastMove.pieceCode === 'wK' && gameState.lastMove.boardSide === 'queen') {
+          $('#e1').addClass('last-move');
+          $('#c1').addClass('last-move');
+        }
+        if (gameState.lastMove.pieceCode === 'wK' && gameState.lastMove.boardSide === 'king') {
+          $('#e1').addClass('last-move');
+          $('#g1').addClass('last-move');
+        }
+        if (gameState.lastMove.pieceCode === 'bK' && gameState.lastMove.boardSide === 'queen') {
+          $('#e8').addClass('last-move');
+          $('#c8').addClass('last-move');
+        }
+        if (gameState.lastMove.pieceCode === 'bK' && gameState.lastMove.boardSide === 'king') {
+          $('#e8').addClass('last-move');
+          $('#g8').addClass('last-move');
+        }
+      }
+    }
+
+    // Test for checkmate
+    if (gameState.status === 'checkmate') {
+      if (opponent.inCheck) { showGameOverMessage('checkmate-win');  }
+      if (you.inCheck)      { showGameOverMessage('checkmate-lose'); }
+    }
+
+    // Test for stalemate
+    if (gameState.status === 'stalemate') { showGameOverMessage('stalemate'); }
+
+    // Test for forfeit
+    if (gameState.status === 'forfeit') {
+      if (opponent.forfeited) { showGameOverMessage('forfeit-win');  }
+      if (you.forfeited)      { showGameOverMessage('forfeit-lose'); }
+    }
+  };
+      
+      
   
