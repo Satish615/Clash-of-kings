@@ -1,5 +1,10 @@
 Implemented by Venkata Deviprasad Sura
 
+Respect week 7: All team memebers work is integrated and taken care,Everyone is properly communicated and inputs are taken from anyone for any modifications
+To be done:
+Review final
+
+Implementing Javascript patterns on our completed code.
 
 Respect week  6:
 All team memebers planned events are completed and taken care, every ones review is considered.
