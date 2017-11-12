@@ -95,6 +95,7 @@ https://github.com/nguyensjsu/cmpe202-fivestars/issues/18
 
 Week #4 :
 --------
+
 Chess Board & Chess Moves Implementation by the end of this week-
 
 ![](https://github.com/nguyensjsu/cmpe202-fivestars/blob/master/Chess_Screenshot.png)
@@ -162,6 +163,7 @@ State: https://github.com/nguyensjsu/cmpe202-fivestars/issues/34
 
 Week #7:
 --------
+
 Timer for each player to be shown on his window:
 
 https://github.com/nguyensjsu/cmpe202-fivestars/issues/28
