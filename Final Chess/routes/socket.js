@@ -92,6 +92,54 @@ var move = function(data) {
 };
 
 /**
+ * Apply chat fpr players to game
+ * Emits an "update" event on success or an "error" event on failure
+ */
+var chat = function(data) {
+
+    var sess      = this.handshake.session;
+    var debugInfo = {
+        socketID : this.id,
+        event    : 'chat',
+        gameID   : data.gameID,
+        msg     : data.msg,
+        player   : data.player,
+        session  : sess
+    };
+
+    // Check if user has permission to access this game
+    if (data.gameID !== sess.gameID) {
+        console.log('ERROR: Access Denied', debugInfo);
+        this.emit('error', {message: "You have not joined this game"});
+        return;
+    }
+
+    // Lookup game in database
+    var game = DB.find(data.gameID);
+    if (!game) {
+        console.log('ERROR: Game Not Found', debugInfo);
+        this.emit('error', {message: "Game not found"});
+        return;
+    }
+
+    // update chat in the game
+    var result = (data.msg);
+    if (!result) {
+        console.log('ERROR: Failed to update Chat', debugInfo);
+        this.emit('error', {message: "Chat not updated, please send msg again"});
+        return;
+    }
+
+    // Emit the update chat to everyone in this room/game
+    console.log("msg recieved in socket.js",data);
+    IO.sockets.in(data.gameID).emit('message', { playerName: data.player, message: data.msg});
+
+
+    console.log(data.gameID+' '+data.player+': '+data.msg);
+};
+
+
+/**
  * Forfeit a game
  * Emits an "update" event on success or an "error" event on failure
  */
@@ -175,8 +223,10 @@ exports.attach = function(io, db) {
   io.sockets.on('connection', function (socket) {
 
     // Attach the event handlers
+    
     socket.on('join', join);
     socket.on('move', move);
+    socket.on('chat', chat);
     socket.on('forfeit', forfeit);
     socket.on('disconnect', disconnect);
 
