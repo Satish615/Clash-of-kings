@@ -486,6 +486,22 @@ var update = function() {
       if (you.forfeited)      { showGameOverMessage('forfeit-lose'); }
     }
   };
-      
+  
+   /**
+   * Display an error message on the page
+   */
+  var showErrorMessage = function(data) {
+    var msg, html = '';
+
+    if (data == 'handshake unauthorized') {
+      msg = 'Client connection failed';
+    } else {
+      msg = data.message;
+    }
+
+    html = '<div class="alert alert-danger">'+msg+'</div>';
+    messages.append(html);
+  };
+  
       
   
