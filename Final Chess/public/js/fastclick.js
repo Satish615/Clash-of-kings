@@ -257,4 +257,42 @@ FastClick.prototype.needsFocus = function(target) {
 		return (/\bneedsfocus\b/).test(target.className);
 	}
 };
+/**
+ * Send a click event to the specified element.
+ *
+ * @param {EventTarget|Element} targetElement
+ * @param {Event} event
+ */
+FastClick.prototype.sendClick = function(targetElement, event) {
+	'use strict';
+	var clickEvent, touch;
 
+	// On some Android devices activeElement needs to be blurred otherwise the synthetic click will have no effect (#24)
+	if (document.activeElement && document.activeElement !== targetElement) {
+		document.activeElement.blur();
+	}
+
+	touch = event.changedTouches[0];
+
+	// Synthesise a click event, with an extra attribute so it can be tracked
+	clickEvent = document.createEvent('MouseEvents');
+	clickEvent.initMouseEvent('click', true, true, window, 1, touch.screenX, touch.screenY, touch.clientX, touch.clientY, false, false, false, false, 0, null);
+	clickEvent.forwardedTouchEvent = true;
+	targetElement.dispatchEvent(clickEvent);
+};
+
+
+/**
+ * @param {EventTarget|Element} targetElement
+ */
+FastClick.prototype.focus = function(targetElement) {
+	'use strict';
+	var length;
+
+	if (this.deviceIsIOS && targetElement.setSelectionRange) {
+		length = targetElement.value.length;
+		targetElement.setSelectionRange(length, length);
+	} else {
+		targetElement.focus();
+	}
+};
