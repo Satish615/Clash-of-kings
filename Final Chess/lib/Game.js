@@ -665,7 +665,7 @@ var King = function(piece, square, board, includeUnsafe){
     }
 };
 
-function getMovesForPlayer(){
+function getMovesForPlayer(board){
     var moves = [];
     var piece, square = null;
     var pawn = new Pawn();
