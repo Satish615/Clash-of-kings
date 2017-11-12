@@ -37,3 +37,8 @@ Tasks done in this week:
 Shiva has created timer function for the players after each move , Feedback is to create functions to display the timer on the front end for players to see.
 Satish has created a multiplayer chat feedback is reduce the chatbox size so that it fits the screen size beside chess board.
 
+Tasks to be done in This week:
+To implement kills for each player with static pieces and other players.
+To implement the logic for assigning players to boards available.
+To redesign the home page for player joining the game.
+
