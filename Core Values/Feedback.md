@@ -34,4 +34,6 @@ To create timers after each player move so that player can be static.
 
 week 7:
 Tasks done in this week:
-Feedback is to create functions to display the timer on the front end for players to see.
+Shiva has created timer function for the players after each move , Feedback is to create functions to display the timer on the front end for players to see.
+Satish has created a multiplayer chat feedback is reduce the chatbox size so that it fits the screen size beside chess board.
+
