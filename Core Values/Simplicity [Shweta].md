@@ -28,6 +28,10 @@ Following are the steps I took to make sure simplicity in our project:
   * Using multi-color players as static players so that it is simple for players to distinguish. 
   * Displaying timer on game screen for all the players, so that it is easy for all the players to understand when they can       make a move.
   
+8. 8th week
+  * Along with timer, displayed text to make it simple for players to understand. 
+  * Added the functionality to chat with other players so that players can communicate with each other.
+  
 
   
    
