@@ -1,3 +1,24 @@
+Week #8:
+
+Attendees - Shiva,Satish,Akansha,Devi,Shweta
+
+What did team do last week?
+- Completed timer display on the board for each player.
+- Completed the static players acquisition and display.
+- Completed the chatting functionality between various players.
+
+What are challenges:
+- Acquisition of static players and state change accordingly. 
+- The timer is not accurate.
+
+Discussion held:
+
+- Discussed how to improve game usability. 
+- Discussed how to make game error-free.
+- discussed display of timer accurately.
+
+
+
 Week #7:
 
 Attendees - Shiva,Satish,Akansha,Devi,Shweta
