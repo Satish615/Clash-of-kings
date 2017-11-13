@@ -203,6 +203,13 @@ State Pattern :
 
 https://github.com/nguyensjsu/cmpe202-fivestars/issues/34
 
+UI Wireframe Diagram :
+
+https://github.com/nguyensjsu/cmpe202-fivestars/issues/39
+
+Server Side functionalities :
+
+https://github.com/nguyensjsu/cmpe202-fivestars/issues/36
 
 
 
