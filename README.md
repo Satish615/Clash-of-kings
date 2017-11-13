@@ -190,6 +190,20 @@ Add functions to highlight valid moves for all colour players :
 
 https://github.com/nguyensjsu/cmpe202-fivestars/issues/35
 
+Week #8:
+--------
+
+Remaining Design patterns to be implemented :
+
+Decorator Pattern :
+
+https://github.com/nguyensjsu/cmpe202-fivestars/issues/33
+
+State Pattern :
+
+https://github.com/nguyensjsu/cmpe202-fivestars/issues/34
+
+
 
 
 
