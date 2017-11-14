@@ -203,13 +203,17 @@ State Pattern :
 
 https://github.com/nguyensjsu/cmpe202-fivestars/issues/34
 
-UI Wireframe Diagram :
+Sequence Diagram :
 
-https://github.com/nguyensjsu/cmpe202-fivestars/issues/39
+https://github.com/nguyensjsu/cmpe202-fivestars/issues/29
 
 Activity Diagram :
 
 https://github.com/nguyensjsu/cmpe202-fivestars/blob/master/UML%20Diagrams/UML%20Activity%20diagram.PNG
+
+UI Wireframe Diagram :
+
+https://github.com/nguyensjsu/cmpe202-fivestars/issues/39
 
 Server Side functionalities :
 
