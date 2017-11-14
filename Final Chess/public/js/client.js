@@ -334,21 +334,19 @@ var move = function(destinationSquare) {
     return piece+selection.file+selection.rank+'-'+dest.attr('id');
   };
 
- var capture = function(destinationSquare) {
-    var piece = selection.color+selection.piece;
-    var src   = $('#'+selection.file+selection.rank);
-    var dest  = $(destinationSquare);
+  /**
+   * Move selected piece to destination square and capture an opponents piece
+   */
+  var capture = function(destinationSquare) {
+      var src   = $('#'+selection.file+selection.rank);
+      var dest  = $(destinationSquare);
+      var piece = selection.color+selection.piece;
+      var destPiece = gameState.board[dest.attr('id')];
+      clearHighlights();
 
-    clearHighlights();
-
-    // Move piece on board
-    src.removeClass(getPieceClasses(piece)).addClass('empty');
-    /*if(selection.color === "w" ){
-      dest_color = "b"
-    }*/
-    dest.removeClass(gameClasses);
-        //.addClass(getPieceClasses(dest_color+selection.piece));
-      //addClass(getPieceClasses(piece));
+      // Move piece on board
+      src.removeClass(getPieceClasses()).addClass('empty');
+      dest.removeClass(gameClasses).addClass(getPieceClasses(selection.color+gameState.board[dest.attr('id')].substring(1,2)));
 
       //disable and call timer
       switch (selection.color) {
@@ -388,8 +386,10 @@ var move = function(destinationSquare) {
               break;
       }
 
-    // Return move string
-    return piece+selection.file+selection.rank+'x'+dest.attr('id');
+
+
+      // Return move string
+      return piece+selection.file+selection.rank+'x'+dest.attr('id');
   };
  
 var update = function() {
