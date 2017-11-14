@@ -504,59 +504,43 @@ var update = function() {
   };
   
      
-  
-    var getPieceClasses = function(piece) {
-    switch (piece) {
-      case 'bP'  : return 'black pawn';
-      case 'bP_' : return 'black pawn not-moved';
-      case 'bR'  : return 'black rook';
-      case 'bR_' : return 'black rook not-moved';
-      case 'bN'  : return 'black knight';
-      case 'bN_' : return 'black knight not-moved';
-      case 'bB'  : return 'black bishop';
-      case 'bB_' : return 'black bishop not-moved';
-      case 'bQ'  : return 'black queen';
-      case 'bQ_' : return 'black queen not-moved';
-      case 'bK'  : return 'black king';
-      case 'bK_' : return 'black king not-moved';
-      case 'wP'  : return 'white pawn';
-      case 'wP_' : return 'white pawn not-moved';
-      case 'wR'  : return 'white rook';
-      case 'wR_' : return 'white rook not-moved';
-      case 'wN'  : return 'white knight';
-      case 'wN_' : return 'white knight not-moved';
-      case 'wB'  : return 'white bishop';
-      case 'wB_' : return 'white bishop not-moved';
-      case 'wQ'  : return 'white queen';
-      case 'wQ_' : return 'white queen not-moved';
-      case 'wK'  : return 'white king';
-      case 'wK_' : return 'white king not-moved';
-        case 'rP'  : return 'red pawn';
-        case 'rP_' : return 'red pawn not-moved';
-        case 'rR'  : return 'red rook';
-        case 'rR_' : return 'red rook not-moved';
-        case 'rN'  : return 'red knight';
-        case 'rN_' : return 'red knight not-moved';
-        case 'rB'  : return 'red bishop';
-        case 'rB_' : return 'red bishop not-moved';
-        case 'rQ'  : return 'red queen';
-        case 'rQ_' : return 'red queen not-moved';
-        case 'rK'  : return 'red king';
-        case 'rK_' : return 'red king not-moved';
-        case 'yP'  : return 'yellow pawn';
-        case 'yP_' : return 'yellow pawn not-moved';
-        case 'yR'  : return 'yellow rook';
-        case 'yR_' : return 'yellow rook not-moved';
-        case 'yN'  : return 'yellow knight';
-        case 'yN_' : return 'yellow knight not-moved';
-        case 'yB'  : return 'yellow bishop';
-        case 'yB_' : return 'yellow bishop not-moved';
-        case 'yQ'  : return 'yellow queen';
-        case 'yQ_' : return 'yellow queen not-moved';
-        case 'yK'  : return 'yellow king';
-        case 'yK_' : return 'yellow king not-moved';
-      default    : return 'empty';
-    }
+ /**
+   * Get the corresponding CSS classes for a given piece
+   */
+  var getPieceClasses = function(piece) {
+      switch (piece) {
+          case 'bP'  : return 'black pawn';
+          case 'bR'  : return 'black rook';
+          case 'bN'  : return 'black knight';
+          case 'bB'  : return 'black bishop';
+          case 'bQ'  : return 'black queen';
+          case 'bK'  : return 'black king';
+          case 'wP'  : return 'white pawn';
+          case 'wR'  : return 'white rook';
+          case 'wN'  : return 'white knight';
+          case 'wB'  : return 'white bishop';
+          case 'wQ'  : return 'white queen';
+          case 'wK'  : return 'white king';
+          case 'rP'  : return 'red pawn';
+          case 'rR'  : return 'red rook';
+          case 'rN'  : return 'red knight';
+          case 'rB'  : return 'red bishop';
+          case 'rQ'  : return 'red queen';
+          case 'rK'  : return 'red king';
+          case 'sP'  : return 'static pawn';
+          case 'sR'  : return 'static rook';
+          case 'sN'  : return 'static knight';
+          case 'sB'  : return 'static bishop';
+          case 'sQ'  : return 'static queen';
+          case 'sK'  : return 'static king';
+          case 'yP'  : return 'yellow pawn';
+          case 'yR'  : return 'yellow rook';
+          case 'yN'  : return 'yellow knight';
+          case 'yB'  : return 'yellow bishop';
+          case 'yQ'  : return 'yellow queen';
+          case 'yK'  : return 'yellow king';
+          default    : return 'empty';
+      }
   };
 
   
