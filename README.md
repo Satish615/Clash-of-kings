@@ -207,6 +207,10 @@ UI Wireframe Diagram :
 
 https://github.com/nguyensjsu/cmpe202-fivestars/issues/39
 
+Activity Diagram :
+
+https://github.com/nguyensjsu/cmpe202-fivestars/blob/master/UML%20Diagrams/UML%20Activity%20diagram.PNG
+
 Server Side functionalities :
 
 https://github.com/nguyensjsu/cmpe202-fivestars/issues/36
