@@ -82,6 +82,7 @@ var Client = (function(window) {
     var countdown_svg = document.getElementById('countdown-svg').style;
     var countdown_number = document.getElementById('countdown-number').style;
     var countdown_svg_circle = document.getElementById('countdown-svg-circle').style;
+    var timer_text = document.getElementById("timer_text");
 
 
   /**
@@ -478,11 +479,11 @@ var Client = (function(window) {
                   countdown_svg.visibility = 'visible';
                   countdown_number.visibility = 'visible';
                   countdown_svg_circle.animationPlayState = 'running';
-                  document.getElementById("timer_text").textContent= "Wait for 5 seconds before making next move!";
+                  timer_text.textContent= "Wait for 5 seconds before making next move!";
                   console.log(wActive);
                   setTimeout(function () {
                       wActive = true;
-                      document.getElementById("timer_text").textContent= "You can move now !!";
+                      timer_text.textContent= "You can move now !!";
                       countdown_svg.visibility ='hidden';
                       countdown_svg_circle.animationPlayState= 'paused';
                       countdown_number.visibility='hidden';
@@ -490,49 +491,73 @@ var Client = (function(window) {
                   }, 5000);
               break;
           case 'b':
-                console.log(selection.color);
-                bActive = false;
-                $('#timer1').text("Wait for 4 seconds before making a move!");
-                console.log(wActive);
-                ctoday = new Date();
-                bch = ctoday.getHours();
-                bcm = ctoday.getMinutes();
-                bcs = ctoday.getSeconds();
-                bcms = ctoday.getMilliseconds();
-                setTimeout(function () {
-                    bActive = true;
-                    $('#timer1').text("You can move now");
-              }, 3000);
+              console.log(selection.color);
+              bActive = false;
+              var countdown = 5;
+              countdownNumberEl.textContent = countdown;
+              var timer = setInterval(function() {
+                  countdown = --countdown <= 0 ? 5 : countdown;
+                  countdownNumberEl.textContent = countdown;
+              }, 1000);
+              countdown_svg.visibility = 'visible';
+              countdown_number.visibility = 'visible';
+              countdown_svg_circle.animationPlayState = 'running';
+              timer_text.textContent= "Wait for 5 seconds before making next move!";
+              console.log(wActive);
+              setTimeout(function () {
+                  bActive = true;
+                  timer_text.textContent= "You can move now !!";
+                  countdown_svg.visibility ='hidden';
+                  countdown_svg_circle.animationPlayState= 'paused';
+                  countdown_number.visibility='hidden';
+                  clearInterval(timer);
+              }, 5000);
               break;
           case 'y':
-                console.log(selection.color);
-                bActive = false;
-                $('#timer1').text("Wait for 4 seconds before making a move!");
-                console.log(wActive);
-                ctoday = new Date();
-                ych = ctoday.getHours();
-                ycm = ctoday.getMinutes();
-                ycs = ctoday.getSeconds();
-                ycms = ctoday.getMilliseconds();
-                setTimeout(function () {
-                    yActive = true;
-                    $('#timer1').text("You can move now");
-              }, 3000);
+              console.log(selection.color);
+              yActive = false;
+              var countdown = 5;
+              countdownNumberEl.textContent = countdown;
+              var timer = setInterval(function() {
+                  countdown = --countdown <= 0 ? 5 : countdown;
+                  countdownNumberEl.textContent = countdown;
+              }, 1000);
+              countdown_svg.visibility = 'visible';
+              countdown_number.visibility = 'visible';
+              countdown_svg_circle.animationPlayState = 'running';
+              timer_text.textContent= "Wait for 5 seconds before making next move!";
+              console.log(wActive);
+              setTimeout(function () {
+                  yActive = true;
+                  timer_text.textContent= "You can move now !!";
+                  countdown_svg.visibility ='hidden';
+                  countdown_svg_circle.animationPlayState= 'paused';
+                  countdown_number.visibility='hidden';
+                  clearInterval(timer);
+              }, 5000);
               break;
           case 'r':
-                console.log(selection.color);
-                bActive = false;
-                $('#timer1').text("Wait for 4 seconds before making a move!");
-                console.log(wActive);
-                ctoday = new Date();
-                rch = ctoday.getHours();
-                rcm = ctoday.getMinutes();
-                rcs = ctoday.getSeconds();
-                rcms = ctoday.getMilliseconds();
-                setTimeout(function () {
-                    rActive = true;
-                    $('#timer1').text("You can move now");
-              }, 3000);
+              console.log(selection.color);
+              rActive = false;
+              var countdown = 5;
+              countdownNumberEl.textContent = countdown;
+              var timer = setInterval(function() {
+                  countdown = --countdown <= 0 ? 5 : countdown;
+                  countdownNumberEl.textContent = countdown;
+              }, 1000);
+              countdown_svg.visibility = 'visible';
+              countdown_number.visibility = 'visible';
+              countdown_svg_circle.animationPlayState = 'running';
+              timer_text.textContent= "Wait for 5 seconds before making next move!";
+              console.log(wActive);
+              setTimeout(function () {
+                  rActive = true;
+                  timer_text.textContent= "You can move now !!";
+                  countdown_svg.visibility ='hidden';
+                  countdown_svg_circle.animationPlayState= 'paused';
+                  countdown_number.visibility='hidden';
+                  clearInterval(timer);
+              }, 5000);
               break;
           default:
               break;
@@ -562,40 +587,98 @@ var Client = (function(window) {
           case 'w':
               console.log(selection.color);
               wActive = false;
+              var countdown = 5;
+              countdownNumberEl.textContent = countdown;
+              var timer = setInterval(function() {
+                  countdown = --countdown <= 0 ? 5 : countdown;
+                  countdownNumberEl.textContent = countdown;
+              }, 1000);
+              countdown_svg.visibility = 'visible';
+              countdown_number.visibility = 'visible';
+              countdown_svg_circle.animationPlayState = 'running';
+              timer_text.textContent= "Wait for 5 seconds before making next move!";
               console.log(wActive);
               setTimeout(function () {
                   wActive = true;
-              }, 4000);
+                  timer_text.textContent= "You can move now !!";
+                  countdown_svg.visibility ='hidden';
+                  countdown_svg_circle.animationPlayState= 'paused';
+                  countdown_number.visibility='hidden';
+                  clearInterval(timer);
+              }, 5000);
               break;
           case 'b':
               console.log(selection.color);
               bActive = false;
+              var countdown = 5;
+              countdownNumberEl.textContent = countdown;
+              var timer = setInterval(function() {
+                  countdown = --countdown <= 0 ? 5 : countdown;
+                  countdownNumberEl.textContent = countdown;
+              }, 1000);
+              countdown_svg.visibility = 'visible';
+              countdown_number.visibility = 'visible';
+              countdown_svg_circle.animationPlayState = 'running';
+              timer_text.textContent= "Wait for 5 seconds before making next move!";
               console.log(wActive);
               setTimeout(function () {
                   bActive = true;
-              }, 4000);
+                  timer_text.textContent= "You can move now !!";
+                  countdown_svg.visibility ='hidden';
+                  countdown_svg_circle.animationPlayState= 'paused';
+                  countdown_number.visibility='hidden';
+                  clearInterval(timer);
+              }, 5000);
               break;
           case 'y':
               console.log(selection.color);
               yActive = false;
+              var countdown = 5;
+              countdownNumberEl.textContent = countdown;
+              var timer = setInterval(function() {
+                  countdown = --countdown <= 0 ? 5 : countdown;
+                  countdownNumberEl.textContent = countdown;
+              }, 1000);
+              countdown_svg.visibility = 'visible';
+              countdown_number.visibility = 'visible';
+              countdown_svg_circle.animationPlayState = 'running';
+              timer_text.textContent= "Wait for 5 seconds before making next move!";
               console.log(wActive);
               setTimeout(function () {
                   yActive = true;
-              }, 4000);
+                  timer_text.textContent= "You can move now !!";
+                  countdown_svg.visibility ='hidden';
+                  countdown_svg_circle.animationPlayState= 'paused';
+                  countdown_number.visibility='hidden';
+                  clearInterval(timer);
+              }, 5000);
               break;
           case 'r':
               console.log(selection.color);
               rActive = false;
+              var countdown = 5;
+              countdownNumberEl.textContent = countdown;
+              var timer = setInterval(function() {
+                  countdown = --countdown <= 0 ? 5 : countdown;
+                  countdownNumberEl.textContent = countdown;
+              }, 1000);
+              countdown_svg.visibility = 'visible';
+              countdown_number.visibility = 'visible';
+              countdown_svg_circle.animationPlayState = 'running';
+              timer_text.textContent= "Wait for 5 seconds before making next move!";
               console.log(wActive);
               setTimeout(function () {
                   rActive = true;
-              }, 4000);
+                  timer_text.textContent= "You can move now !!";
+                  countdown_svg.visibility ='hidden';
+                  countdown_svg_circle.animationPlayState= 'paused';
+                  countdown_number.visibility='hidden';
+                  clearInterval(timer);
+              }, 5000);
               break;
           default:
               break;
       }
-
-
 
       // Return move string
       return piece+selection.file+selection.rank+'x'+dest.attr('id');
@@ -656,33 +739,6 @@ var Client = (function(window) {
     for (var sq in gameState.board) {
       $('#'+sq).removeClass(gameClasses).addClass(getPieceClasses(gameState.board[sq]));
     }
-    /*
-    // Highlight last move
-    if (gameState.lastMove) {
-      if (gameState.lastMove.type === 'move' || gameState.lastMove.type === 'capture') {
-        $('#'+gameState.lastMove.startSquare).addClass('last-move');
-        $('#'+gameState.lastMove.endSquare).addClass('last-move');
-      }
-      else if (gameState.lastMove.type === 'castle') {
-        if (gameState.lastMove.pieceCode === 'wK' && gameState.lastMove.boardSide === 'queen') {
-          $('#e1').addClass('last-move');
-          $('#c1').addClass('last-move');
-        }
-        if (gameState.lastMove.pieceCode === 'wK' && gameState.lastMove.boardSide === 'king') {
-          $('#e1').addClass('last-move');
-          $('#g1').addClass('last-move');
-        }
-        if (gameState.lastMove.pieceCode === 'bK' && gameState.lastMove.boardSide === 'queen') {
-          $('#e8').addClass('last-move');
-          $('#c8').addClass('last-move');
-        }
-        if (gameState.lastMove.pieceCode === 'bK' && gameState.lastMove.boardSide === 'king') {
-          $('#e8').addClass('last-move');
-          $('#g8').addClass('last-move');
-        }
-      }
-    }
-    */
   };
 
   /**
