@@ -123,15 +123,15 @@ var joinGame = function(req, res) {
   req.session.regenerate(function(err) {
     if (err) { res.redirect('/'); return; }
 
-  
     // Validate form input
     var validData = validateJoinGame(req);
     if (!validData) { res.redirect('/'); return; }
-    
+
     // Find specified game
     var game = DB.find(validData.gameID);
     if (!game) { res.redirect('/'); return;}
-      // Determine which player (color) to join as
+
+    // Determine which player (color) to join as
     var joinColor ;
       if(game.players[0].joined)
       joinColor= game.players[1].color;
@@ -150,7 +150,6 @@ if(!game.players[0].joined)
     res.redirect('/game/'+validData.gameID);
   });
 };
-
 
 /**
  * Redirect non-existent routes to the home page
