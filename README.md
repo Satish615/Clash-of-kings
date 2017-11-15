@@ -221,6 +221,10 @@ https://github.com/nguyensjsu/cmpe202-fivestars/issues/36
 
 
 
+Please use the final chess folder for the code,use npm start to run the game
+
+
+
 
 
 
