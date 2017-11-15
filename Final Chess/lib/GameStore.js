@@ -1,5 +1,6 @@
 var Game = require('./Game');
 
+
 function GameStore() {
   this.games = {};
 
