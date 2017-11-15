@@ -68,7 +68,6 @@ var Client = (function(window) {
     // Attach event handlers
     attachDOMEventHandlers();
     attachSocketEventHandlers();
-    startTime();
     // Initialize modal popup windows
    // gameOverMessage.modal({show: false, keyboard: false, backdrop: 'static'});
    // pawnPromotionPrompt.modal({show: false, keyboard: false, backdrop: 'static'});
@@ -80,75 +79,9 @@ var Client = (function(window) {
 
 
     var countdownNumberEl = document.getElementById('countdown-number');
-
-
-  /*
-    timer code to get current time and then subtract and show on the game.jade file
-  */
-
-  var startTime = function() {
-     today = new Date();
-     h = today.getHours();
-     m = today.getMinutes();
-     s = today.getSeconds();
-     ms = today.getMilliseconds();
-    // add a zero in front of numbers<10
-    m = checkTime(m);
-    s = checkTime(s);
-    ms = checkTime(ms);
-
-   
-    $('#clock').text(wdh + ":" + wdm + ":" + wds+ ":" + wdms);
-
-    if (playerColor === 'white' && !wActive)
-    {
-      wdh = (h - wch + 24)%24;
-      wdm = (m - wcm + 60)%60;
-      wds = (s - wcs + 60)%60;
-      wdms = (ms - wcms + 1000)%1000;
-      $('#clock').text(wdh + ":" + wdm + ":" + wds+ ":" + wdms);
-    }
-    
-    if (playerColor === 'black' && !bActive)
-    {
-      bdh = (h - bch + 24)%24;
-      bdm = (m - bcm + 60)%60;
-      bds = (s - bcs + 60)%60;
-      bdms = (ms - bcms + 1000)%1000;
-      $('#clock').text(bdh + ":" + bdm + ":" + bds+ ":" + bdms);
-    }
-
-    if (playerColor === 'yellow' && !yActive)
-    {
-      ydh = (h - ych + 24)%24;
-      ydm = (m - ycm + 60)%60;
-      yds = (s - ycs + 60)%60;
-      ydms = (ms - ycms + 1000)%1000;
-      $('#clock').text(ydh + ":" + ydm + ":" + yds+ ":" + ydms);
-    }
-
-    if (playerColor === 'red' && !rActive)
-    {
-      rdh = (h - rch + 24)%24;
-      rdm = (m - rcm + 60)%60;
-      rds = (s - rcs + 60)%60;
-      rdms = (ms - rcms + 1000)%1000;
-      $('#clock').text(rdh + ":" + rdm + ":" + rds+ ":" + rdms);
-    }
-
-
-    var t = setTimeout(function(){ startTime() }, 50);
-
-    
-  
-};
-
-var checkTime = function(i) {
-    if (i < 10) {
-        i = "0" + i;
-    }
-    return i;
-}
+    var countdown_svg = document.getElementById('countdown-svg').style;
+    var countdown_number = document.getElementById('countdown-number').style;
+    var countdown_svg_circle = document.getElementById('countdown-svg-circle').style;
 
 
   /**
@@ -536,17 +469,25 @@ var checkTime = function(i) {
           case 'w':
                   console.log(selection.color);
                   wActive = false;
-                  $('#timer1').text("Wait for 4 seconds before making a move!");
+                  var countdown = 5;
+                  countdownNumberEl.textContent = countdown;
+                  var timer = setInterval(function() {
+                    countdown = --countdown <= 0 ? 5 : countdown;
+                    countdownNumberEl.textContent = countdown;
+                  }, 1000);
+                  countdown_svg.visibility = 'visible';
+                  countdown_number.visibility = 'visible';
+                  countdown_svg_circle.animationPlayState = 'running';
+                  document.getElementById("timer_text").textContent= "Wait for 5 seconds before making next move!";
                   console.log(wActive);
-                  ctoday = new Date();
-                  wch = ctoday.getHours();
-                  wcm = ctoday.getMinutes();
-                  wcs = ctoday.getSeconds();
-                  wcms = ctoday.getMilliseconds();
                   setTimeout(function () {
                       wActive = true;
-                      $('#timer1').text("You can move now");
-                  }, 3000);
+                      document.getElementById("timer_text").textContent= "You can move now !!";
+                      countdown_svg.visibility ='hidden';
+                      countdown_svg_circle.animationPlayState= 'paused';
+                      countdown_number.visibility='hidden';
+                      clearInterval(timer);
+                  }, 5000);
               break;
           case 'b':
                 console.log(selection.color);
