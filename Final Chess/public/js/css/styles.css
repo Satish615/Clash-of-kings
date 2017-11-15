@@ -1,5 +1,5 @@
 body  { background-color: #f8f8f8; }
-table { border-collapse: collapse; }
+table { border-collapse: collapse; width=100% ; max-height: 90%}
 
 #banner { background-color: #222222; color: #ffffff; }
 
@@ -39,8 +39,8 @@ table { border-collapse: collapse; }
 
 
 #board .square {
-  width:  40px;
-  height: 40px;
+  width:  3.7%;
+  height: 7%;
   font-size: 35px;
   line-height: 35px;
   text-align: center;
@@ -106,9 +106,13 @@ table { border-collapse: collapse; }
 #board .bottom-right-corner { background: url("../img/board-corners.png") top left;     }
 #board .bottom-left-corner  { background: url("../img/board-corners.png") top right;    }
 
-#board .selected                        { color: #049cdb;                   }
+#board .selected                        {
+    /*color: #049cdb;*/                   }
 #board .valid-move:before               { color: #46a546; content: "\25cf"; }
-#board .valid-capture:before            { color: #46a546;                   }
+#board .valid-capture { box-shadow: inset 0 0 0 3px #D2691E;
+                        -moz-box-shadow: inset 0 0 0 3px #D2691E;
+                        -webkit-box-shadow: inset 0 0 0 3px #D2691E;
+}
 #board .valid-en-passant-capture:before { color: #46a546; content: "\25cf"; }
 #board .valid-castle:before             { color: #46a546; content: "\25cf"; }
 
@@ -125,20 +129,36 @@ table { border-collapse: collapse; }
 /*
  * Pieces
  */
-
-.black.pawn:before    { content: "\265F"; }
+.black.pawn:before    { content: "\265F"; max-width: 24px ; max-height: 30px }
 .black.rook:before    { content: "\265C"; }
 .black.knight:before  { content: "\265E"; }
 .black.bishop:before  { content: "\265D"; }
 .black.queen:before   { content: "\265B"; }
-.black.king:before    { content: "\265A"; }
-.white.pawn:before    { content: "\2659"; }
+.black.king:before    { content: "\265A"; max-width: 24px ; max-height: 30px }
+
+.white.pawn:before {content:url(../img/bluePawn.png)}
+
+.white.king:before {content :url(../img/blueKing.png)
+}
+.white.rook:before {content :url(../img/blueRook.png)
+}
+.white.knight:before {content :url(../img/blueKnight.png)}
+
+.white.bishop:before {content :url(../img/blueBishop.png)
+
+}
+.white.queen:before {content :url(../img/blueQueen.png)
+
+}
+
+
+/*.white.pawn:before    { content: "\2659"; }
 .white.rook:before    { content: "\2656"; }
 .white.knight:before  { content: "\2658"; }
 .white.bishop:before  { content: "\2657"; }
 .white.queen:before   { content: "\2655"; }
-.white.king:before    { content: "\2654"; }
-.red.pawn:before {content: "\265F";}
+.white.king:before    { content: "\2654"; }*/
+.red.pawn:before {content:url(../img/redPawn.png)}
 
 .red.king:before {content :url(../img/redKing.png)
 }
@@ -153,7 +173,7 @@ table { border-collapse: collapse; }
 .red.queen:before {content :url(../img/redQueen.png)
 
 }
-.yellow.pawn:before {content: "\265F";}
+.yellow.pawn:before {content:url(../img/yellowPawn.png)}
 .yellow.bishop:before {content :url(../img/yellowBishop.png)
 
 }
@@ -169,4 +189,166 @@ table { border-collapse: collapse; }
 }
 .yellow.rook:before {content :url(../img/yellowRook.png)
 
+}.static.pawn:before {content: url(../img/staticPawn.png)}
+.static.bishop:before {content :url(../img/staticBishop.png)
+
 }
+.static.knight:before {content :url(../img/staticknight.png)
+
+}
+
+.static.king:before {content :url(../img/staticKing.png)
+
+}
+.static.queen:before {content :url(../img/staticQueen.png)
+
+}
+.static.rook:before {content :url(../img/staticRook.png)
+
+}
+
+
+img.resize{
+    width: 10px;
+    height: 10px;
+}
+
+.mytext{
+    border:0;padding:10px;background:whitesmoke;
+}
+.text{
+    width:75%;display:flex;flex-direction:column;
+}
+.text > p:first-of-type{
+    width:100%;margin-top:0;margin-bottom:auto;line-height: 13px;font-size: 12px;
+}
+.text > p:last-of-type{
+    width:100%;text-align:right;color:black;margin-bottom:-7px;margin-top:auto;padding-bottom:8px;
+}
+.text-l{
+    float:left;padding-right:10px;
+}
+.text-r{
+    float:right;padding-left:10px;
+}
+.avatar{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    width:25%;
+    float:left;
+    padding-right:10px;
+}
+.macro{
+    margin-top:5px;width:85%;border-radius:5px;padding:5px;display:flex;
+}
+.msj-rta{
+    float:right;background:whitesmoke;
+}
+.msj{
+    float:left;background:white;
+}
+.frame{
+    background:#e0e0de;
+    height:450px;
+    overflow:hidden;
+    padding:0;
+}
+.frame > div:last-of-type{
+    position:absolute;bottom:5px;width:100%;display:flex;
+}
+ul {
+    width:100%;
+    list-style-type: none;
+    padding:18px;
+    position:absolute;
+    bottom:32px;
+    display:flex;
+    flex-direction: column;
+
+}
+.msj:before{
+    width: 0;
+    height: 0;
+    content:"";
+    top:-5px;
+    left:-14px;
+    position:relative;
+    border-style: solid;
+    border-width: 0 13px 13px 0;
+    border-color: transparent #ffffff transparent transparent;
+}
+.msj-rta:after{
+    width: 0;
+    height: 0;
+    content:"";
+    top:-5px;
+    left:14px;
+    position:relative;
+    border-style: solid;
+    border-width: 13px 13px 0 0;
+    border-color: whitesmoke transparent transparent transparent;
+}
+input:focus{
+    outline: none;
+}
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+    color: #d4d4d4;
+}
+::-moz-placeholder { /* Firefox 19+ */
+    color: #d4d4d4;
+}
+:-ms-input-placeholder { /* IE 10+ */
+    color: #d4d4d4;
+}
+:-moz-placeholder { /* Firefox 18- */
+    color: #d4d4d4;
+}
+
+.panel-heading { background-color: #3d6da7 !important; color: white !important; }
+
+
+#countdown {
+    position: relative;
+    margin: auto;
+    margin-top: 20px;
+    height: 40px;
+    width: 40px;
+    text-align: center;
+}
+
+#countdown-number {
+    color: black;
+    display: inline-block;
+    line-height: 40px;
+}
+
+svg {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 40px;
+    height: 40px;
+    transform: rotateY(-180deg) rotateZ(-90deg);
+}
+
+svg circle {
+    stroke-dasharray: 113px;
+    stroke-dashoffset: 0px;
+    stroke-linecap: round;
+    stroke-width: 3px;
+    stroke: black;
+    fill: none;
+    animation: countdown 5s linear infinite forwards;
+    animation-play-state: paused;
+}
+
+@keyframes countdown {
+    from {
+        stroke-dashoffset: 0px;
+    }
+    to {
+        stroke-dashoffset: 113px;
+    }
+}
+
