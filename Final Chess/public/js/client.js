@@ -26,21 +26,11 @@ var Client = (function(window) {
   var rActive = true;
   var sendButton = null;
   var field = null;
-  var h,m,s,ms, dm, ds, dms, dhs;
-  var wh,wm,ws,wms,wdh=0, wdm=0, wds=0, wdms=0, wdhs=0;
-  var bch,bcm,bcs,bcms,bdh=0, bdm=0, bds=0, bdms=0, bdhs=0;
-  var ych,ycm,ycs,ycms,ydh=0, ydm=0, yds=0, ydms=0, ydhs=0;
-  var rch,rcm,rcs,rcms,rdh=0, rdm=0, rds=0, rdms=0, rdhs=0;
-
-  var ctoday;
-
-
-
 
   /**
    * Initialize the UI
    */
-  var init = function(config) {
+var init = function(config) {
     gameID      = config.gameID;
     playerColor = config.playerColor;
     playerName  = config.playerName;
