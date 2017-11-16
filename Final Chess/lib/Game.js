@@ -881,5 +881,28 @@ var transformSquare = function(square, transform) {
         return null;
 };
 
+var parseMoveString = function(moveString) {
+  // Moves
+  if (moveString[4] === '-') {
+    return {
+      type        : 'move',
+      pieceCode   : moveString.substring(0, 2),
+      startSquare : moveString.substring(2, 4),
+      endSquare   : moveString.substring(5, 7)
+    }
+  }
+  // Captures
+  else if (moveString[4] === 'x') {
+    return {
+      type          : 'capture',
+      pieceCode     : moveString.substring(0, 2),
+      startSquare   : moveString.substring(2, 4),
+      endSquare     : moveString.substring(5, 7),
+      captureSquare : moveString.substring(5, 7)
+    }
+  } else {
+    return null;
+  }
+};
 // Export the game object
 module.exports = Game;
