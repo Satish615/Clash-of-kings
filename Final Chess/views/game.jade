@@ -18,18 +18,36 @@ block content
         strong #{gameID}
         <span id="timer_text" style="position: absolute;left: 40%; color: #ff4c4c;"></span>
 
-        <span  style="position: absolute;left: 75%;">Score: </span>
-        <span id="score_text" style="position: absolute;left: 80%;"></span>
-
       <div id="countdown" style="visibility:hidden">
       <div id="countdown-number" style="visibility:hidden"></div>
       <svg id = "countdown-svg">
       <circle id = "countdown-svg-circle" r="18" cx="20" cy="20"></circle>
       </svg>
       </div>
+      span(style='font-size:30px;cursor:pointer', onclick='openNav()') ☰ Chat
+        script.
+            function openNav() {
+
+                if(document.getElementById("one").className == "col-md-9")
+                {
+                document.getElementById("one").className= "col-md-12";
+                document.getElementById("two").style.display="none";
+
+                }
+                else
+                {
+                    document.getElementById("one").className = "col-md-9";
+                    document.getElementById("two").className = "col-md-3";
+                    document.getElementById("two").style.display="block";
+                }
 
 
-      .col-md-9
+
+
+            }
+
+
+      #one.col-md-9
         table#board
           tr
             td.top-left-corner
@@ -379,12 +397,11 @@ block content
             td.bottom-edge
             td.bottom-edge
           td.bottom-right-corner
-          tr
         #you.player-info
           strong ...
           span.status.pull-right
           ul.captured-pieces.list-inline
-      .col-md-3
+      #two.col-md-3
         .col-md-12.col-md-offset-2.frame
           #accordion.panel-heading
             span
