@@ -205,7 +205,7 @@ https://github.com/nguyensjsu/cmpe202-fivestars/issues/34
 
 Sequence Diagram :
 
-https://github.com/nguyensjsu/cmpe202-fivestars/issues/29
+https://github.com/nguyensjsu/cmpe202-fivestars/blob/master/UML%20Diagrams/Sequence%20diagram.png
 
 Activity Diagram :
 
