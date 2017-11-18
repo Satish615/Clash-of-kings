@@ -1,6 +1,7 @@
 extends layout
 
 block content
+  body.homepage
 
   #banner.jumbotron
     .container
@@ -15,33 +16,17 @@ block content
 
   .container
     .row
-      .col-sm-6
-        h2 Start a New Game
-        form#startForm(action="/start", method="POST", role="form")
-          .form-group
-            label Play as
-            div
-              .btn-group(data-toggle="buttons")
-                label.btn.btn-default.active
-                  input(type="radio", name="player-color", value="white", checked="checked")
-                  | White
-                label.btn.btn-default
-                  input(type="radio", name="player-color", value="black")
-                  | Black
-          .form-group
-            label(for="playerName") Name
-            input#playerName.form-control(type="text", name="player-name", placeholder="Player 1")
-          button.btn.btn-primary(type="submit") Start Game
-      .col-sm-6
-        h2 Join an Existing Game
+      .col-sm-3
+      .col-sm-6#playgame
+        h2 Play Game
         form#joinForm(action="/join", method="POST", role="form")
-          .form-group
+          //.form-group
             label(for="gameID") Game ID
             input#gameID.form-control(type="text", name="game-id")
           .form-group
             label(for="playerName") Name
-            input#playerName.form-control(type="text", name="player-name", placeholder="Player 2")
-          button.btn.btn-primary(type="submit") Join Game
+            input#playerName.form-control(type="text", name="player-name", placeholder="Player name")
+          button.btn.btn-primary(type="submit") Join
 
   script(src="/js/jquery.min.js")
   script(src="/js/bootstrap.min.js")
