@@ -1,0 +1,10 @@
+In this the player is a subject while scoreboard is a observer to the payer.
+
+As the player moves, that event is notified to the score and then the score increases.
+
+for that we need 3 methods - 
+
+1. subscribe 
+2. unsubscribe 
+3. notify 
+
