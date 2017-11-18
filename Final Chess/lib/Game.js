@@ -179,18 +179,30 @@ Game.prototype.forfeit = function(playerData) {
   return true;
 };
 
-//using Strategy Pattern for defining player moves
+//using Strategy and Decorator Pattern to define player's moves
 var PlayerMoves = function(){
     this.chessPiece = "";
+    this.chessPieceDecorator = undefined;
 }
-  
+
 PlayerMoves.prototype = {
-    setStrategy: function(chessPiece){
+    setStrategy: function(chessPiece,chessPieceDecorators){
         this.chessPiece = chessPiece;
+        this.chessPieceDecorators = chessPieceDecorators;
     },
 
-    getMoves: function(piece, square, board){
-        return this.piece.getMoves(piece, square, board);
+    getMoves: function(piece,square,board){
+        if(this.chessPieceDecorators === undefined) {
+            return this.chessPiece.getMoves(piece, square, board);
+        }
+        else {
+            var decoratedMoves = this.chessPiece.getMoves(piece, square, board);
+            for(i=0;i<this.chessPieceDecorators.length;i++) {
+                console.log(this.chessPieceDecorators[i].getMoves(piece,square,board));
+                decoratedMoves = decoratedMoves.concat(this.chessPieceDecorators[i].getMoves(piece,square,board));
+            }
+            return decoratedMoves;
+        }
     }
 };
 
@@ -498,75 +510,6 @@ var Bishop = function(piece, square, board, lastMove, includeUnsafe){
     }
 };
 
-//defining moves for Queen
-var Queen = function(piece, square, board, lastMove, includeUnsafe){
-    this.getMoves = function(piece, square, board){
-        var moves = [];
-
-    var transforms = {
-        n: [{x:0, y:+1}, {x:0, y:+2}, {x:0, y:+3}, {x:0, y:+4}, {x:0, y:+5}, {x:0, y:+6}, {x:0, y:+7},
-            {x:0, y:+8}, {x:0, y:+8}, {x:0, y:+9}],
-
-        e: [{x:+1, y:0}, {x:+2, y:0}, {x:+3, y:0}, {x:+4, y:0}, {x:+5, y:0}, {x:+6, y:0}, {x:+7, y:0},
-            {x:+8, y:0}, {x:+9, y:0}, {x:+10, y:0}, {x:+11, y:0}, {x:+12, y:0}, {x:+13, y:0}, {x:+14, y:0},
-            {x:+15, y:0}, {x:+16, y:0}, {x:+17, y:0}, {x:+18, y:0}, {x:+19, y:0}, {x:+20, y:0}, {x:+21, y:0},
-            {x:+22, y:0}, {x:+23, y:0}, {x:+24, y:0}, {x:+25, y:0}],
-
-
-        s: [{x:0, y:-1}, {x:0, y:-2}, {x:0, y:-3}, {x:0, y:-4}, {x:0, y:-5}, {x:0, y:-6}, {x:0, y:-7} ,{x:0, y:-8}, {x:0, y:-9}],
-        w: [{x:-1, y:0}, {x:-2, y:0}, {x:-3, y:0}, {x:-4, y:0}, {x:-5, y:0}, {x:-6, y:0}, {x:-7, y:0},
-            {x:-8, y:0}, {x:-9, y:0}, {x:-10, y:0}, {x:-11, y:0}, {x:-12, y:0}, {x:-13, y:0}, {x:-14, y:0},
-            {x:-15, y:0}, {x:-16, y:0}, {x:-17, y:0}, {x:-18, y:0}, {x:-19, y:0}, {x:-20, y:0}, {x:-21, y:0},
-            {x:-22, y:0}, {x:-23, y:0}, {x:-24, y:0}, {x:-25, y:0}],
-        ne: [{x:+1, y:+1}, {x:+2, y:+2}, {x:+3, y:+3}, {x:+4, y:+4}, {x:+5, y:+5}, {x:+6, y:+6}, {x:+7, y:+7},{x:+8, y:+8},{x:+9, y:+9}],
-        se: [{x:+1, y:-1}, {x:+2, y:-2}, {x:+3, y:-3}, {x:+4, y:-4}, {x:+5, y:-5}, {x:+6, y:-6}, {x:+7, y:-7},{x:+8, y:-8},{x:+9, y:-9}],
-        sw: [{x:-1, y:-1}, {x:-2, y:-2}, {x:-3, y:-3}, {x:-4, y:-4}, {x:-5, y:-5}, {x:-6, y:-6}, {x:-7, y:-7},{x:-8, y:-8},{x:-9, y:-9}],
-        nw: [{x:-1, y:+1}, {x:-2, y:+2}, {x:-3, y:+3}, {x:-4, y:+4}, {x:-5, y:+5}, {x:-6, y:+6}, {x:-7, y:+7},{x:-8, y:+8},{x:-9, y:+9}]
-    };
-
-
-    var destination, move = null;
-
-  // Loop all moves
-  for (var group in transforms) {
-    for (var i=0; i<transforms[group].length; i++) {
-
-      // Get destination square for move
-      destination = transformSquare(square, transforms[group][i]);
-      if (!destination) { break; }
-
-      // If destination square is empty
-      if (board[destination] === null) {
-        move = {
-          type        : 'move',
-          pieceCode   : piece.substring(0,2),
-          startSquare : square,
-          endSquare   : destination
-        };
-        moves.push(move);
-      }
-      // If destination square is occupied by foe
-      else if (board[destination][0] !== piece[0]) {
-        move = {
-          type          : 'capture',
-          pieceCode     : piece.substring(0,2),
-          startSquare   : square,
-          endSquare     : destination,
-          captureSquare : destination
-        };
-        moves.push(move);
-        break;
-      }
-      // If destination square is occupied by friend
-      else {
-        break;
-      }
-    }
-  }
-
-  return moves;
-    }
-};
 
 //defining moves for King
 var King = function(piece, square, board, includeUnsafe){
@@ -672,12 +615,11 @@ function getMovesForPlayer(board){
     var rook = new Rook();
     var knight = new Knight();
     var bishop = new Bishop();
-    var queen = new Queen();
+    //var queen = new Queen();
     var king = new King();
 
     var playerMoves = new PlayerMoves();
 
-    console.log("inside move generation");
     // Loop board
      for (square in board) {
        piece = board[square];
@@ -686,57 +628,41 @@ function getMovesForPlayer(board){
        if (piece === null) {
           continue;
       }
-/*      if (piece[0] !== 's') {
-          // don't eveluate moves dor static players
+      if (piece[0] == 's') {
+          // don't evaluate moves dor static players
           continue;
       }
- */
+ 
        if (square !== null) {
           // Collect all moves for all of player's pieces
           switch (piece[1]) {
               case 'P':
-                  if(square!==null){
-                      playerMoves.setStrategy(pawn);
-                      moves.push.apply(moves, playerMoves.getMoves(piece, square, board));
-                  }
+                  playerMoves.setStrategy(pawn);
                   break;
               case 'R':
-                  if(square!==null){
-                      playerMoves.setStrategy(rook);
-                      moves.push.apply(moves, playerMoves.getMoves(piece, square, board));
-                  }
+                  playerMoves.setStrategy(rook);
                   break;
               case 'N':
-                  if(square!==null){
-                      playerMoves.setStrategy(knight);
-                      moves.push.apply(moves, playerMoves.getMoves(piece, square, board));
-                  }
+                  playerMoves.setStrategy(knight);
                   break;
               case 'B':
-                  if(square!==null){
-                      playerMoves.setStrategy(bishop);
-                      moves.push.apply(moves, playerMoves.getMoves(piece, square, board));
-                  }
-                  break;
-              case 'Q':
-                  if(square!==null){
-                      playerMoves.setStrategy(queen);
-                      moves.push.apply(moves, playerMoves.getMoves(piece, square, board));
-                  }
+                  playerMoves.setStrategy(bishop);
                   break;
               case 'K':
-                  if(square!==null){
-                      playerMoves.setStrategy(king);
-                      moves.push.apply(moves, playerMoves.getMoves(piece, square, board));
-                  }
+                  playerMoves.setStrategy(king);
                   break;
+              case 'Q':
+                  // Decorate rook strategy with Bishop
+                  playerMoves.setStrategy(rook,Array.of(bishop));
+                  break;
+              default: break;
           }
+           moves.push.apply(moves, playerMoves.getMoves(piece, square, board));
       }
   }
-
   return moves;
-    
 };
+
 var num2alpha = function (n) {
     switch (n) {
 
