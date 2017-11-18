@@ -8,3 +8,61 @@ for that we need 3 methods -
 2. unsubscribe 
 3. notify 
 
+
+1. function Click() {
+2.     this.handlers = [];  // observers
+3. }
+4.  
+5. Click.prototype = {
+6.  
+7.     subscribe: function(fn) {
+8.         this.handlers.push(fn);
+9.     },
+10.  
+11.     unsubscribe: function(fn) {
+12.         this.handlers = this.handlers.filter(
+13.             function(item) {
+14.                 if (item !== fn) {
+15.                     return item;
+16.                 }
+17.             }
+18.         );
+19.     },
+20.  
+21.     fire: function(o, thisObj) {
+22.         var scope = thisObj || window;
+23.         this.handlers.forEach(function(item) {
+24.             item.call(scope, o);
+25.         });
+26.     }
+27. }
+28.  
+29. // log helper
+30.  
+31. var log = (function() {
+32.     var log = "";
+33.  
+34.     return {
+35.         add: function(msg) { log += msg + "\n"; },
+36.         show: function() { alert(log); log = ""; }
+37.     }
+38. })();
+39.  
+40. function run() {
+41.  
+42.     var clickHandler = function(item) { 
+43.         log.add("fired: " + item); 
+44.     };
+45.  
+46.     var click = new Click();
+47.  
+48.     click.subscribe(clickHandler);
+49.     click.fire('event #1');
+50.     click.unsubscribe(clickHandler);
+51.     click.fire('event #2');
+52.     click.subscribe(clickHandler);
+53.     click.fire('event #3');
+54.  
+55.     log.show();
+56. }
+
