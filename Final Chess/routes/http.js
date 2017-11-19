@@ -29,16 +29,16 @@ var validateGame = function(req) {
 var validateStartGame = function(req) {
 
   // These must exist
-  if (!req.body['player-color']) { return null; }
+  //if (!req.body['player-color']) { return 'white'; }
 
   // Player Color must be 'white' or 'black'
-  if (req.body['player-color'] !== 'white' && req.body['player-color'] !== 'black' && req.body['player-color'] !== 'yellow'&& req.body['player-color'] !== 'red') { return null; }
+  //if (req.body['player-color'] !== 'white' && req.body['player-color'] !== 'black' && req.body['player-color'] !== 'yellow'&& req.body['player-color'] !== 'red') { return null; }
 
   // If Player Name consists only of whitespace, set as 'Player 1'
   if (/^\s*$/.test(req.body['player-name'])) { req.body['player-name'] = 'Player 1'; }
 
   return {
-    playerColor : req.body['player-color'],
+    playerColor : 'white',
     playerName  : req.body['player-name']
   };
 };
@@ -49,17 +49,10 @@ var validateStartGame = function(req) {
  */
 var validateJoinGame = function(req) {
 
-  // These must exist
-  if (!req.body['game-id']) { return null; }
-
-  // If Game ID consists of only whitespace, return null
-  if (/^\s*$/.test(req.body['game-id'])) { return null; }
-
   // If Player Name consists only of whitespace, set as 'Player 2'
   if (/^\s*$/.test(req.body['player-name'])) { req.body['player-name'] = 'Player 2'; }
 
   return {
-    gameID      : req.body['game-id'],
     playerName  : req.body['player-name']
   };
 };
@@ -117,40 +110,70 @@ var startGame = function(req, res) {
  * Process "Join Game" form submission
  * Redirects to game page on success or home page on failure
  */
-var joinGame = function(req, res) {
+var joinExistingGame = function(req, res,gameKey) {
+    //creating new session.
+    req.session.regenerate(function(err) {
+        if (err) { res.redirect('/'); return; }
 
-  // Create a new session
-  req.session.regenerate(function(err) {
-    if (err) { res.redirect('/'); return; }
+        // Validate form input
+        var validData = validateJoinGame(req);
+        if (!validData) { res.redirect('/'); return; }
 
-    // Validate form input
-    var validData = validateJoinGame(req);
-    if (!validData) { res.redirect('/'); return; }
+        //
+        var game = DB.find(gameKey);
 
-    // Find specified game
-    var game = DB.find(validData.gameID);
-    if (!game) { res.redirect('/'); return;}
+        // Determine which player (color) to join as
+        var joinColor ;
+        if(game.players[0].joined)
+            joinColor= game.players[1].color;
+        if(game.players[1].joined)
+            joinColor= game.players[2].color;
+        if(game.players[2].joined)
+            joinColor= game.players[3].color;
+        if(!game.players[0].joined)
+            joinColor= game.players[0].color;
+        // Save data to session
+        req.session.gameID      = gameKey;
+        req.session.playerColor = joinColor;
+        req.session.playerName  = validData.playerName;
 
-    // Determine which player (color) to join as
-    var joinColor ;
-      if(game.players[0].joined)
-      joinColor= game.players[1].color;
-       if(game.players[1].joined)
-           joinColor= game.players[2].color;
-      if(game.players[2].joined)
-          joinColor= game.players[3].color;
-if(!game.players[0].joined)
-    joinColor= game.players[0].color;
-      // Save data to session
-    req.session.gameID      = validData.gameID;
-    req.session.playerColor = joinColor;
-    req.session.playerName  = validData.playerName;
-
-    // Redirect to game page
-    res.redirect('/game/'+validData.gameID);
-  });
+        // Redirect to game page
+        res.redirect('/game/'+gameKey);
+    });
 };
 
+//proxy for redirecting requests
+var joinGameProxy = function(req,res){
+    var gamekey= null;
+
+    for(key in DB.games){
+        var gameid = DB.games[key];
+        var playerCount = countItemsTrue(gameid.players);
+        if(gameid.status === 'pending' && playerCount < 4){
+            gamekey = key;
+            break;
+        }
+    }
+    if(!gamekey){
+        startGame(req,res);
+    }
+    else{
+        joinExistingGame(req,res,gamekey);
+    }
+}
+
+
+//counting items in game with true values
+function countItemsTrue(arry){
+    var result = 0;
+    for(x in arry){
+        if(arry[x].joined == true){
+            result++;
+        }
+    }
+    return result;
+
+}
 /**
  * Redirect non-existent routes to the home page
  */
@@ -168,7 +191,7 @@ exports.attach = function(app, db) {
 
   app.get('/',         home);
   app.get('/game/:id', game);
-  app.post('/start',   startGame);
-  app.post('/join',    joinGame);
+  //app.post('/start',   startGame);
+  app.post('/join',    joinGameProxy);
   app.all('*',         invalid);
 };
