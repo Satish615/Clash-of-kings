@@ -31,7 +31,25 @@ var Client = (function(window) {
       var yScore = 0;
       var rScore = 0;
     
-      
+     var State = function() {
+        this.state = "Active";
+    }
+    State.prototype.switch = function() {
+        if(this.state === "Active") {
+            this.state = "InActive";
+        } else {
+            this.state = "Active";
+        }
+    };
+    State.prototype.isActiveState = function() {
+        if(this.state === "Active") {
+            return true;
+        } else {
+            return false;
+        }
+    };
+    var curState = new State();
+
     
     
       /**
@@ -178,37 +196,36 @@ var Client = (function(window) {
       /**
        * Attach DOM event handlers
        */
-      var attachDOMEventHandlers = function() {
+         var attachDOMEventHandlers = function() {
         // Highlight valid moves for white pieces
-    
         if (playerColor === 'white') {
           container.on('click', '.white.pawn', function(ev) {
-            if (wActive) {
+            if (gameState.status === 'ongoing' && curState.isActiveState()) {
               highlightValidMoves('wP', ev.target);
             }
           });
           container.on('click', '.white.rook', function(ev) {
-              if (wActive) {
+              if (gameState.status === 'ongoing' && curState.isActiveState()) {
                   highlightValidMoves('wR', ev.target);
               }
           });
           container.on('click', '.white.knight', function(ev) {
-            if (wActive) {
+            if (gameState.status === 'ongoing' && curState.isActiveState()) {
               highlightValidMoves('wN', ev.target);
             }
           });
           container.on('click', '.white.bishop', function(ev) {
-            if (wActive) {
+            if (gameState.status === 'ongoing' && curState.isActiveState()) {
               highlightValidMoves('wB', ev.target);
             }
           });
           container.on('click', '.white.queen', function(ev) {
-            if (wActive) {
+            if (gameState.status === 'ongoing' && curState.isActiveState()) {
               highlightValidMoves('wQ', ev.target);
             }
           });
           container.on('click', '.white.king', function(ev) {
-            if (wActive) {
+            if (gameState.status === 'ongoing' && curState.isActiveState()) {
               highlightValidMoves('wK', ev.target);
             }
           });
@@ -217,32 +234,32 @@ var Client = (function(window) {
         // Highlight valid moves for black pieces
         if (playerColor === 'black') {
           container.on('click', '.black.pawn',   function(ev) {
-            if (bActive) {
+            if (gameState.status === 'ongoing' && curState.isActiveState()) {
               highlightValidMoves('bP', ev.target);
             }
           });
           container.on('click', '.black.rook',   function(ev) {
-              if (bActive) {
+              if (gameState.status === 'ongoing' && curState.isActiveState()) {
                 highlightValidMoves('bR', ev.target);
               }
           });
           container.on('click', '.black.knight', function(ev) {
-            if (bActive) {
+            if (gameState.status === 'ongoing' && curState.isActiveState()) {
                   highlightValidMoves('bN', ev.target);
               }
           });
           container.on('click', '.black.bishop', function(ev) {
-            if (bActive) {
+            if (gameState.status === 'ongoing' && curState.isActiveState()) {
               highlightValidMoves('bB', ev.target);
             }
           });
           container.on('click', '.black.queen',  function(ev) {
-           if (bActive) {
+           if (gameState.status === 'ongoing' && curState.isActiveState()) {
               highlightValidMoves('bQ', ev.target);
             }
           });
           container.on('click', '.black.king',   function(ev) {
-            if (bActive) {
+            if (gameState.status === 'ongoing' && curState.isActiveState()) {
               highlightValidMoves('bK', ev.target);
             }
           });
@@ -250,32 +267,32 @@ var Client = (function(window) {
           // Highlight valid moves for black pieces
           if (playerColor === 'yellow') {
               container.on('click', '.yellow.pawn',   function(ev) {
-                  if (yActive) {
+                  if (gameState.status === 'ongoing' && curState.isActiveState()) {
                       highlightValidMoves('yP', ev.target);
                   }
               });
               container.on('click', '.yellow.rook',   function(ev) {
-                  if (yActive) {
+                  if (gameState.status === 'ongoing' && curState.isActiveState()) {
                       highlightValidMoves('yR', ev.target);
                   }
               });
               container.on('click', '.yellow.knight', function(ev) {
-                  if (yActive) {
+                  if (gameState.status === 'ongoing' && curState.isActiveState()) {
                       highlightValidMoves('yN', ev.target);
                   }
               });
               container.on('click', '.yellow.bishop', function(ev) {
-                  if (yActive) {
+                  if (gameState.status === 'ongoing' && curState.isActiveState()) {
                       highlightValidMoves('yB', ev.target);
                   }
               });
               container.on('click', '.yellow.queen',  function(ev) {
-                  if (yActive) {
+                  if (gameState.status === 'ongoing' && curState.isActiveState()) {
                       highlightValidMoves('yQ', ev.target);
                   }
               });
               container.on('click', '.yellow.king',   function(ev) {
-                  if (yActive) {
+                  if (gameState.status === 'ongoing' && curState.isActiveState()) {
                       highlightValidMoves('yK', ev.target);
                   }
               });
@@ -283,33 +300,33 @@ var Client = (function(window) {
           // Highlight valid moves for black pieces
           if (playerColor === 'red') {
               container.on('click', '.red.pawn',   function(ev) {
-                  if (rActive)
+                  if (gameState.status === 'ongoing' && curState.isActiveState())
                   {
                       highlightValidMoves('rP', ev.target);
                   }
               });
               container.on('click', '.red.rook',   function(ev) {
-                  if (rActive) {
+                  if (gameState.status === 'ongoing' && curState.isActiveState()) {
                       highlightValidMoves('rR', ev.target);
                  }
               });
               container.on('click', '.red.knight', function(ev) {
-                 if (rActive) {
+                 if (gameState.status === 'ongoing' && curState.isActiveState()) {
                       highlightValidMoves('rN', ev.target);
                   }
               });
               container.on('click', '.red.bishop', function(ev) {
-                  if (rActive) {
+                  if (gameState.status === 'ongoing' && curState.isActiveState()) {
                       highlightValidMoves('rB', ev.target);
                   }
               });
               container.on('click', '.red.queen',  function(ev) {
-                  if (rActive) {
+                  if (gameState.status === 'ongoing' && curState.isActiveState()) {
                       highlightValidMoves('rQ', ev.target);
                   }
               });
               container.on('click', '.red.king',   function(ev) {
-                  if (rActive) {
+                  if (gameState.status === 'ongoing' && curState.isActiveState()) {
                       highlightValidMoves('rK', ev.target);
                   }
               });
@@ -386,6 +403,7 @@ var Client = (function(window) {
             field.val('');
         });
       };
+    
     
       /**
        * Attach Socket.IO event handlers
