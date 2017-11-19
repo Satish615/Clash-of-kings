@@ -6,6 +6,8 @@ GetMovesForPlayer.prototype = {
     setStrategy: function(chessPiece){
         this.chessPiece = chessPiece;
     },
+    
+    
 
     getMoves: function(piece, square, board){
         return this.piece.getMoves(piece, square, board);
