@@ -30,8 +30,10 @@ var Client = (function(window) {
       var bScore = 0;
       var yScore = 0;
       var rScore = 0;
-    
-     var State = function() {
+      var player = null; 
+
+
+    var State = function() {
         this.state = "Active";
     }
     State.prototype.switch = function() {
@@ -50,8 +52,6 @@ var Client = (function(window) {
     };
     var curState = new State();
 
-    
-    
       /**
        * Initialize the UI
        */
@@ -76,7 +76,7 @@ var Client = (function(window) {
     
           // Create socket connection
         socket = io.connect();
-    
+
         // Define board based on player's perspective
         assignSquares();
     
@@ -91,9 +91,8 @@ var Client = (function(window) {
         // Join game
         socket.emit('join', gameID);
     
-    
-        //   Observer Design pattern code
-            var player = new Player();
+            //   Observer Design pattern code
+            player = new Player();
             
             
                 var log = (function() {
@@ -103,15 +102,59 @@ var Client = (function(window) {
                     show: function() { alert(log); log = ""; }
                 }
             })();
-                var score = function(item) { 
-                    log.add("fired: " + item); 
+                var score = function() { 
+                        switch (selection.color) {
+                            case 'w':
+                                    wScore++;
+                                    score_text.textContent= wScore;
+                                break;
+                            case 'b':
+                                    bScore++;
+                                    score_text.textContent= bScore;
+                                break;
+                            case 'y':
+                                    yScore++;
+                                    score_text.textContent= yScore;
+                                break;
+                            case 'r':
+                                    rScore++;
+                                    score_text.textContent= rScore;
+                                break;
+                            default:
+                                break;
+                        }
                 };
-            
-                player.subscribe(score);
-    
+
+                var score_static  = function() { 
+                    switch (selection.color) {
+                        case 'w':
+                                wScore+=2;
+                                score_text.textContent= wScore;
+                            break;
+                        case 'b':
+                                bScore+=2;
+                                score_text.textContent= bScore;
+                            break;
+                        case 'y':
+                                yScore+=2;
+                                score_text.textContent= yScore;
+                            break;
+                        case 'r':
+                                rScore+=2;
+                                score_text.textContent= rScore;
+                            break;
+                        default:
+                            break;
+                    }
             };
+
+                
+                player.subscribe(score);
+                player.subscribe(score_static);
+       
     
-    
+ };
+
         var countdownNumberEl = document.getElementById('countdown-number');
         var countdown_svg = document.getElementById('countdown-svg').style;
         var countdown_number = document.getElementById('countdown-number').style;
@@ -120,12 +163,7 @@ var Client = (function(window) {
         
     
         var score_text = document.getElementById("score_text");
-    
-        // 
-    
-        
-        
-    
+
     
       /**
        * Assign square IDs and labels based on player's perspective
@@ -196,7 +234,7 @@ var Client = (function(window) {
       /**
        * Attach DOM event handlers
        */
-         var attachDOMEventHandlers = function() {
+      var attachDOMEventHandlers = function() {
         // Highlight valid moves for white pieces
         if (playerColor === 'white') {
           container.on('click', '.white.pawn', function(ev) {
@@ -404,7 +442,6 @@ var Client = (function(window) {
         });
       };
     
-    
       /**
        * Attach Socket.IO event handlers
        */
@@ -492,79 +529,45 @@ var Client = (function(window) {
         squares.removeClass('valid-castle');
       };
     
-    /**
+ /**
     Observer Design Pattern where player is a Subject and score is observer
     
     **/
     function Player() {
-        this.handlers = [];  // observers
+        this.observers = [];
     }
-     
+
     Player.prototype = 
     {
-        subscribe: function(fn) {
-            this.handlers.push(fn);
-        },
-        unsubscribe: function(fn) {
-            this.handlers = this.handlers.filter(
-                function(item) {
-                    if (item !== fn) {
-                        return item;
-                    }
-                }
-            );
-        }, 
-        notify: function() {
-    
-            switch (selection.color) {
-                case 'w':
-                        
-                        wScore++;
-                        score_text.textContent= wScore;
-                    break;
-                case 'b':
-                        bScore++;
-                        score_text.textContent= bScore;
-                    break;
-                case 'y':
-                        yScore++;
-                        score_text.textContent= yScore;
-                    break;
-                case 'r':
-                        rScore++;
-                        score_text.textContent= rScore;
-                    break;
-                default:
-                    break;
-            }
-        },    
-        
-        notify_static: function() {
+        subscribe: function(fn) { // fn is score function which modifies the score 
             
-                    switch (selection.color) {
-                        case 'w':
-                                wScore +=2;
-                                score_text.textContent= wScore;
-                            break;
-                        case 'b':
-                                bScore+=2;
-                                score_text.textContent= bScore;
-                            break;
-                        case 'y':
-                                yScore+=2;
-                                score_text.textContent= yScore;
-                            break;
-                        case 'r':
-                                rScore+=2;
-                                score_text.textContent= rScore;
-                            break;
-                        default:
-                            break;
-                    }
-                },    
+            this.observers.push(fn) ; 
+            console.log("i am in subsscribe : " + this.observers[0] );
+            console.log("i am in subsscribe : " + this.observers[1] );
+        },     
+
+        unsubscribe: function(fn) {
+
+            console.log("i am in Unsubsscribe : " + this.observers[0]);
+            
+        }, 
+
+        notify: function() {
+            console.log("i am in notify"); 
+            console.log("i am in notify : " + this.observers[0]);
+            this.observers[0]();
+            // for lopp over observers array 
+          //  this.observers["score"]();
+        },
+
+        notify_static: function() {
+            console.log("i am in notify"); 
+            console.log("i am in notify : " + this.observers[1]);
+            this.observers[1]();
+            
+        },
     }
-        
-    
+
       /**
        * Move selected piece to destination square
        */
@@ -574,8 +577,6 @@ var Client = (function(window) {
         var dest  = $(destinationSquare);
     
         clearHighlights();
-    
-        var player = new Player();
     
         // Move piece on board
         src.removeClass(getPieceClasses(piece)).addClass('empty');
@@ -588,8 +589,8 @@ var Client = (function(window) {
                       console.log(selection.color);
                       
                       player.notify();
-                      
-                      wActive = false;
+
+                      curState.switch();
                       var countdown = 5;
                       countdownNumberEl.textContent = countdown;
                       var timer = setInterval(function() {
@@ -600,10 +601,9 @@ var Client = (function(window) {
                       countdown_number.visibility = 'visible';
                       countdown_svg_circle.animationPlayState = 'running';
                       timer_text.textContent= "Wait for 5 seconds before making next move!";
-                      
-                      console.log(wActive);
+
                       setTimeout(function () {
-                          wActive = true;
+                          curState.switch();
                           timer_text.textContent= "You can move now !!";
                           countdown_svg.visibility ='hidden';
                           countdown_svg_circle.animationPlayState= 'paused';
@@ -615,8 +615,8 @@ var Client = (function(window) {
                   console.log(selection.color);
     
                   player.notify();
-    
-                  bActive = false;
+
+                  curState.switch();
                   var countdown = 5;
                   countdownNumberEl.textContent = countdown;
                   var timer = setInterval(function() {
@@ -627,9 +627,9 @@ var Client = (function(window) {
                   countdown_number.visibility = 'visible';
                   countdown_svg_circle.animationPlayState = 'running';
                   timer_text.textContent= "Wait for 5 seconds before making next move!";
-                  console.log(wActive);
+
                   setTimeout(function () {
-                      bActive = true;
+                      curState.switch();
                       timer_text.textContent= "You can move now !!";
                       countdown_svg.visibility ='hidden';
                       countdown_svg_circle.animationPlayState= 'paused';
@@ -641,8 +641,8 @@ var Client = (function(window) {
                   console.log(selection.color);
     
                   player.notify();
-    
-                  yActive = false;
+
+                  curState.switch();
                   var countdown = 5;
                   countdownNumberEl.textContent = countdown;
                   var timer = setInterval(function() {
@@ -653,9 +653,8 @@ var Client = (function(window) {
                   countdown_number.visibility = 'visible';
                   countdown_svg_circle.animationPlayState = 'running';
                   timer_text.textContent= "Wait for 5 seconds before making next move!";
-                  console.log(wActive);
                   setTimeout(function () {
-                      yActive = true;
+                      curState.switch();
                       timer_text.textContent= "You can move now !!";
                       countdown_svg.visibility ='hidden';
                       countdown_svg_circle.animationPlayState= 'paused';
@@ -667,7 +666,7 @@ var Client = (function(window) {
                   console.log(selection.color);
                   player.notify();
 
-                  rActive = false;
+                  curState.switch();
                   var countdown = 5;
                   countdownNumberEl.textContent = countdown;
                   var timer = setInterval(function() {
@@ -680,7 +679,7 @@ var Client = (function(window) {
                   timer_text.textContent= "Wait for 5 seconds before making next move!";
                   console.log(wActive);
                   setTimeout(function () {
-                      rActive = true;
+                      curState.switch();
                       timer_text.textContent= "You can move now !!";
                       countdown_svg.visibility ='hidden';
                       countdown_svg_circle.animationPlayState= 'paused';
@@ -706,8 +705,6 @@ var Client = (function(window) {
           var piece = selection.color+selection.piece;
           var destPiece = gameState.board[dest.attr('id')];
           clearHighlights();
-
-          var player = new Player();
     
           // Move piece on board
           src.removeClass(getPieceClasses()).addClass('empty');
@@ -719,8 +716,8 @@ var Client = (function(window) {
                   console.log(selection.color);
     
                   player.notify_static();
-                  
-                  wActive = false;
+
+                  curState.switch();
                   var countdown = 5;
                   countdownNumberEl.textContent = countdown;
                   var timer = setInterval(function() {
@@ -733,7 +730,7 @@ var Client = (function(window) {
                   timer_text.textContent= "Wait for 5 seconds before making next move!";
                   console.log(wActive);
                   setTimeout(function () {
-                      wActive = true;
+                      curState.switch();
                       timer_text.textContent= "You can move now !!";
                       countdown_svg.visibility ='hidden';
                       countdown_svg_circle.animationPlayState= 'paused';
@@ -745,7 +742,7 @@ var Client = (function(window) {
                   console.log(selection.color);
 
                   player.notify_static();
-                  bActive = false;
+                  curState.switch();
                   var countdown = 5;
                   countdownNumberEl.textContent = countdown;
                   var timer = setInterval(function() {
@@ -756,9 +753,9 @@ var Client = (function(window) {
                   countdown_number.visibility = 'visible';
                   countdown_svg_circle.animationPlayState = 'running';
                   timer_text.textContent= "Wait for 5 seconds before making next move!";
-                  console.log(wActive);
+
                   setTimeout(function () {
-                      bActive = true;
+                      curState.switch();
                       timer_text.textContent= "You can move now !!";
                       countdown_svg.visibility ='hidden';
                       countdown_svg_circle.animationPlayState= 'paused';
@@ -770,7 +767,7 @@ var Client = (function(window) {
                   console.log(selection.color);
 
                   player.notify_static();
-                  yActive = false;
+                  curState.switch();
                   var countdown = 5;
                   countdownNumberEl.textContent = countdown;
                   var timer = setInterval(function() {
@@ -781,9 +778,9 @@ var Client = (function(window) {
                   countdown_number.visibility = 'visible';
                   countdown_svg_circle.animationPlayState = 'running';
                   timer_text.textContent= "Wait for 5 seconds before making next move!";
-                  console.log(wActive);
+
                   setTimeout(function () {
-                      yActive = true;
+                      curState.switch();
                       timer_text.textContent= "You can move now !!";
                       countdown_svg.visibility ='hidden';
                       countdown_svg_circle.animationPlayState= 'paused';
@@ -795,7 +792,7 @@ var Client = (function(window) {
                   console.log(selection.color);
 
                   player.notify_static();
-                  rActive = false;
+                  curState.switch();
                   var countdown = 5;
                   countdownNumberEl.textContent = countdown;
                   var timer = setInterval(function() {
@@ -806,9 +803,9 @@ var Client = (function(window) {
                   countdown_number.visibility = 'visible';
                   countdown_svg_circle.animationPlayState = 'running';
                   timer_text.textContent= "Wait for 5 seconds before making next move!";
-                  console.log(wActive);
+
                   setTimeout(function () {
-                      rActive = true;
+                      curState.switch();
                       timer_text.textContent= "You can move now !!";
                       countdown_svg.visibility ='hidden';
                       countdown_svg_circle.animationPlayState= 'paused';
