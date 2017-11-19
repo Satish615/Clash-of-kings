@@ -42,3 +42,12 @@ To implement kills for each player with static pieces and other players.
 To implement the logic for assigning players to boards available.
 To redesign the home page for player joining the game.
 
+Week 8:
+Tasks done in this week: 
+Implemented the design patterns strategy, Decorator, chain of responsibility. 
+created uml deliverable for the project.
+As per feedback 
+strategy pattern was implemented for calculating the score function for players. 
+shiva has created the functionality to disable the game until all the players are joined.
+
+
