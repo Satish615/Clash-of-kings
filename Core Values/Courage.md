@@ -32,3 +32,8 @@ _Week #6:_
 _Week #7:_
 - Team has made an effort to make sure our task boards are accurate about the progress.
 - Team members showed courage to accomodate design patterns to the code implementation succesfully.
+
+_Week #8:_
+- Since it is the last week team has made extra efforts and alloted more than regular 10hrs to work on remaning tasks and work on creating UML diagrams. 
+- Team has made an effort to make sure our task boards are accurate about the progress.
+- Team has made an effort to update agile charts.
