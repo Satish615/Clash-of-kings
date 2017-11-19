@@ -1,5 +1,12 @@
 Implemented by Venkata Deviprasad Sura
 
+
+Respect week 8: All team memebers work is committed and final review is done by all team mates, and improvements are discussed over the project,
+Uml diagrams are distrivuted equally
+To be done: Review final
+
+Implementing Javascript patterns on our completed code.
+
 Respect week 7: All team memebers work is integrated and taken care,Everyone is properly communicated and inputs are taken from anyone for any modifications
 To be done:
 Review final
