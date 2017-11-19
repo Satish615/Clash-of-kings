@@ -162,6 +162,100 @@ Game.prototype.removePlayer = function(playerData) {
   return true;
 };
 
+Game.prototype.move = function(moveString) {
+
+    // Test if move is valid
+    var validMove = _.findWhere(this.validMoves, parseMoveString(moveString));
+    if (!validMove) { return false; }
+
+    var gameScope = this;
+
+    var responsibilityPipeline = {
+        handleRequest: function(request){
+            var moveResponsibility = new MoveResponsibility();
+            var staticCaptureResponsibility = new StaticCaptureResponsibility();
+            var userCaptureResponsibility = new UserCaptureResponsibility();
+
+            moveResponsibility.setNext(staticCaptureResponsibility).setNext(userCaptureResponsibility);
+            moveResponsibility.handleRequest(request);
+        }
+    }
+
+        //Handler
+    var Handler = function(){
+        this.next = {
+            handleRequest: function(request){
+                console.log('All responsibilities exhausted.');
+            }
+        }
+    } ;
+    Handler.prototype.setNext = function(next){
+        this.next = next;
+        return next;
+    }
+
+    Handler.prototype.handleRequest = function(request){};
+
+    //MoveResponsibility
+    var MoveResponsibility = function(){};
+    MoveResponsibility.prototype = new Handler();
+    MoveResponsibility.prototype.handleRequest = function(request){
+        console.log('moveResponsibility');
+        if(request == 'move'){
+            gameScope.board[validMove.endSquare] =  validMove.pieceCode;
+            gameScope.board[validMove.startSquare] = null;
+            return ;
+        }
+        this.next.handleRequest(request);
+    }
+
+    //StaticCaptureResponsibility
+    var StaticCaptureResponsibility = function(){};
+    StaticCaptureResponsibility.prototype = new Handler();
+    StaticCaptureResponsibility.prototype.handleRequest = function(request){
+        console.log('StaticCaptureResponsibility');
+        if(request == 'capture'){
+            var capturedPlayer = gameScope.board[validMove.captureSquare];
+            var playerType = capturedPlayer.substring(0, 1);
+            if (playerType === 's') {
+                gameScope.board[validMove.captureSquare] = null;
+                gameScope.board[validMove.startSquare] = null;
+                gameScope.board[validMove.endSquare] = validMove.pieceCode.substring(0, 1) + capturedPlayer.substring(1, 2);
+                return ;
+            }
+        }
+        this.next.handleRequest(request);
+    }
+
+    //UserCaptureResponsibility
+    var UserCaptureResponsibility = function(){};
+    UserCaptureResponsibility.prototype = new Handler();
+    UserCaptureResponsibility.prototype.handleRequest = function(request){
+        console.log('UserCaptureResponsibility');
+        if(request == 'capture'){
+            gameScope.board[validMove.captureSquare] = null;
+            gameScope.board[validMove.startSquare] = null;
+            gameScope.board[validMove.endSquare] = validMove.pieceCode;
+            return ;
+        }
+        return;
+    }
+
+    responsibilityPipeline.handleRequest(validMove.type);
+
+
+    // Set this move as last move
+    this.lastMove = validMove;
+
+    // Regenerate valid moves for all players
+    this.validMoves = getMovesForPlayer(this.board);
+
+    this.modifiedOn = Date.now();
+
+    return true;
+};
+
+
 Game.prototype.forfeit = function(playerData) {
 
   // Find player in question
