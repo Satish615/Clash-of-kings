@@ -6,6 +6,7 @@ What did team do last week?
 - Completed timer display on the board for each player.
 - Completed the static players acquisition and display.
 - Completed the chatting functionality between various players.
+- Implemented Design Patterns
 
 What are challenges:
 - Acquisition of static players and state change accordingly. 
