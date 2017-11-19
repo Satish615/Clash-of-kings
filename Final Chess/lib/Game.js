@@ -1,3 +1,13 @@
+var _ = require('underscore');
+var idhere;
+
+/*
+ * The Game object
+ */
+
+/**
+ * Create new game and initialize
+ */
 function Game(params) {
 
   // pending/ongoing/checkmate/stalemate/forfeit
@@ -66,11 +76,70 @@ function Game(params) {
         q0: null, r0: null, s0: null, t0: null, u0: null, v0: null, w0: null, x0: null,
         y0: null, z0: null  };
 
+    var pieces =[];
+    var staticfactory = new StaticFactory();
+
+    pieces.push(staticfactory.createPiece("Rook"));
+    console.log(pieces);
+   // pieces.push(staticfactory.createPiece("Pawn"));
+    //console.log(pieces);
+    pieces.push(staticfactory.createPiece("Bishop"));
+    console.log(pieces);
+    pieces.push(staticfactory.createPiece("Queen"));
+    console.log(pieces);
+    pieces.push(staticfactory.createPiece("Knight"));
+    console.log(pieces);
+    var getpositionsforBishop=new GetpositionsforBishop();
+    console.log(getpositionsforBishop.posit);
+    var getpositionsforRook=new GetpositionsforRook();
+    console.log(getpositionsforRook.posit);
+    //var getpositionsforQueen=new GetpositionsforQueen();
+    var getpositionsforPawn=new GetpositionsforPawn();
+    console.log(getpositionsforPawn.posit);
+    var getpositionsforKnight=new GetpositionsforKnight();
+    console.log(getpositionsforKnight.posit);
+
+for(var i=0;i<getpositionsforBishop.posit.length;i++)
+{
+    this.board[getpositionsforBishop.posit[i]]= pieces[1].idhere;
+}
+
+    for( i=0;i<getpositionsforKnight.posit.length;i++)
+    {
+        this.board[getpositionsforKnight.posit[i]]= pieces[3].idhere;
+    }
+    for( i=0;i<getpositionsforRook.posit.length;i++)
+    {
+        this.board[getpositionsforRook.posit[i]]= pieces[0].idhere;
+    }
+    for( i=0;i<getpositionsforPawn.posit.length;i++)
+    {
+        this.board[getpositionsforPawn.posit[i]]='sP';
+    }
+
+/* for(var i=0;i<getpositionsforBishop.posit.length;i++)
+ {
+ this.board[getpositionsforBishop.posit[i]]= pieces[1].idhere;
+ }
+ console.log(getpositionsforBishop.posit);
+
+    console.log(getpositionsforRook.posit);
+    console.log(getpositionsforPawn.posit);
+    console.log(getpositionsforKnight.posit);
+    console.log(getpositionsforBishop.posit);*/
+       // this.board['a0'] =
+          //  console.log(pieces);
+
+
+
+    //var staticknight = piece.clone();
+
+
   this.capturedPieces = [];
 
   this.validMoves = [
     { type: 'move', pieceCode: 'wK', startSquare: 'a0', endSquare: 'a1' },
-    { type: 'move', pieceCode: 'wK ', startSquare: 'a0', endSquare: 'b0' },
+    { type: 'move', pieceCode: 'wK', startSquare: 'a0', endSquare: 'b0' },
     { type: 'move', pieceCode: 'wK', startSquare: 'a0', endSquare: 'b1' },
     { type: 'move', pieceCode: 'rK', startSquare: 'z0', endSquare: 'z1' },
     { type: 'move', pieceCode: 'rK', startSquare: 'z0', endSquare: 'y1' },
@@ -105,8 +174,558 @@ function Game(params) {
 
 /**
  * Add player to game, and after both players have joined activate the game.
- * Returns true on success and false on failure.
+ * Returns true on success and false on failure.category
+ * 
  */
+
+GetpositionsforRook= function(){
+
+    var  horsepos=[];
+
+        var x=(( num2alpha(Math.floor((Math.random() * 10) + 1))) .concat( 4));
+         horsepos.push(x);
+
+
+     x=(( num2alpha(Math.floor((Math.random() * 10) + 1))) .concat( 5));
+      horsepos.push(x);
+
+    x=(( num2alpha(Math.floor((Math.random() * 10) + 16))) .concat( 4));
+
+        horsepos.push(x);
+
+    x=(( num2alpha(Math.floor((Math.random() * 10) + 16))) .concat( 5));
+
+        horsepos.push(x);
+
+
+
+    this.posit=horsepos;
+
+};
+
+GetpositionsforBishop= function(){
+
+    var  horsepos=[];
+    for(var t=0;t<2;t++)
+    {
+        var x=(( num2alpha(Math.floor((Math.random() * 2) + 9))) .concat( Math.floor((Math.random() * 3) + 1)));
+        if (horsepos.indexOf(x))
+        horsepos.push(x);
+        else
+            t--;
+
+    }
+
+  for( t=0;t<2;t++)
+    {
+       x=(( num2alpha(Math.floor((Math.random() * 2) + 9))) .concat( Math.floor((Math.random() * 3) + 6)));
+        if( x.indexOf(horsepos))
+        {
+            horsepos.push(x);
+        }
+        else
+            t--;
+    }
+    for( t=0;t<2;t++)
+    {
+        x=(( num2alpha(Math.floor((Math.random() * 2) + 16))) .concat( Math.floor((Math.random() * 3) + 1)));
+        if( x.indexOf(horsepos))
+        {
+            horsepos.push(x);
+        }
+        else
+            t--;
+    }
+    for( t=0;t<2;t++)
+    {
+        x=(( num2alpha(Math.floor((Math.random() * 2) + 16))) .concat( Math.floor((Math.random() * 3) + 6)));
+        if( x.indexOf(horsepos))
+        {
+            horsepos.push(x);
+        }
+        else
+            t--;
+    }
+
+    this.posit=horsepos;
+
+};
+
+GetpositionsforPawn= function(){
+
+
+
+
+    var  horsepos=[];
+    for(var t=0;t<3;t++)
+    {
+        var x=(( num2alpha(Math.floor((Math.random() * 2) + 7))) .concat( Math.floor((Math.random() * 2) + 1)));
+        if (horsepos.indexOf(x))
+            horsepos.push(x);
+        else
+            t--;
+
+    }
+
+    for( t=0;t<3;t++)
+    {
+        x=(( num2alpha(Math.floor((Math.random() * 2) + 7))) .concat( Math.floor((Math.random() * 2) + 7)));
+        if( x.indexOf(horsepos))
+        {
+            horsepos.push(x);
+        }
+        else
+            t--;
+    }
+    for( t=0;t<3;t++)
+    {
+        x=(( num2alpha(Math.floor((Math.random() * 2) + 19))) .concat( Math.floor((Math.random() * 2) + 1)));
+        if( x.indexOf(horsepos))
+        {
+            horsepos.push(x);
+        }
+        else
+            t--;
+    }
+    for( t=0;t<3;t++)
+    {
+        x=(( num2alpha(Math.floor((Math.random() * 2 ) + 19))) .concat( Math.floor((Math.random() * 2) + 7)));
+        if( x.indexOf(horsepos))
+        {
+            horsepos.push(x);
+        }
+        else
+            t--;
+    }
+    x=(( num2alpha(Math.floor((Math.random() * 8) + 1))) .concat( 3));
+
+    horsepos.push(x);
+    x=(( num2alpha(Math.floor((Math.random() * 8) + 1))) .concat( 6));
+
+    horsepos.push(x);
+    x=(( num2alpha(Math.floor((Math.random() * 8) + 18))) .concat( 3));
+
+    horsepos.push(x);
+    x=(( num2alpha(Math.floor((Math.random() * 8) + 18))) .concat( 6));
+
+    horsepos.push(x);
+
+    this.posit=horsepos;
+
+   /* var  horsepos=[];
+    for( var t=0;t<3;t++)
+    {
+         var x=(( num2alpha(Math.floor((Math.random() * 8) + 7))) .concat( Math.floor((Math.random() * 2) + 1)));
+        if( x.indexOf(horsepos))
+        {
+            horsepos.push(x);
+        }
+        else
+            t--;
+    }
+    console.log(horsepos);
+       x=(( num2alpha(Math.floor((Math.random() * 8) + 1))) .concat( 3));
+ 
+            horsepos.push(x);
+    console.log(horsepos);
+
+
+    for( t=0;t<3;t++)
+    {
+         x=(( num2alpha(Math.floor((Math.random() * 8) + 7))) .concat( Math.floor((Math.random() * 8) + 7)));
+        if( x.indexOf(horsepos))
+        {
+            horsepos.push(x);
+        }
+        else
+            t--;
+    }
+    console.log(horsepos);
+    x=(( num2alpha(Math.floor((Math.random() * 8) + 1))) .concat( 6));
+
+        horsepos.push(x);
+
+
+    console.log(horsepos);
+
+    for( t=0;t<3;t++)
+    {
+         x=(( num2alpha(Math.floor((Math.random() * 20) + 18))) .concat( Math.floor((Math.random() * 2) + 1)));
+        if( x.indexOf(horsepos))
+        {
+            horsepos.push(x);
+        }
+        else
+            t--;
+    }
+
+    x=(( num2alpha(Math.floor((Math.random() * 25) + 18))) .concat( 3));
+
+        horsepos.push(x);
+
+
+    for( t=0;t<3;t++)
+    {
+        x=(( num2alpha(Math.floor((Math.random() * 20) + 18))) .concat( Math.floor((Math.random() * 8) + 7)));
+        if( x.indexOf(horsepos) )
+        {
+            horsepos.push(x);
+        }
+        else
+            t--;
+    }
+
+    x=(( num2alpha(Math.floor((Math.random() * 25) + 18))) .concat( 6));
+
+        horsepos.push(x);
+
+
+
+    this.posit=horsepos;*/
+
+};
+
+GetpositionsforKnight= function(){
+
+    var  horsepos=[];
+    for(var t=0;t<4;t++)
+    {
+        var x=(( num2alpha(Math.floor((Math.random() * 6) + 2))) .concat( Math.floor((Math.random() * 2) + 1)));
+        if (horsepos.indexOf(x))
+            horsepos.push(x);
+        else
+            t--;
+
+    }
+
+    for( t=0;t<4;t++)
+    {
+        x=(( num2alpha(Math.floor((Math.random() * 6) + 2))) .concat( Math.floor((Math.random() * 2) + 7)));
+        if( x.indexOf(horsepos))
+        {
+            horsepos.push(x);
+        }
+        else
+            t--;
+    }
+    for( t=0;t<4;t++)
+    {
+        x=(( num2alpha(Math.floor((Math.random() * 6) + 20))) .concat( Math.floor((Math.random() * 2) + 1)));
+        if( x.indexOf(horsepos))
+        {
+            horsepos.push(x);
+        }
+        else
+            t--;
+    }
+    for( t=0;t<4;t++)
+    {
+        x=(( num2alpha(Math.floor((Math.random() * 6) + 20))) .concat( Math.floor((Math.random() * 2) + 7)));
+        if( x.indexOf(horsepos))
+        {
+            horsepos.push(x);
+        }
+        else
+            t--;
+    }
+
+    this.posit=horsepos;
+    /*var  horsepos=[];
+    for(var t=0;t<4;t++)
+    {
+        var x=(( num2alpha(Math.floor((Math.random() * 6) + 1))) .concat( Math.floor((Math.random() * 2) + 1)));
+        if( x.indexOf(horsepos))
+        {
+            horsepos.push(x);
+        }
+        else
+            t--;
+    }
+    console.log(horsepos);
+    for( t=0;t<4;t++)
+    {
+        x=(( num2alpha(Math.floor((Math.random() * 6) + 1))) .concat( Math.floor((Math.random() * 8) + 7)));
+        if( x.indexOf(horsepos) )
+        {
+            horsepos.push(x);
+        }
+        else
+            t--;
+    }
+    for( t=0;t<4;t++)
+    {
+        x=(( num2alpha(Math.floor((Math.random() * 25) + 20))) .concat( Math.floor((Math.random() * 2) + 1)));
+        if( x.indexOf(horsepos))
+        {
+            horsepos.push(x);
+        }
+        else
+            t--;
+    }
+    for( t=0;t<4;t++)
+    {
+        x=(( num2alpha(Math.floor((Math.random() * 25) + 20))) .concat( Math.floor((Math.random() * 8) + 7)));
+        if( x.indexOf(horsepos) )
+        {
+            horsepos.push(x);
+        }
+        else
+            t--;
+    }
+
+    this.posit=horsepos;*/
+
+};
+
+GetpositionsforQueen= function(){
+    this.posit='hi';
+    var  horsepos=[];
+    for(var t=0;t<4;t++)
+    {
+        var x=(( num2alpha(Math.floor((Math.random() * 6) + 1))) .concat( Math.floor((Math.random() * 2) + 1)));
+        if( x.indexOf(horsepos) === -1)
+        {
+            horsepos.push(x);
+        }
+        else
+            t--;
+    }
+
+    for( t=0;t<4;t++)
+    {
+        x=(( num2alpha(Math.floor((Math.random() * 6) + 1))) .concat( Math.floor((Math.random() * 8) + 7)));
+        if( x.indexOf(horsepos) === -1)
+        {
+            horsepos.push(x);
+        }
+        else
+            t--;
+    }
+    for( t=0;t<4;t++)
+    {
+        x=(( num2alpha(Math.floor((Math.random() * 25) + 20))) .concat( Math.floor((Math.random() * 2) + 1)));
+        if( x.indexOf(horsepos) === -1)
+        {
+            horsepos.push(x);
+        }
+        else
+            t--;
+    }
+    for( t=0;t<4;t++)
+    {
+        x=(( num2alpha(Math.floor((Math.random() * 25) + 20))) .concat( Math.floor((Math.random() * 8) + 7)));
+        if( x.indexOf(horsepos) === -1)
+        {
+            horsepos.push(x);
+        }
+        else
+            t--;
+    }
+
+    this.posit=horsepos;
+
+};
+
+/*GetpositionsforBishop= function(){
+
+    var  horsepos=[];
+    for(var t=0;t<4;t++)
+    {
+        var x=(( num2alpha(Math.floor((Math.random() * 6) + 1))) .concat( Math.floor((Math.random() * 2) + 1)));
+        if( x.indexOf(horsepos) === -1)
+        {
+            horsepos.push(x);
+        }
+        else
+            t--;
+    }
+
+    for( t=0;t<4;t++)
+    {
+        x=(( num2alpha(Math.floor((Math.random() * 6) + 1))) .concat( Math.floor((Math.random() * 8) + 7)));
+        if( x.indexOf(horsepos) === -1)
+        {
+            horsepos.push(x);
+        }
+        else
+            t--;
+    }
+    for( t=0;t<4;t++)
+    {
+        x=(( num2alpha(Math.floor((Math.random() * 25) + 20))) .concat( Math.floor((Math.random() * 2) + 1)));
+        if( x.indexOf(horsepos) === -1)
+        {
+            horsepos.push(x);
+        }
+        else
+            t--;
+    }
+    for( t=0;t<4;t++)
+    {
+        x=(( num2alpha(Math.floor((Math.random() * 25) + 20))) .concat( Math.floor((Math.random() * 8) + 7)));
+        if( x.indexOf(horsepos) === -1)
+        {
+            horsepos.push(x);
+        }
+        else
+            t--;
+    }
+
+   this.idhere='hi';
+
+};*/
+
+
+StaticFactory= function () {
+    var proto;
+    this.createPiece = function (type) {
+        var piece;
+
+        if (type === "Rook") {
+             proto = new StaticRookPrototype();
+            piece = proto.clone();
+        } else if (type === "Pawn") {
+            proto = new StaticPawnPrototype();
+            piece = proto.clone();
+        } else if (type === "Bishop") {
+            proto = new StaticBishopPrototype();
+            piece = proto.clone();
+        } else if (type === "Queen") {
+            proto = new StaticQueenPrototype();
+            piece = proto.clone();
+        }
+        else if (type === "Knight") {
+            proto = new StaticKnightPrototype();
+            piece = proto.clone();
+        }
+       // piece.type = type;
+
+
+
+        return piece;
+    };
+};
+var Piece1;
+
+StaticRook=function() {
+    this.idhere='sR';
+
+   var getId=function(){
+       return 'sR';
+   }
+};
+StaticBishop=function() {
+    this.idhere='sB';
+   var  getId=function(){
+        return 'sB';
+    }
+};
+StaticKnight=function() {
+    this.idhere='sN';
+   var  getId=function(){
+        return 'sN';
+    }
+};
+StaticPawn=function() {
+    this.idhere='sP';
+    var  getId=function(){
+        return 'sP';
+    }
+};
+StaticQueen=function() {
+    this.idhere='sQ';
+    var  getId=function(){
+        return 'sQ';
+    }
+};
+
+StaticRookPrototype=function() {
+
+    this.clone = function () {
+        Piece1 = new StaticRook();
+        return Piece1;
+    };
+};
+
+StaticBishopPrototype=function() {
+
+    this.clone = function () {
+        Piece1 = new StaticBishop();
+        return Piece1;
+    };
+};
+
+StaticKnightPrototype=function() {
+
+    this.clone = function () {
+        Piece1 = new StaticKnight();
+        return Piece1;
+    };
+
+};
+
+StaticQueenPrototype=function() {
+
+    this.clone = function () {
+        Piece1 = new StaticQueen();
+        return Piece1;
+    };
+
+};
+
+StaticPawnPrototype=function() {
+
+    this.clone=function () {
+         Piece1 = new StaticPawn();
+        return Piece1;
+    };
+
+     var  horsepos=[];
+    for(var t=0;t<4;t++)
+    {
+        var x=(( num2alpha(Math.floor((Math.random() * 6) + 1))) .concat( Math.floor((Math.random() * 2) + 1)));
+ if( x.indexOf(horsepos) === -1)
+        {
+            horsepos.push(x);
+        }
+        else
+            t--;
+    }
+
+    for( t=0;t<4;t++)
+    {
+         x=(( num2alpha(Math.floor((Math.random() * 6) + 1))) .concat( Math.floor((Math.random() * 8) + 7)));
+        if(  $.inArray(x, horsepos) === -1)
+        {
+            horsepos.push(x);
+        }
+        else
+            t--;
+    }
+    for( t=0;t<4;t++)
+    {
+         x=(( num2alpha(Math.floor((Math.random() * 25) + 20))) .concat( Math.floor((Math.random() * 2) + 1)));
+        if(  $.inArray(x, horsepos) === -1)
+        {
+            horsepos.push(x);
+        }
+        else
+            t--;
+    }
+    for( t=0;t<4;t++)
+    {
+         x=(( num2alpha(Math.floor((Math.random() * 25) + 20))) .concat( Math.floor((Math.random() * 8) + 7)));
+        if(  $.inArray(x, horsepos) )
+        {
+            horsepos.push(x);
+        }
+        else
+            t--;
+    }
+
+this.posit=horsepos;
+};
+
 Game.prototype.addPlayer = function(playerData) {
     var p;
     p = _.findWhere(this.players, { joined: false});
@@ -117,29 +736,30 @@ Game.prototype.addPlayer = function(playerData) {
     // Set player info
     p.name = playerData.playerName;
     p.joined = true;
-    //console.log(p);
 
-    if(this.players[0].joined){
-        this.board['a0'] = 'wK';
-    }
-
-    if(this.players[1].joined){
-        this.board['z9'] = 'bK';
-    }
-
-    if(this.players[2].joined){
-        this.board['z0'] = 'rK';
-    }
-
-    if(this.players[3].joined){
+    if(this.players[3].joined && this.status == 'pending'){
         this.board['a9'] = 'yK';
     }
 
+    else if(this.players[2].joined && this.status == 'pending'){
+        this.board['z0'] = 'rK';
+
+    }
+
+    else if(this.players[1].joined && this.status == 'pending'){
+        this.board['z9'] = 'bK';
+
+    }
+
+    else if(this.players[0].joined && this.status == 'pending'){
+        this.board['a0'] = 'wK';
+
+    }
+
     // If both players have joined, start the game
-    if (this.players[0].joined && this.players[1].joined
+    if (this.players[0].joined && this.players[1].joined && this.status == 'pending'
         //&& this.players[2].joined && this.players[3].joined && this.status == 'pending'
     ) {
-       // this.activePlayer = _.findWhere(this.players, {color: 'white'});
         this.status = 'ongoing';
     }
 
@@ -148,6 +768,10 @@ Game.prototype.addPlayer = function(playerData) {
     return true;
 };
 
+/**
+ * Remove player from game, this does not end the game, players may come and go as they please.
+ * Returns true on success and false on failure.
+ */
 Game.prototype.removePlayer = function(playerData) {
 
   // Find player in question
@@ -162,6 +786,10 @@ Game.prototype.removePlayer = function(playerData) {
   return true;
 };
 
+/**
+ * Apply move and regenerate game state.
+ * Returns true on success and false on failure.
+ */
 Game.prototype.move = function(moveString) {
 
     // Test if move is valid
@@ -243,6 +871,30 @@ Game.prototype.move = function(moveString) {
 
     responsibilityPipeline.handleRequest(validMove.type);
 
+    // Apply move
+  /*  switch (validMove.type) {
+        case 'move' :
+            this.board[validMove.endSquare] =  validMove.pieceCode;
+            this.board[validMove.startSquare] = null;
+            break;
+
+        case 'capture' :
+
+            var capturedPlayer = this.board[validMove.captureSquare];
+            this.board[validMove.captureSquare] = null;
+            var playerType = capturedPlayer.substring(0, 1);
+            if (playerType === 's') {
+                this.board[validMove.endSquare] = validMove.pieceCode.substring(0, 1) + capturedPlayer.substring(1, 2);
+            }
+            else {
+                this.board[validMove.endSquare] = validMove.pieceCode;
+            }
+            this.board[validMove.startSquare] = null;
+            break;
+
+        default : break;
+    };
+    */
 
     // Set this move as last move
     this.lastMove = validMove;
@@ -255,7 +907,10 @@ Game.prototype.move = function(moveString) {
     return true;
 };
 
-
+/**
+ * Apply a player's forfeit to the game.
+ * Returns true on success and false on failure.
+ */
 Game.prototype.forfeit = function(playerData) {
 
   // Find player in question
@@ -273,7 +928,14 @@ Game.prototype.forfeit = function(playerData) {
   return true;
 };
 
-//using Strategy and Decorator Pattern to define player's moves
+
+
+/**
+ * Get all the valid/safe moves a player can make.
+ * Returns an array of move objects on success or an empty array on failure.
+ */
+
+//using Strategy Pattern to define player's moves
 var PlayerMoves = function(){
     this.chessPiece = "";
     this.chessPieceDecorator = undefined;
@@ -300,8 +962,9 @@ PlayerMoves.prototype = {
     }
 };
 
-//defining moves for Pawn
-var Pawn = function(piece, square, board, lastMove, includeUnsafe){
+
+//Defining moves for Pawn
+var Pawn = function(piece, square, board){
     this.getMoves = function(piece, square, board){
   
   var moves = [];
@@ -309,21 +972,21 @@ var Pawn = function(piece, square, board, lastMove, includeUnsafe){
   var moveTransforms, captureTransforms = [];
 
   if (piece[0] === 'w') {
-    moveTransforms    = (piece[2] === '_') ? [{x:+0, y:+1}, {x:+0, y:+2}] : [{x:+0, y:+1}];
+    moveTransforms    = [{x:+0, y:+1}, {x:+0, y: -1}];
     captureTransforms = [{x:+1, y:+1}, {x:-1, y:+1}];
   }
 
   if (piece[0] === 'b') {
-      moveTransforms = (piece[2] === '_') ? [{x: +0, y: -1}, {x: +0, y: -2}] : [{x: +0, y: -1}];
+      moveTransforms    = [{x:+0, y:+1}, {x:+0, y: -1}];
       captureTransforms = [{x: +1, y: -1}, {x: -1, y: -1}];
   }
   if (piece[0] === 'r') {
-          moveTransforms    = (piece[2] === '_') ? [{x:+0, y:+1}, {x:+0, y:+2}] : [{x:+0, y:+1}];
-          captureTransforms = [{x:+1, y:+1}, {x:-1, y:+1}];
+      moveTransforms    = [{x:+0, y:+1}, {x:+0, y: -1}];
+      captureTransforms = [{x:+1, y:+1}, {x:-1, y:+1}];
       }
 
   if (piece[0] === 'y') {
-      moveTransforms = (piece[2] === '_') ? [{x: +0, y: -1}, {x: +0, y: -2}] : [{x: +0, y: -1}];
+      moveTransforms    = [{x:+0, y:+1}, {x:+0, y: -1}];
       captureTransforms = [{x: +1, y: -1}, {x: -1, y: -1}];
   }
 
@@ -357,53 +1020,7 @@ var Pawn = function(piece, square, board, lastMove, includeUnsafe){
 
     // If destination square is empty
     if (board[destination] === null) {
-
-      // Get prerequisite move for a valid en passant capture
-      if (piece[0] === 'w') {
-        epPreReq = {
-          type        : 'move',
-          pieceCode   : 'bP',
-          startSquare : destination[0] + '7',
-          endSquare   : destination[0] + square[1]
-        };
-      }
-      if (piece[0] === 'b') {
-        epPreReq = {
-          type        : 'move',
-          pieceCode   : 'wP',
-          startSquare : destination[0]+'2',
-          endSquare   : destination[0] + square[1]
-        };
-      }
-        if (piece[0] === 'r') {
-            epPreReq = {
-                type        : 'move',
-                pieceCode   : 'bP',
-                startSquare : destination[0] + '7',
-                endSquare   : destination[0] + square[1]
-            };
-        }
-        if (piece[0] === 'y') {
-            epPreReq = {
-                type        : 'move',
-                pieceCode   : 'rP',
-                startSquare : destination[0] + '7',
-                endSquare   : destination[0] + square[1]
-            };
-        }
-
-      // If last move matches the prerequisite, then we have a valid en passant capture
-      if (_.isEqual(lastMove, epPreReq)) {
-        capture = {
-          type          : 'capture',
-          pieceCode     : piece.substring(0,2),
-          startSquare   : square,
-          endSquare     : destination,
-          captureSquare : destination[0]+square[1]
-        };
-
-        moves.push(capture);
-      }
+        break;
     }
 
     // If destination square is occupied by foe
@@ -426,7 +1043,161 @@ var Pawn = function(piece, square, board, lastMove, includeUnsafe){
     }
 };
 
-//defining moves for Rook
+//Defining moves for King
+var King = function(piece, square, board, includeUnsafe){
+    this.getMoves = function(piece, square, board){
+        var moves = [];
+
+        var transforms = [
+            {x:+0, y:+1},
+            {x:+1, y:+1},
+            {x:+1, y:+0},
+            {x:+1, y:-1},
+            {x:+0, y:-1},
+            {x:-1, y:-1},
+            {x:-1, y:+0},
+            {x:-1, y:+1}
+        ];
+
+        var destination, move = null;
+
+        // Loop all moves
+        for (var i=0; i<transforms.length; i++) {
+
+            // Get destination square for move
+            if(square!==null)
+                destination = transformSquare(square, transforms[i]);
+            if (!destination) { continue; }
+
+            // If destination square is empty
+            if (board[destination] === null) {
+                move = {
+                    type        : 'move',
+                    pieceCode   : piece.substring(0,2),
+                    startSquare : square,
+                    endSquare   : destination
+                };
+                moves.push(move);
+            }
+            // If destination square is occupied by foe
+            else if (board[destination][0] !== piece[0]) {
+                move = {
+                    type          : 'capture',
+                    pieceCode     : piece.substring(0,2),
+                    startSquare   : square,
+                    endSquare     : destination,
+                    captureSquare : destination
+                };
+                moves.push(move);
+            }
+            // If destination square is occupied by friend
+            else {
+                // Do nothing
+            }
+        }
+
+        // Check for castling moves
+
+        if (piece[0] === 'w') {
+            if (board.e1 === 'wK_' && board.h1 === 'wR_' && board.f1 === null && board.g1 === null) {
+                move = {
+                    type: 'castle',
+                    pieceCode: 'wK',
+                    boardSide: 'king'
+                };
+                moves.push(move);
+            }
+            if (board.e1 === 'wK_' && board.a1 === 'wR_' && board.b1 === null && board.c1 === null && board.d1 === null) {
+                move = {
+                    type: 'castle',
+                    pieceCode: 'wK',
+                    boardSide: 'queen'
+                };
+                moves.push(move);
+            }
+        }
+
+        if (piece[0] === 'b') {
+            if (board.e8 === 'bK_' && board.h8 === 'bR_' && board.f8 === null && board.g8 === null) {
+                move = {
+                    type: 'castle',
+                    pieceCode: 'bK',
+                    boardSide: 'king'
+                };
+                moves.push(move);
+            }
+            if (board.e8 === 'bK_' && board.a8 === 'bR_' && board.b8 === null && board.c8 === null && board.d8 === null) {
+                move = {
+                    type: 'castle',
+                    pieceCode: 'bK',
+                    boardSide: 'queen'
+                };
+                moves.push(move);
+            }
+        }
+
+        return moves;
+    }
+};
+
+//Defining moves for Knight
+var Knight = function(piece, square, board, lastMove, includeUnsafe){
+    this.getMoves = function(piece, square, board){
+        var moves = [];
+
+        var transforms = [
+            {x:+1, y:+2},
+            {x:+2, y:+1},
+            {x:+2, y:-1},
+            {x:+1, y:-2},
+            {x:-1, y:-2},
+            {x:-2, y:-1},
+            {x:-2, y:+1},
+            {x:-1, y:+2}
+        ];
+
+        var destination, move = null;
+
+        // Loop all moves
+        for (var i=0; i<transforms.length; i++) {
+
+            // Get destination square for move
+            destination = transformSquare(square, transforms[i]);
+            if (!destination) { continue; }
+
+            // If destination square is empty
+            if (board[destination] === null) {
+                move = {
+                    type        : 'move',
+                    pieceCode   : piece.substring(0,2),
+                    startSquare : square,
+                    endSquare   : destination
+                };
+                moves.push(move);
+            }
+            // If destination square is occupied by foe
+            else if (board[destination][0] !== piece[0]) {
+                move = {
+                    type          : 'capture',
+                    pieceCode     : piece.substring(0,2),
+                    startSquare   : square,
+                    endSquare     : destination,
+                    captureSquare : destination
+                };
+                // if (includeUnsafe || isMoveSafe(move, board)) {
+                moves.push(move); //}
+            }
+            // If destination square is occupied by friend
+            else {
+                // Do nothing
+            }
+        }
+
+        return moves;
+    }
+};
+
+//Defining moves for Rook
 var Rook = function(piece, square, board, includeUnsafe){
     this.getMoves = function(piece, square, board){
         var moves = [];
@@ -491,64 +1262,7 @@ var Rook = function(piece, square, board, includeUnsafe){
     }
 };
 
-//defining moves for Knight
-var Knight = function(piece, square, board, lastMove, includeUnsafe){
-    this.getMoves = function(piece, square, board){
-        var moves = [];
-
-  var transforms = [
-    {x:+1, y:+2},
-    {x:+2, y:+1},
-    {x:+2, y:-1},
-    {x:+1, y:-2},
-    {x:-1, y:-2},
-    {x:-2, y:-1},
-    {x:-2, y:+1},
-    {x:-1, y:+2}
-  ];
-
-  var destination, move = null;
-
-  // Loop all moves
-  for (var i=0; i<transforms.length; i++) {
-
-    // Get destination square for move
-    destination = transformSquare(square, transforms[i]);
-    if (!destination) { continue; }
-
-    // If destination square is empty
-    if (board[destination] === null) {
-      move = {
-        type        : 'move',
-        pieceCode   : piece.substring(0,2),
-        startSquare : square,
-        endSquare   : destination
-      };
-        moves.push(move);
-    }
-    // If destination square is occupied by foe
-    else if (board[destination][0] !== piece[0]) {
-      move = {
-        type          : 'capture',
-        pieceCode     : piece.substring(0,2),
-        startSquare   : square,
-        endSquare     : destination,
-        captureSquare : destination
-      };
-     // if (includeUnsafe || isMoveSafe(move, board)) {
-         moves.push(move); //}
-    }
-    // If destination square is occupied by friend
-    else {
-      // Do nothing
-    }
-  }
-
-  return moves;
-    }
-};
-
-//defining moves for Bishop
+//Defining moves for Bishop
 var Bishop = function(piece, square, board, lastMove, includeUnsafe){
     this.getMoves = function(piece, square, board){
         var moves = [];
@@ -604,103 +1318,77 @@ var Bishop = function(piece, square, board, lastMove, includeUnsafe){
     }
 };
 
-
-//defining moves for King
-var King = function(piece, square, board, includeUnsafe){
+/*
+//Defining moves for Queen
+var Queen = function(piece, square, board, lastMove, includeUnsafe){
     this.getMoves = function(piece, square, board){
         var moves = [];
 
-  var transforms = [
-    {x:+0, y:+1},
-    {x:+1, y:+1},
-    {x:+1, y:+0},
-    {x:+1, y:-1},
-    {x:+0, y:-1},
-    {x:-1, y:-1},
-    {x:-1, y:+0},
-    {x:-1, y:+1}
-  ];
+    var transforms = {
+        n: [{x:0, y:+1}, {x:0, y:+2}, {x:0, y:+3}, {x:0, y:+4}, {x:0, y:+5}, {x:0, y:+6}, {x:0, y:+7},
+            {x:0, y:+8}, {x:0, y:+8}, {x:0, y:+9}],
 
-  var destination, move = null;
+        e: [{x:+1, y:0}, {x:+2, y:0}, {x:+3, y:0}, {x:+4, y:0}, {x:+5, y:0}, {x:+6, y:0}, {x:+7, y:0},
+            {x:+8, y:0}, {x:+9, y:0}, {x:+10, y:0}, {x:+11, y:0}, {x:+12, y:0}, {x:+13, y:0}, {x:+14, y:0},
+            {x:+15, y:0}, {x:+16, y:0}, {x:+17, y:0}, {x:+18, y:0}, {x:+19, y:0}, {x:+20, y:0}, {x:+21, y:0},
+            {x:+22, y:0}, {x:+23, y:0}, {x:+24, y:0}, {x:+25, y:0}],
+
+
+        s: [{x:0, y:-1}, {x:0, y:-2}, {x:0, y:-3}, {x:0, y:-4}, {x:0, y:-5}, {x:0, y:-6}, {x:0, y:-7} ,{x:0, y:-8}, {x:0, y:-9}],
+        w: [{x:-1, y:0}, {x:-2, y:0}, {x:-3, y:0}, {x:-4, y:0}, {x:-5, y:0}, {x:-6, y:0}, {x:-7, y:0},
+            {x:-8, y:0}, {x:-9, y:0}, {x:-10, y:0}, {x:-11, y:0}, {x:-12, y:0}, {x:-13, y:0}, {x:-14, y:0},
+            {x:-15, y:0}, {x:-16, y:0}, {x:-17, y:0}, {x:-18, y:0}, {x:-19, y:0}, {x:-20, y:0}, {x:-21, y:0},
+            {x:-22, y:0}, {x:-23, y:0}, {x:-24, y:0}, {x:-25, y:0}],
+        ne: [{x:+1, y:+1}, {x:+2, y:+2}, {x:+3, y:+3}, {x:+4, y:+4}, {x:+5, y:+5}, {x:+6, y:+6}, {x:+7, y:+7},{x:+8, y:+8},{x:+9, y:+9}],
+        se: [{x:+1, y:-1}, {x:+2, y:-2}, {x:+3, y:-3}, {x:+4, y:-4}, {x:+5, y:-5}, {x:+6, y:-6}, {x:+7, y:-7},{x:+8, y:-8},{x:+9, y:-9}],
+        sw: [{x:-1, y:-1}, {x:-2, y:-2}, {x:-3, y:-3}, {x:-4, y:-4}, {x:-5, y:-5}, {x:-6, y:-6}, {x:-7, y:-7},{x:-8, y:-8},{x:-9, y:-9}],
+        nw: [{x:-1, y:+1}, {x:-2, y:+2}, {x:-3, y:+3}, {x:-4, y:+4}, {x:-5, y:+5}, {x:-6, y:+6}, {x:-7, y:+7},{x:-8, y:+8},{x:-9, y:+9}]
+    };
+
+
+    var destination, move = null;
 
   // Loop all moves
-  for (var i=0; i<transforms.length; i++) {
+  for (var group in transforms) {
+    for (var i=0; i<transforms[group].length; i++) {
 
-    // Get destination square for move
-      if(square!==null)
-    destination = transformSquare(square, transforms[i]);
-    if (!destination) { continue; }
+      // Get destination square for move
+      destination = transformSquare(square, transforms[group][i]);
+      if (!destination) { break; }
 
-    // If destination square is empty
-    if (board[destination] === null) {
-      move = {
-        type        : 'move',
-        pieceCode   : piece.substring(0,2),
-        startSquare : square,
-        endSquare   : destination
-      };
-     moves.push(move);
-    }
-    // If destination square is occupied by foe
-    else if (board[destination][0] !== piece[0]) {
-      move = {
-        type          : 'capture',
-        pieceCode     : piece.substring(0,2),
-        startSquare   : square,
-        endSquare     : destination,
-        captureSquare : destination
-      };
-     moves.push(move);
-    }
-    // If destination square is occupied by friend
-    else {
-      // Do nothing
-    }
-  }
-
-  // Check for castling moves
-
-  if (piece[0] === 'w') {
-    if (board.e1 === 'wK_' && board.h1 === 'wR_' && board.f1 === null && board.g1 === null) {
-      move = {
-        type: 'castle',
-        pieceCode: 'wK',
-        boardSide: 'king'
-      };
-      moves.push(move);
-    }
-    if (board.e1 === 'wK_' && board.a1 === 'wR_' && board.b1 === null && board.c1 === null && board.d1 === null) {
-      move = {
-        type: 'castle',
-        pieceCode: 'wK',
-        boardSide: 'queen'
-      };
-      moves.push(move);
-    }
-  }
-
-  if (piece[0] === 'b') {
-    if (board.e8 === 'bK_' && board.h8 === 'bR_' && board.f8 === null && board.g8 === null) {
-      move = {
-        type: 'castle',
-        pieceCode: 'bK',
-        boardSide: 'king'
-      };
-     moves.push(move);
-    }
-    if (board.e8 === 'bK_' && board.a8 === 'bR_' && board.b8 === null && board.c8 === null && board.d8 === null) {
-      move = {
-        type: 'castle',
-        pieceCode: 'bK',
-        boardSide: 'queen'
-      };
-    moves.push(move);
+      // If destination square is empty
+      if (board[destination] === null) {
+        move = {
+          type        : 'move',
+          pieceCode   : piece.substring(0,2),
+          startSquare : square,
+          endSquare   : destination
+        };
+        moves.push(move);
+      }
+      // If destination square is occupied by foe
+      else if (board[destination][0] !== piece[0]) {
+        move = {
+          type          : 'capture',
+          pieceCode     : piece.substring(0,2),
+          startSquare   : square,
+          endSquare     : destination,
+          captureSquare : destination
+        };
+        moves.push(move);
+        break;
+      }
+      // If destination square is occupied by friend
+      else {
+        break;
+      }
     }
   }
 
   return moves;
     }
 };
+*/
 
 function getMovesForPlayer(board){
     var moves = [];
@@ -905,6 +1593,10 @@ var transformSquare = function(square, transform) {
         return null;
 };
 
+/**
+ * Parse a move string and convert it to an object.
+ * Returns the move object on success or null on failure.
+ */
 var parseMoveString = function(moveString) {
   // Moves
   if (moveString[4] === '-') {
